@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bj05mkieex84u"]
+
+[ext_resource type="PackedScene" uid="uid://civdvqwjebqu8" path="res://scenes/dungeon_room.tscn" id="1_4sjfn"]
+[ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://scenes/player.tscn" id="2_m234n"]
+[ext_resource type="Script" uid="uid://cpcmo0l4pnh6c" path="res://scripts/camera_2d.gd" id="3_1jouj"]
+
+[node name="WorldDungeon" type="Node2D" unique_id=277609706]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=330485459]
+repeat_size = Vector2(320, 192)
+
+[node name="DungeonRoom" parent="Parallax2D" unique_id=877367474 instance=ExtResource("1_4sjfn")]
+
+[node name="Player" parent="." unique_id=537425067 instance=ExtResource("2_m234n")]
+position = Vector2(160, 96)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=715682123]
+position = Vector2(1.5258789e-05, 1.5258789e-05)
+scale = Vector2(0.9999997, 0.9999997)
+anchor_mode = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("3_1jouj")
