@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Infect"
-run/main_scene="uid://bj05mkieex84u"
+run/main_scene="uid://cvtsli5k8pi1a"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [audio]
