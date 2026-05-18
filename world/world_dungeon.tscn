@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cakmv68q26t3l"]
+
+[ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_52cv3"]
+[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/hearts_ui.tscn" id="2_8y5ks"]
+[ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
+[ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_88ruy"]
+vertices = PackedVector2Array(330, 202, -10, 202, -10, -18, 330, -18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -24, 336, -24, 336, 208, -16, 208)])
+source_geometry_mode = 2
+agent_radius = 6.0
+
+[node name="WorldDungeon" type="Node2D" unique_id=158855967]
+
+[node name="Room1" parent="." unique_id=1208624606 instance=ExtResource("1_52cv3")]
+
+[node name="Door" parent="Room1" index="4" unique_id=2133244952]
+tp_position = "Room2"
+enabled = true
+
+[node name="Door2" parent="Room1" index="5" unique_id=281333314]
+tp_position = "Room4"
+enabled = true
+
+[node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
+position = Vector2(0, -216)
+
+[node name="Door2" parent="Room2" index="5" unique_id=281333314]
+tp_position = "Room3"
+enabled = true
+
+[node name="Door3" parent="Room2" index="6" unique_id=1313167308]
+tp_position = "Room1"
+enabled = true
+
+[node name="Room3" parent="." unique_id=320607790 instance=ExtResource("1_52cv3")]
+position = Vector2(352, -216)
+
+[node name="Door3" parent="Room3" index="6" unique_id=1313167308]
+tp_position = "Room4"
+enabled = true
+
+[node name="Door4" parent="Room3" index="7" unique_id=933195664]
+tp_position = "Room2"
+enabled = true
+
+[node name="Room4" parent="." unique_id=1925319994 instance=ExtResource("1_52cv3")]
+position = Vector2(352, 0)
+
+[node name="Door" parent="Room4" index="4" unique_id=2133244952]
+tp_position = "Room3"
+enabled = true
+
+[node name="Door4" parent="Room4" index="7" unique_id=933195664]
+tp_position = "Room1"
+enabled = true
+
+[node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
+
+[node name="Player" parent="." unique_id=537425067 instance=ExtResource("4_p6nxk")]
+position = Vector2(151.99998, 111.99999)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=66285054]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_88ruy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=559247693]
+
+[node name="HeartsUI" parent="CanvasLayer" unique_id=2106509227 instance=ExtResource("2_8y5ks")]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1766837620]
+position = Vector2(160, 91)
+zoom = Vector2(1, 0.95)
+position_smoothing_speed = 50.0
+
+[editable path="Room1"]
+[editable path="Room2"]
+[editable path="Room3"]
+[editable path="Room4"]

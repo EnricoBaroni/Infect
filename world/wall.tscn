@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bg84f4sdd0bo6"]
+
+[ext_resource type="Texture2D" uid="uid://clgct4emns5cj" path="res://assets/RoomCellar.png" id="1_fbtni"]
+
+[node name="Wall" type="StaticBody2D" unique_id=1729661105]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=745448343]
+position = Vector2(114, 78)
+texture = ExtResource("1_fbtni")
+region_enabled = true
+region_rect = Rect2(0, 0, 228, 156)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195081944]
+polygon = PackedVector2Array(0, 160, 56, 160, 56, 56, 232, 56, 232, 0, 0, 0)

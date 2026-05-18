@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dn38e2lj6t1iv"]
+
+[ext_resource type="PackedScene" uid="uid://bg84f4sdd0bo6" path="res://world/wall.tscn" id="1_tj6rx"]
+[ext_resource type="Script" uid="uid://b0qtmhwj06v5c" path="res://world/room.gd" id="1_ucf2g"]
+[ext_resource type="PackedScene" uid="uid://tds40taf8dv8" path="res://world/door.tscn" id="2_ucf2g"]
+
+[node name="Room1" type="Node2D" unique_id=1208624606]
+script = ExtResource("1_ucf2g")
+
+[node name="Wall" parent="." unique_id=1729661105 instance=ExtResource("1_tj6rx")]
+position = Vector2(-16, -16)
+scale = Vector2(0.8, 0.8)
+
+[node name="Wall2" parent="." unique_id=970769170 instance=ExtResource("1_tj6rx")]
+position = Vector2(336, -16)
+rotation = 3.1415927
+scale = Vector2(0.8, -0.8)
+
+[node name="Wall3" parent="." unique_id=1537552728 instance=ExtResource("1_tj6rx")]
+position = Vector2(-16, 200)
+scale = Vector2(0.8, -0.8)
+
+[node name="Wall4" parent="." unique_id=1204550088 instance=ExtResource("1_tj6rx")]
+position = Vector2(336, 199.99998)
+rotation = -3.1415925
+scale = Vector2(0.8, 0.8)
+
+[node name="Door" parent="." unique_id=2133244952 instance=ExtResource("2_ucf2g")]
+position = Vector2(152, 14)
+
+[node name="Door2" parent="." unique_id=281333314 instance=ExtResource("2_ucf2g")]
+position = Vector2(306, 80)
+rotation = 1.5707964
+
+[node name="Door3" parent="." unique_id=1313167308 instance=ExtResource("2_ucf2g")]
+position = Vector2(152, 170)
+rotation = 3.1415927
+
+[node name="Door4" parent="." unique_id=933195664 instance=ExtResource("2_ucf2g")]
+position = Vector2(14, 80)
+rotation = -1.5707964
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1697690180]
+position = Vector2(160, 91)

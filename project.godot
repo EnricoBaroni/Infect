@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Infect"
-run/main_scene="uid://cvtsli5k8pi1a"
+run/main_scene="uid://cakmv68q26t3l"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [audio]
@@ -21,6 +21,7 @@ buses/default_bus_layout="uid://ds2wmpkfbhpfc"
 [autoload]
 
 Events="*uid://by1t8dmn3rqmq"
+Global="*uid://dt22oyalvgix"
 
 [display]
 
