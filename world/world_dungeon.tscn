@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/hearts_ui.tscn" id="2_8y5ks"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
+[ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_88ruy"]
 vertices = PackedVector2Array(330, 202, -10, 202, -10, -18, 330, -18)
@@ -78,6 +79,9 @@ offset_bottom = 48.0
 position = Vector2(160, 91)
 zoom = Vector2(1, 0.95)
 position_smoothing_speed = 50.0
+
+[node name="BatEnemy" parent="." unique_id=267330816 instance=ExtResource("5_8y5ks")]
+position = Vector2(224, 56)
 
 [editable path="Room1"]
 [editable path="Room2"]

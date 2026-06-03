@@ -2,8 +2,12 @@ extends CharacterBody2D
 
 const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
-const SPEED = 30
+const BASE_SPEED = 30
+const INFECTION_MULTIPLIER = 1.5
 const FRICTION = 500
+
+var infected := false
+var speed := BASE_SPEED
 
 @export var min_range: = 4
 @export var max_range: = 80
@@ -32,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			if player is Player:
 				navigation_agent_2d.target_position = player.global_position
 				var next_point = navigation_agent_2d.get_next_path_position()
-				velocity = global_position.direction_to(next_point - marker_2d.position) * SPEED
+				velocity = global_position.direction_to(next_point - marker_2d.position) * speed
 				sprite_2d.scale.x = sign(velocity.x)
 			else:
 				velocity = Vector2.ZERO
@@ -52,9 +56,20 @@ func take_hit(other_hitbox: Hitbox) -> void:
 	get_tree().current_scene.add_child(hit_effect)
 	hit_effect.global_position = center.global_position
 	
+	if other_hitbox.infection_power > 0:
+		infect()
+		return
+	
 	stats.health -= other_hitbox.damage
 	velocity = other_hitbox.knockback_direction * other_hitbox.knockback_amount
 	playback.start("HitState")
+
+func infect() -> void:
+	if infected:
+		return
+	infected = true
+	modulate = Color.GREEN
+	speed = BASE_SPEED * INFECTION_MULTIPLIER
 
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")

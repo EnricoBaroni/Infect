@@ -10,9 +10,14 @@ extends Area2D
 var direction: Vector2 = Vector2.ZERO
 var inherited_velocity: Vector2 = Vector2.ZERO
 var distance_travelled: float = 0.0
+var infection_shot := false
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
+	if infection_shot:
+		modulate = Color.GREEN
+		hitbox.infection_power = 1
+		hitbox.damage = 0
 
 func _physics_process(delta: float) -> void:
 	var movement = (direction * SPEED + inherited_velocity * MOVEMENT_INHERITANCE) * delta

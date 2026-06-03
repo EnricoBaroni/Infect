@@ -6,6 +6,7 @@ const SPEED = 100
 
 var input_vector: = Vector2.ZERO
 var attack_vector: = Vector2.ZERO
+var infection_mode := false
 
 @onready var body_animation_tree: AnimationTree = $Body/BodyAnimationTree
 @onready var head_animation_tree: AnimationTree = $Head/HeadAnimationTree
@@ -31,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	match headState:
 		"AttackState": attack_state(delta)
 	
+	infection_mode = Input.is_action_pressed("infection_mode")
 	velocity = input_vector * SPEED
 	move_and_slide()
 
@@ -62,7 +64,11 @@ func shoot(direction_vector: Vector2) -> void:
 	var bullet_instance = BULLET.instantiate()
 	bullet_instance.global_position = shoot_marker.global_position
 	bullet_instance.direction = attack_vector
-	bullet_instance.inherited_velocity = velocity
+	
+	var perpendicular_velocity = velocity - attack_vector * velocity.dot(attack_vector)
+	bullet_instance.inherited_velocity = perpendicular_velocity
+	
+	bullet_instance.infection_shot = infection_mode
 	fire_rate.start(bullet_instance.get_fire_rate())
 	get_tree().current_scene.add_child(bullet_instance)
 
