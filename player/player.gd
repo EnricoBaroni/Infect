@@ -62,6 +62,7 @@ func shoot(direction_vector: Vector2) -> void:
 	var bullet_instance = BULLET.instantiate()
 	bullet_instance.global_position = shoot_marker.global_position
 	bullet_instance.direction = attack_vector
+	bullet_instance.inherited_velocity = velocity
 	fire_rate.start(bullet_instance.get_fire_rate())
 	get_tree().current_scene.add_child(bullet_instance)
 

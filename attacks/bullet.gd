@@ -4,16 +4,18 @@ extends Area2D
 @export var DAMAGE: float = 1.0
 @export var FIRE_RATE: float = 0.6
 @export var MAX_DISTANCE: float = 150
+@export var MOVEMENT_INHERITANCE: float = 0.4
 @onready var hitbox: Hitbox = $Hitbox
 
 var direction: Vector2 = Vector2.ZERO
+var inherited_velocity: Vector2 = Vector2.ZERO
 var distance_travelled: float = 0.0
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
 func _physics_process(delta: float) -> void:
-	var movement = direction * SPEED * delta
+	var movement = (direction * SPEED + inherited_velocity * MOVEMENT_INHERITANCE) * delta
 	global_position += movement
 	
 	hitbox.knockback_direction = direction.normalized()
