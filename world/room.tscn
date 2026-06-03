@@ -4,6 +4,11 @@
 [ext_resource type="Script" uid="uid://b0qtmhwj06v5c" path="res://world/room.gd" id="1_ucf2g"]
 [ext_resource type="PackedScene" uid="uid://tds40taf8dv8" path="res://world/door.tscn" id="2_ucf2g"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ucf2g"]
+vertices = PackedVector2Array(326.90625, 190, -6.046875, 190, -6.953125, -6, 325.09375, -6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-17, -16, 335, -16, 337, 200, -16, 200)])
+
 [node name="Room1" type="Node2D" unique_id=1208624606]
 script = ExtResource("1_ucf2g")
 
@@ -42,3 +47,9 @@ rotation = -1.5707964
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1697690180]
 position = Vector2(160, 91)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=558756004]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_ucf2g")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1420077364]

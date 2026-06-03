@@ -10,7 +10,7 @@ var infected := false
 var speed := BASE_SPEED
 
 @export var min_range: = 4
-@export var max_range: = 80
+@export var max_range: = 400
 @export var stats: Stats
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -28,6 +28,10 @@ func _ready() -> void:
 	stats.no_health.connect(die)
 
 func _physics_process(delta: float) -> void:
+	var room = get_room()
+	if not room.active:
+		return
+	
 	var state = playback.get_current_node()
 	match state:
 		"IdleState": pass
@@ -36,8 +40,9 @@ func _physics_process(delta: float) -> void:
 			if player is Player:
 				navigation_agent_2d.target_position = player.global_position
 				var next_point = navigation_agent_2d.get_next_path_position()
-				velocity = global_position.direction_to(next_point - marker_2d.position) * speed
-				sprite_2d.scale.x = sign(velocity.x)
+				velocity = global_position.direction_to(next_point) * speed
+				if velocity.x != 0:
+					sprite_2d.scale.x = sign(velocity.x)
 			else:
 				velocity = Vector2.ZERO
 			move_and_slide()
@@ -70,6 +75,9 @@ func infect() -> void:
 	infected = true
 	modulate = Color.GREEN
 	speed = BASE_SPEED * INFECTION_MULTIPLIER
+
+func get_room():
+	return get_parent().get_parent()
 
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")

@@ -12,9 +12,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 		if body not in area_2d.get_overlapping_bodies():
 			return
+	if not tp_position:
+		return
 	move_body_to(body, marker_2d.global_position)
 	move_camera_to(get_tree().current_scene.get_node(tp_position).get_node("Marker2D").global_position)
 	_start_move_cooldown()
+
+func has_destination() -> bool:
+	return tp_position != ""
 
 func move_body_to(body: Node2D, pos:Vector2):
 	body.global_position = pos
@@ -31,3 +36,11 @@ func _start_move_cooldown():
 	Global.recently_moved = true
 	await get_tree().create_timer(0.3).timeout
 	Global.recently_moved = false
+
+func open():
+	enabled = true
+	modulate = Color.WHITE
+
+func close():
+	enabled = false
+	modulate = Color.BLACK
