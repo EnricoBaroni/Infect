@@ -11,9 +11,21 @@ var direction: Vector2 = Vector2.ZERO
 var inherited_velocity: Vector2 = Vector2.ZERO
 var distance_travelled: float = 0.0
 var infection_shot := false
+var custom_color: Color = Color.WHITE
+var enemy_shot := false
 
 func _ready() -> void:
+	modulate = custom_color
 	area_entered.connect(_on_area_entered)
+	print("enemy_shot: ", enemy_shot)
+	print("layer before: ", hitbox.collision_layer)
+	print("mask before: ", hitbox.collision_mask)
+	if enemy_shot:
+		hitbox.collision_layer = 8
+		hitbox.collision_mask = 8
+	print("layer after: ", hitbox.collision_layer)
+	print("mask after: ", hitbox.collision_mask)
+	
 	if infection_shot:
 		modulate = Color.GREEN
 		hitbox.infection_power = 1

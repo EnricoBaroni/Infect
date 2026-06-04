@@ -1,16 +1,17 @@
-[gd_scene format=3 uid="uid://dpj0bdt4x2tur"]
+[gd_scene format=3 uid="uid://4wm0rnnygrql"]
 
-[ext_resource type="Texture2D" uid="uid://cqxkuslu7o0n0" path="res://assets/bat.png" id="1_5ejt7"]
-[ext_resource type="Script" uid="uid://chfiw8vdkg2i" path="res://enemies/bat_enemy.gd" id="1_a1g8r"]
-[ext_resource type="Texture2D" uid="uid://birymg7a6vh3j" path="res://assets/small_shadow.png" id="2_a1g8r"]
-[ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="2_v6jij"]
-[ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="4_tm0s6"]
-[ext_resource type="Script" uid="uid://ck4dpilw310u0" path="res://system/hitbox.gd" id="6_8d0ax"]
+[ext_resource type="Script" uid="uid://c5r70vuudyg6d" path="res://enemies/rapper_enemy.gd" id="1_md6yn"]
+[ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="2_wad27"]
+[ext_resource type="Texture2D" uid="uid://cqxkuslu7o0n0" path="res://assets/bat.png" id="3_nk8eq"]
+[ext_resource type="PackedScene" uid="uid://cwe1h0ebu2ech" path="res://attacks/bullet.tscn" id="3_wad27"]
+[ext_resource type="Texture2D" uid="uid://birymg7a6vh3j" path="res://assets/small_shadow.png" id="4_kbdhs"]
+[ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="5_8b7fu"]
+[ext_resource type="Script" uid="uid://ck4dpilw310u0" path="res://system/hitbox.gd" id="6_6qwx1"]
 
-[sub_resource type="Resource" id="Resource_8d0ax"]
-script = ExtResource("2_v6jij")
-health = 2
-max_health = 2
+[sub_resource type="Resource" id="Resource_v6eil"]
+script = ExtResource("2_wad27")
+health = 4
+max_health = 4
 metadata/_custom_type_script = "uid://b468jftlj52qv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftvvf"]
@@ -121,40 +122,29 @@ _data = {
 &"hit": SubResource("Animation_8d0ax")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a1g8r"]
-animation = &"fly"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tm0s6"]
 animation = &"hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ejt7"]
 animation = &"fly"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1g8r"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tm0s6"]
-advance_mode = 2
-advance_expression = "can_see_player()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6jij"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8d0ax"]
 advance_mode = 2
 advance_expression = "velocity == Vector2(0, 0)"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1g8r"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tm0s6"]
-states/ChaseState/node = SubResource("AnimationNodeAnimation_a1g8r")
-states/ChaseState/position = Vector2(367, 188)
 states/HitState/node = SubResource("AnimationNodeAnimation_tm0s6")
 states/HitState/position = Vector2(552, 100)
-states/IdleState/node = SubResource("AnimationNodeAnimation_5ejt7")
-states/IdleState/position = Vector2(367, 100)
-transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTransition_a1g8r"), "IdleState", "ChaseState", SubResource("AnimationNodeStateMachineTransition_tm0s6"), "ChaseState", "IdleState", SubResource("AnimationNodeStateMachineTransition_v6jij"), "HitState", "IdleState", SubResource("AnimationNodeStateMachineTransition_8d0ax")]
+states/WanderState/node = SubResource("AnimationNodeAnimation_5ejt7")
+states/WanderState/position = Vector2(365, 100)
+transitions = ["HitState", "WanderState", SubResource("AnimationNodeStateMachineTransition_8d0ax"), "Start", "WanderState", SubResource("AnimationNodeStateMachineTransition_a1g8r")]
 graph_offset = Vector2(-141, 16)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6jij"]
-graph_offset = Vector2(-174, 157)
+graph_offset = Vector2(-239.78891, 77.909836)
 nodes/output/position = Vector2(360, 220)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_tm0s6")
 nodes/StateMachine/position = Vector2(46, 194)
@@ -166,21 +156,22 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikmo2"]
 radius = 8.0
 
-[node name="BatEnemy" type="CharacterBody2D" unique_id=267330816]
+[node name="RapperEnemy" type="CharacterBody2D" unique_id=267330816]
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_a1g8r")
-stats = SubResource("Resource_8d0ax")
+script = ExtResource("1_md6yn")
+stats = SubResource("Resource_v6eil")
+BULLET = ExtResource("3_wad27")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1822061733]
-texture = ExtResource("1_5ejt7")
+texture = ExtResource("3_nk8eq")
 offset = Vector2(-1, -4)
 hframes = 5
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="." unique_id=1347354646]
 show_behind_parent = true
-texture = ExtResource("2_a1g8r")
+texture = ExtResource("4_kbdhs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=738081806]
 position = Vector2(0, -5)
@@ -194,13 +185,10 @@ tree_root = SubResource("AnimationNodeBlendTree_v6jij")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1169455138]
-target_position = Vector2(8, 0)
-
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1179168837]
 collision_layer = 16
 collision_mask = 16
-script = ExtResource("4_tm0s6")
+script = ExtResource("5_8b7fu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2020317422]
 position = Vector2(0, -5)
@@ -210,7 +198,7 @@ debug_color = Color(0.12672248, 0.55439305, 0.88826007, 0.41960785)
 [node name="Hitbox" type="Area2D" parent="." unique_id=837343085]
 collision_layer = 8
 collision_mask = 8
-script = ExtResource("6_8d0ax")
+script = ExtResource("6_6qwx1")
 metadata/_custom_type_script = "uid://ck4dpilw310u0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=591692733]
@@ -221,9 +209,5 @@ debug_color = Color(0.8657692, 0.3171433, 0.42991397, 0.41960785)
 [node name="Center" type="Marker2D" parent="." unique_id=1170983145]
 position = Vector2(0, -5)
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=791697373]
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Marker2D" unique_id=956827311]
-path_desired_distance = 4.0
-target_desired_distance = 4.0
-debug_enabled = true
+[node name="AttackTimer" type="Timer" parent="." unique_id=1190580025]
+wait_time = 2.0

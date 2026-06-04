@@ -20,7 +20,6 @@ buses/default_bus_layout="uid://ds2wmpkfbhpfc"
 
 [autoload]
 
-Events="*uid://by1t8dmn3rqmq"
 Global="*uid://dt22oyalvgix"
 
 [display]
