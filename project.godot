@@ -120,6 +120,8 @@ infection_mode={
 2d_physics/layer_4="player_hurtbox"
 2d_physics/layer_5="enemy_hurtbox"
 2d_physics/layer_6="bullet"
+2d_physics/layer_7="obstacles"
+2d_physics/layer_8="drops"
 
 [physics]
 

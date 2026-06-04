@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+const DROP = preload("uid://dhaw4gt67tdhp")
 const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
 const BASE_SPEED = 30
@@ -26,6 +27,7 @@ func _ready() -> void:
 	stats = stats.duplicate()
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_health.connect(die)
+	speed = BASE_SPEED * randf_range(0.9, 1.1)
 
 func _physics_process(delta: float) -> void:
 	var room = get_room()
@@ -38,9 +40,7 @@ func _physics_process(delta: float) -> void:
 		"ChaseState":
 			var player = get_player()
 			if player is Player:
-				navigation_agent_2d.target_position = player.global_position
-				var next_point = navigation_agent_2d.get_next_path_position()
-				velocity = global_position.direction_to(next_point) * speed
+				velocity = global_position.direction_to(player.global_position) * speed
 				if velocity.x != 0:
 					sprite_2d.scale.x = sign(velocity.x)
 			else:
@@ -54,6 +54,12 @@ func die() -> void:
 	var death_effect = DEATH_EFFECT.instantiate()
 	get_tree().current_scene.add_child(death_effect)
 	death_effect.global_position = global_position
+	
+	var drop = DROP.instantiate()
+	get_tree().current_scene.add_child(drop)
+	drop.global_position = global_position
+	drop.setup(infected)
+	
 	queue_free()
 
 func take_hit(other_hitbox: Hitbox) -> void:
@@ -90,11 +96,3 @@ func is_player_in_range() -> bool:
 		if distance_to_player < max_range and distance_to_player > min_range: 
 			result = true
 	return result
-	
-func can_see_player() -> bool:
-	if not is_player_in_range(): return false
-	var player: = get_player()
-	ray_cast_2d.target_position = player.global_position - global_position
-	ray_cast_2d.force_raycast_update()
-	var has_los_to_player: = not ray_cast_2d.is_colliding()
-	return has_los_to_player

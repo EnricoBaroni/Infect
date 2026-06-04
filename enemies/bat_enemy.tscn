@@ -135,7 +135,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tm0s6"]
 advance_mode = 2
-advance_expression = "can_see_player()"
+advance_expression = "is_player_in_range()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6jij"]
 
@@ -154,7 +154,7 @@ transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-141, 16)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6jij"]
-graph_offset = Vector2(-174, 157)
+graph_offset = Vector2(-194, 110)
 nodes/output/position = Vector2(360, 220)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_tm0s6")
 nodes/StateMachine/position = Vector2(46, 194)
@@ -167,6 +167,7 @@ radius = 8.0
 radius = 8.0
 
 [node name="BatEnemy" type="CharacterBody2D" unique_id=267330816]
+z_index = 2
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1

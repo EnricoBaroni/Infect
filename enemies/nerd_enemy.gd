@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+const DROP = preload("uid://dhaw4gt67tdhp")
 const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
 const BASE_SPEED = 30
@@ -32,6 +33,7 @@ func _ready() -> void:
 	attack_timer.timeout.connect(start_attack)
 	attack_timer.start()
 	modulate = custom_color
+	speed = BASE_SPEED * randf_range(0.9, 1.1)
 
 func _physics_process(delta: float) -> void:
 	var room = get_room()
@@ -58,6 +60,7 @@ func start_attack() -> void:
 	if not player:
 		return
 	var direction = global_position.direction_to(player.global_position)
+	print("shooting ", direction)
 	spawn_bullet(direction)
 
 func spawn_bullet(direction: Vector2) -> void:
@@ -75,6 +78,12 @@ func die() -> void:
 	var death_effect = DEATH_EFFECT.instantiate()
 	get_tree().current_scene.add_child(death_effect)
 	death_effect.global_position = global_position
+	
+	var drop = DROP.instantiate()
+	get_tree().current_scene.add_child(drop)
+	drop.global_position = global_position
+	drop.setup(infected)
+	
 	queue_free()
 
 func take_hit(other_hitbox: Hitbox) -> void:

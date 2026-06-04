@@ -49,7 +49,6 @@ rotation = -1.5707964
 position = Vector2(160, 91)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=558756004]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_ucf2g")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1420077364]
