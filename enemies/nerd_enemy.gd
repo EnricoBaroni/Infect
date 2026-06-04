@@ -95,7 +95,7 @@ func infect() -> void:
 		return
 	infected = true
 	modulate = Color.GREEN
-	speed = BASE_SPEED * INFECTION_MULTIPLIER
+	attack_timer.wait_time *= 0.5
 
 func get_room():
 	return get_parent().get_parent()

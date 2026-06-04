@@ -3,7 +3,7 @@ extends CharacterBody2D
 const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
 const BASE_SPEED = 15
-const INFECTION_MULTIPLIER = 1.5
+const INFECTION_MULTIPLIER = 2
 const FRICTION = 500
 
 var infected := false

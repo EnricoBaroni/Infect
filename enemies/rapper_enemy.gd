@@ -4,7 +4,7 @@ const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
 
 const BASE_SPEED = 8
-const INFECTION_MULTIPLIER = 1.5
+const INFECTION_MULTIPLIER = 1.2
 const FRICTION = 500
 
 var infected := false
@@ -62,12 +62,20 @@ func start_attack() -> void:
 		return
 	attack_timer.start(randf_range(1.0, 3.0))
 	shoot_cross()
+	if infected:
+		shoot_diagonals()
 
 func shoot_cross() -> void:
 	spawn_bullet(Vector2.UP)
 	spawn_bullet(Vector2.DOWN)
 	spawn_bullet(Vector2.LEFT)
 	spawn_bullet(Vector2.RIGHT)
+
+func shoot_diagonals() -> void:
+	spawn_bullet(Vector2(1, 1).normalized())
+	spawn_bullet(Vector2(1, -1).normalized())
+	spawn_bullet(Vector2(-1, 1).normalized())
+	spawn_bullet(Vector2(-1, -1).normalized())
 
 func spawn_bullet(direction: Vector2) -> void:
 	print("RAPPER SHOOT")
