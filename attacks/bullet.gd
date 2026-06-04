@@ -16,15 +16,11 @@ var enemy_shot := false
 
 func _ready() -> void:
 	modulate = custom_color
-	area_entered.connect(_on_area_entered)
-	print("enemy_shot: ", enemy_shot)
-	print("layer before: ", hitbox.collision_layer)
-	print("mask before: ", hitbox.collision_mask)
+	hitbox.area_entered.connect(_on_hitbox_area_entered)
+	body_entered.connect(_on_body_entered)
 	if enemy_shot:
 		hitbox.collision_layer = 8
 		hitbox.collision_mask = 8
-	print("layer after: ", hitbox.collision_layer)
-	print("mask after: ", hitbox.collision_mask)
 	
 	if infection_shot:
 		modulate = Color.GREEN
@@ -44,7 +40,9 @@ func _physics_process(delta: float) -> void:
 func get_fire_rate() -> float:
 	return FIRE_RATE
 
-func _on_area_entered(area_2d: Area2D) -> void:
-	print("area enter")
-	if area_2d is not Hurtbox: return
+func _on_body_entered(body: Node2D) -> void:
+	queue_free()
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area is not Hurtbox: return
 	queue_free()

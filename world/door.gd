@@ -16,6 +16,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 	move_body_to(body, marker_2d.global_position)
 	move_camera_to(get_tree().current_scene.get_node(tp_position).get_node("Marker2D").global_position)
+	
+	var current_room = get_parent()
+	current_room.deactivate()
+
+	var destination_room = get_tree().current_scene.get_node(tp_position)
+	destination_room.activate()
+	
 	_start_move_cooldown()
 
 func has_destination() -> bool:

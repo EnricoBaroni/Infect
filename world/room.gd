@@ -10,9 +10,6 @@ extends Node2D
 
 var active := false
 
-func _ready():
-	active = true
-
 func _process(_delta):
 	if has_enemies():
 		close_doors()

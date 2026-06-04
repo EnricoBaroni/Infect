@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://cakmv68q26t3l"]
 
+[ext_resource type="Script" uid="uid://bom18mfkbpppn" path="res://world/world_dungeon.gd" id="1_42e15"]
 [ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_52cv3"]
 [ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/hearts_ui.tscn" id="2_8y5ks"]
 [ext_resource type="PackedScene" uid="uid://4wm0rnnygrql" path="res://enemies/rapper_enemy.tscn" id="2_52cv3"]
+[ext_resource type="PackedScene" uid="uid://vng17ck1d4em" path="res://enemies/nerd_enemy.tscn" id="2_p6nxk"]
+[ext_resource type="PackedScene" uid="uid://dqtrghe7ri027" path="res://enemies/bully_enemy.tscn" id="2_u3fw2"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
 [ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
 
 [node name="WorldDungeon" type="Node2D" unique_id=158855967]
+script = ExtResource("1_42e15")
 
 [node name="Room1" parent="." unique_id=1208624606 instance=ExtResource("1_52cv3")]
 
@@ -19,8 +23,8 @@ enabled = true
 tp_position = "Room4"
 enabled = true
 
-[node name="RapperEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=267330816 instance=ExtResource("2_52cv3")]
-position = Vector2(256, 56)
+[node name="BullyEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=267330816 instance=ExtResource("2_u3fw2")]
+position = Vector2(216, 64)
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
@@ -34,7 +38,16 @@ tp_position = "Room1"
 enabled = true
 
 [node name="BatEnemy" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="0" unique_id=1850661317 instance=ExtResource("5_8y5ks")]
-position = Vector2(200, 88)
+position = Vector2(48, 96)
+
+[node name="BatEnemy2" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="1" unique_id=1818253020 instance=ExtResource("5_8y5ks")]
+position = Vector2(48, 56)
+
+[node name="BatEnemy3" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="2" unique_id=1879286800 instance=ExtResource("5_8y5ks")]
+position = Vector2(272, 56)
+
+[node name="BatEnemy4" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="3" unique_id=463286461 instance=ExtResource("5_8y5ks")]
+position = Vector2(272, 96)
 
 [node name="Room3" parent="." unique_id=320607790 instance=ExtResource("1_52cv3")]
 position = Vector2(352, -216)
@@ -47,6 +60,15 @@ enabled = true
 tp_position = "Room2"
 enabled = true
 
+[node name="RapperEnemy" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="0" unique_id=1938019952 instance=ExtResource("2_52cv3")]
+position = Vector2(88, 136)
+
+[node name="RapperEnemy2" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="1" unique_id=465132320 instance=ExtResource("2_52cv3")]
+position = Vector2(160, 56)
+
+[node name="RapperEnemy3" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="2" unique_id=321672829 instance=ExtResource("2_52cv3")]
+position = Vector2(264, 136)
+
 [node name="Room4" parent="." unique_id=1925319994 instance=ExtResource("1_52cv3")]
 position = Vector2(352, 0)
 
@@ -57,6 +79,18 @@ enabled = true
 [node name="Door4" parent="Room4" index="7" unique_id=933195664]
 tp_position = "Room1"
 enabled = true
+
+[node name="NerdEnemy" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="0" unique_id=1895198795 instance=ExtResource("2_p6nxk")]
+position = Vector2(88, 40)
+
+[node name="NerdEnemy2" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="1" unique_id=1385881848 instance=ExtResource("2_p6nxk")]
+position = Vector2(224, 40)
+
+[node name="NerdEnemy3" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="2" unique_id=1264146599 instance=ExtResource("2_p6nxk")]
+position = Vector2(88, 152)
+
+[node name="NerdEnemy4" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="3" unique_id=970172164 instance=ExtResource("2_p6nxk")]
+position = Vector2(224, 152)
 
 [node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
 
