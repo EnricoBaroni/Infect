@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		"AttackState": attack_state(delta)
 	
 	infection_mode = Input.is_action_pressed("infection_mode")
-	velocity = input_vector * SPEED
+	velocity = input_vector * stats.move_speed
 	move_and_slide()
 
 func die() -> void:
@@ -64,12 +64,15 @@ func shoot(direction_vector: Vector2) -> void:
 	var bullet_instance = BULLET.instantiate()
 	bullet_instance.global_position = shoot_marker.global_position
 	bullet_instance.direction = attack_vector
+	bullet_instance.DAMAGE = stats.damage
+	bullet_instance.SPEED = stats.bullet_speed
+	bullet_instance.MAX_DISTANCE = stats.range
 	
 	var perpendicular_velocity = velocity - attack_vector * velocity.dot(attack_vector)
 	bullet_instance.inherited_velocity = perpendicular_velocity
 	
 	bullet_instance.infection_shot = infection_mode
-	fire_rate.start(bullet_instance.get_fire_rate())
+	fire_rate.start(stats.fire_rate)
 	get_tree().current_scene.add_child(bullet_instance)
 
 func update_blend_positions(direction_vector: Vector2, type: String) -> void:

@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bom18mfkbpppn" path="res://world/world_dungeon.gd" id="1_42e15"]
 [ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_52cv3"]
-[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/hearts_ui.tscn" id="2_8y5ks"]
+[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_8y5ks"]
 [ext_resource type="PackedScene" uid="uid://4wm0rnnygrql" path="res://enemies/rapper_enemy.tscn" id="2_52cv3"]
 [ext_resource type="PackedScene" uid="uid://vng17ck1d4em" path="res://enemies/nerd_enemy.tscn" id="2_p6nxk"]
 [ext_resource type="PackedScene" uid="uid://dqtrghe7ri027" path="res://enemies/bully_enemy.tscn" id="2_u3fw2"]
+[ext_resource type="PackedScene" uid="uid://d3gh83ohwg4bt" path="res://world/gachapon_machine.tscn" id="3_6hcyg"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
 [ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
@@ -25,8 +26,12 @@ enabled = true
 tp_position = "Room4"
 enabled = true
 
+[node name="Door3" parent="Room1" index="6" unique_id=1313167308]
+tp_position = "Room5"
+enabled = true
+
 [node name="BullyEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=267330816 instance=ExtResource("2_u3fw2")]
-position = Vector2(216, 64)
+position = Vector2(240, 104)
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
@@ -94,6 +99,17 @@ position = Vector2(88, 144)
 [node name="NerdEnemy4" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="3" unique_id=970172164 instance=ExtResource("2_p6nxk")]
 position = Vector2(224, 152)
 
+[node name="Room5" parent="." unique_id=830723811 instance=ExtResource("1_52cv3")]
+position = Vector2(0, 216)
+combat_room = false
+
+[node name="Door" parent="Room5" index="4" unique_id=2133244952]
+tp_position = "Room1"
+enabled = true
+
+[node name="GachaponMachine" parent="Room5" unique_id=255747899 instance=ExtResource("3_6hcyg")]
+position = Vector2(128, 96)
+
 [node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
 
 [node name="Player" parent="." unique_id=537425067 instance=ExtResource("4_p6nxk")]
@@ -101,16 +117,11 @@ position = Vector2(151.99998, 111.99999)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=559247693]
 
-[node name="HeartsUI" parent="CanvasLayer" unique_id=2106509227 instance=ExtResource("2_8y5ks")]
+[node name="StatsUI" parent="CanvasLayer" unique_id=2106509227 instance=ExtResource("2_8y5ks")]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 48.0
 offset_bottom = 48.0
-
-[node name="DropsLabel" type="Label" parent="CanvasLayer" unique_id=1345431345]
-offset_left = 296.0
-offset_right = 320.0
-offset_bottom = 23.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1766837620]
 position = Vector2(160, 91)
@@ -151,7 +162,7 @@ position = Vector2(416, 40)
 position = Vector2(80, -96)
 
 [node name="Bush6" parent="Obstacles" unique_id=1077180949 instance=ExtResource("11_6hcyg")]
-position = Vector2(208, 104)
+position = Vector2(264, 136)
 
 [node name="Bush5" parent="Obstacles" unique_id=1857873317 instance=ExtResource("11_6hcyg")]
 position = Vector2(80, -120)
@@ -160,3 +171,4 @@ position = Vector2(80, -120)
 [editable path="Room2"]
 [editable path="Room3"]
 [editable path="Room4"]
+[editable path="Room5"]

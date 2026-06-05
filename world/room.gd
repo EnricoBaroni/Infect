@@ -9,8 +9,12 @@ extends Node2D
 ]
 
 var active := false
+@export var combat_room := true
 
 func _process(_delta):
+	if not combat_room:
+		open_doors()
+		return
 	if has_enemies():
 		close_doors()
 	else:

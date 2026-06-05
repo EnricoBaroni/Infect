@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfbs6xrynwlws" path="res://world/tree.tscn" id="5_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://c02ovucw1uf58" path="res://world/grass.tscn" id="6_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="7_i7141"]
-[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/hearts_ui.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="8_4mrxx"]
 [ext_resource type="AudioStream" uid="uid://ban6x8t1h3dav" path="res://audio/music.mp3" id="8_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="10_w7kh3"]
 
