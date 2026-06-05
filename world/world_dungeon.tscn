@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dqtrghe7ri027" path="res://enemies/bully_enemy.tscn" id="2_u3fw2"]
 [ext_resource type="PackedScene" uid="uid://d3gh83ohwg4bt" path="res://world/gachapon_machine.tscn" id="3_6hcyg"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
+[ext_resource type="PackedScene" uid="uid://d0amld2xqepr0" path="res://enemies/pooter_enemy.tscn" id="4_i4p58"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
 [ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
 [ext_resource type="PackedScene" uid="uid://dm420nd0iunuo" path="res://world/respawn_machine.tscn" id="8_s4wlq"]
@@ -35,6 +36,9 @@ enabled = true
 [node name="BullyEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=267330816 instance=ExtResource("2_u3fw2")]
 position = Vector2(240, 104)
 
+[node name="PooterEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="1" unique_id=246844284 instance=ExtResource("4_i4p58")]
+position = Vector2(80, 56)
+
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
 
@@ -46,16 +50,10 @@ enabled = true
 tp_position = "Room1"
 enabled = true
 
-[node name="BatEnemy" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="0" unique_id=1850661317 instance=ExtResource("5_8y5ks")]
-position = Vector2(48, 96)
-
-[node name="BatEnemy2" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="1" unique_id=1818253020 instance=ExtResource("5_8y5ks")]
-position = Vector2(48, 56)
-
-[node name="BatEnemy3" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="2" unique_id=1879286800 instance=ExtResource("5_8y5ks")]
+[node name="BatEnemy3" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="0" unique_id=1879286800 instance=ExtResource("5_8y5ks")]
 position = Vector2(272, 56)
 
-[node name="BatEnemy4" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="3" unique_id=463286461 instance=ExtResource("5_8y5ks")]
+[node name="BatEnemy4" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="1" unique_id=463286461 instance=ExtResource("5_8y5ks")]
 position = Vector2(272, 96)
 
 [node name="Room3" parent="." unique_id=320607790 instance=ExtResource("1_52cv3")]
@@ -69,13 +67,7 @@ enabled = true
 tp_position = "Room2"
 enabled = true
 
-[node name="RapperEnemy" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="0" unique_id=1938019952 instance=ExtResource("2_52cv3")]
-position = Vector2(88, 136)
-
-[node name="RapperEnemy2" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="1" unique_id=465132320 instance=ExtResource("2_52cv3")]
-position = Vector2(160, 56)
-
-[node name="RapperEnemy3" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="2" unique_id=321672829 instance=ExtResource("2_52cv3")]
+[node name="RapperEnemy3" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="0" unique_id=321672829 instance=ExtResource("2_52cv3")]
 position = Vector2(264, 136)
 
 [node name="Room4" parent="." unique_id=1925319994 instance=ExtResource("1_52cv3")]
@@ -91,15 +83,6 @@ enabled = true
 
 [node name="NerdEnemy" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="0" unique_id=1895198795 instance=ExtResource("2_p6nxk")]
 position = Vector2(88, 40)
-
-[node name="NerdEnemy2" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="1" unique_id=1385881848 instance=ExtResource("2_p6nxk")]
-position = Vector2(224, 40)
-
-[node name="NerdEnemy3" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="2" unique_id=1264146599 instance=ExtResource("2_p6nxk")]
-position = Vector2(88, 144)
-
-[node name="NerdEnemy4" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="3" unique_id=970172164 instance=ExtResource("2_p6nxk")]
-position = Vector2(224, 152)
 
 [node name="Room5" parent="." unique_id=830723811 instance=ExtResource("1_52cv3")]
 position = Vector2(0, 216)
@@ -139,26 +122,11 @@ position_smoothing_speed = 50.0
 [node name="Obstacles" type="Node2D" parent="." unique_id=749620164]
 z_index = 1
 
-[node name="Grass" parent="Obstacles" unique_id=579628287 instance=ExtResource("10_jv6pf")]
-position = Vector2(416, 144)
-
-[node name="Grass4" parent="Obstacles" unique_id=1228768353 instance=ExtResource("10_jv6pf")]
-position = Vector2(416, 128)
-
-[node name="Grass7" parent="Obstacles" unique_id=1538670667 instance=ExtResource("10_jv6pf")]
-position = Vector2(440, -104)
-
 [node name="Grass5" parent="Obstacles" unique_id=211677825 instance=ExtResource("10_jv6pf")]
 position = Vector2(464, 128)
 
 [node name="Grass3" parent="Obstacles" unique_id=1459564221 instance=ExtResource("10_jv6pf")]
 position = Vector2(464, 144)
-
-[node name="Grass2" parent="Obstacles" unique_id=1917988957 instance=ExtResource("10_jv6pf")]
-position = Vector2(456, -160)
-
-[node name="Grass8" parent="Obstacles" unique_id=1723032114 instance=ExtResource("10_jv6pf")]
-position = Vector2(456, -88)
 
 [node name="Bush2" parent="Obstacles" unique_id=1638558928 instance=ExtResource("11_6hcyg")]
 position = Vector2(464, 40)
@@ -171,9 +139,6 @@ position = Vector2(80, -96)
 
 [node name="Bush6" parent="Obstacles" unique_id=1077180949 instance=ExtResource("11_6hcyg")]
 position = Vector2(264, 136)
-
-[node name="Bush5" parent="Obstacles" unique_id=1857873317 instance=ExtResource("11_6hcyg")]
-position = Vector2(80, -120)
 
 [editable path="Room1"]
 [editable path="Room2"]

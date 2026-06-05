@@ -4,7 +4,6 @@ const BASE_SPEED = 30
 const INFECTION_MULTIPLIER = 1.5
 const FRICTION = 500
 
-var speed := BASE_SPEED
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
@@ -36,20 +35,10 @@ func _physics_process(delta: float) -> void:
 	match state:
 		"IdleState": pass
 		"ChaseState":
-			var player = get_player()
-			if player is Player:
-				velocity = global_position.direction_to(player.global_position) * speed
-				if velocity.x != 0:
-					sprite_2d.scale.x = sign(velocity.x)
-			else:
-				velocity = Vector2.ZERO
-			move_and_slide()
+			chase_player()
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
-
-func play_hit_animation() -> void:
-	playback.start("HitState")
 
 func on_infected() -> void:
 	speed = BASE_SPEED * INFECTION_MULTIPLIER
