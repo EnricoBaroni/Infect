@@ -1,14 +1,9 @@
-extends CharacterBody2D
-
-const DROP = preload("uid://dhaw4gt67tdhp")
-const HIT_EFFECT = preload("uid://ceyipwdhuape4")
-const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
+extends EnemyBase
 
 const BASE_SPEED = 8
 const INFECTION_MULTIPLIER = 1.2
 const FRICTION = 500
 
-var infected := false
 var speed := BASE_SPEED
 var move_direction := Vector2.ZERO
 var move_timer := 0.0
@@ -16,20 +11,15 @@ var custom_color := Color.CYAN
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
-@export var stats: Stats
 @export var BULLET: PackedScene
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
-@onready var hurtbox: Hurtbox = $Hurtbox
-@onready var center: Marker2D = $Center
 @onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:
-	stats = stats.duplicate()
-	hurtbox.hurt.connect(take_hit.call_deferred)
-	stats.no_health.connect(die)
+	super()
 	attack_timer.timeout.connect(start_attack)
 	attack_timer.start(randf_range(0.3, 1.0))
 	modulate = custom_color
@@ -94,37 +84,8 @@ func spawn_bullet(direction: Vector2) -> void:
 	bullet.direction = direction
 	get_tree().current_scene.add_child(bullet)
 
-func die() -> void:
-	var death_effect = DEATH_EFFECT.instantiate()
-	get_tree().current_scene.add_child(death_effect)
-	death_effect.global_position = global_position
-	
-	var drop = DROP.instantiate()
-	get_tree().current_scene.add_child(drop)
-	drop.global_position = global_position
-	drop.setup(infected)
-	
-	queue_free()
-
-func take_hit(other_hitbox: Hitbox) -> void:
-	var hit_effect = HIT_EFFECT.instantiate()
-	get_tree().current_scene.add_child(hit_effect)
-	hit_effect.global_position = center.global_position
-	
-	if other_hitbox.infection_power > 0:
-		infect()
-		return
-	
-	stats.health -= other_hitbox.damage
-	velocity = other_hitbox.knockback_direction * other_hitbox.knockback_amount
+func play_hit_animation() -> void:
 	playback.start("HitState")
 
-func infect() -> void:
-	if infected:
-		return
-	infected = true
-	modulate = Color.GREEN
+func on_infected() -> void:
 	speed = BASE_SPEED * INFECTION_MULTIPLIER
-
-func get_room():
-	return get_parent().get_parent()
