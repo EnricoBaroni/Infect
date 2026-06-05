@@ -5,10 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_8y5ks"]
 [ext_resource type="PackedScene" uid="uid://4wm0rnnygrql" path="res://enemies/rapper_enemy.tscn" id="2_52cv3"]
 [ext_resource type="PackedScene" uid="uid://vng17ck1d4em" path="res://enemies/nerd_enemy.tscn" id="2_p6nxk"]
-[ext_resource type="PackedScene" uid="uid://dqtrghe7ri027" path="res://enemies/bully_enemy.tscn" id="2_u3fw2"]
 [ext_resource type="PackedScene" uid="uid://d3gh83ohwg4bt" path="res://world/gachapon_machine.tscn" id="3_6hcyg"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
-[ext_resource type="PackedScene" uid="uid://d0amld2xqepr0" path="res://enemies/pooter_enemy.tscn" id="4_i4p58"]
+[ext_resource type="PackedScene" uid="uid://cpr2uno5hcb8m" path="res://enemies/host_enemy.tscn" id="4_i4p58"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
 [ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
 [ext_resource type="PackedScene" uid="uid://dm420nd0iunuo" path="res://world/respawn_machine.tscn" id="8_s4wlq"]
@@ -33,11 +32,8 @@ enabled = true
 tp_position = "Room5"
 enabled = true
 
-[node name="BullyEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=267330816 instance=ExtResource("2_u3fw2")]
-position = Vector2(240, 104)
-
-[node name="PooterEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="1" unique_id=246844284 instance=ExtResource("4_i4p58")]
-position = Vector2(80, 56)
+[node name="HostEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=548786904 instance=ExtResource("4_i4p58")]
+position = Vector2(80, 64)
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)

@@ -158,6 +158,39 @@ func chase_player() -> void:
 
 	move_and_slide()
 
+func flee_player() -> void:
+	var player = get_player()
+
+	if player is Player:
+		velocity = player.global_position.direction_to(global_position) * speed
+		face_direction(velocity)
+	else:
+		velocity = Vector2.ZERO
+
+	move_and_slide()
+
+func charge_towards_player(multiplier: float = 3.0) -> void:
+	var direction = get_direction_to_player()
+
+	velocity = direction * speed * multiplier
+
+	face_direction(velocity)
+
+	move_and_slide()
+
+func is_aligned_with_player(threshold: float = 8.0) -> bool:
+	var player = get_player()
+
+	if not player:
+		return false
+
+	var offset = player.global_position - global_position
+
+	return (
+		abs(offset.x) < threshold
+		or abs(offset.y) < threshold
+	)
+
 func wander(delta: float) -> void:
 	move_timer -= delta
 
