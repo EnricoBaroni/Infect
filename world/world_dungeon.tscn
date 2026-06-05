@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://cakmv68q26t3l"]
 
+[ext_resource type="Script" uid="uid://bom18mfkbpppn" path="res://world/world_dungeon.gd" id="1_42e15"]
 [ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_52cv3"]
-[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/hearts_ui.tscn" id="2_8y5ks"]
+[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_8y5ks"]
+[ext_resource type="PackedScene" uid="uid://4wm0rnnygrql" path="res://enemies/rapper_enemy.tscn" id="2_52cv3"]
+[ext_resource type="PackedScene" uid="uid://vng17ck1d4em" path="res://enemies/nerd_enemy.tscn" id="2_p6nxk"]
+[ext_resource type="PackedScene" uid="uid://dqtrghe7ri027" path="res://enemies/bully_enemy.tscn" id="2_u3fw2"]
+[ext_resource type="PackedScene" uid="uid://d3gh83ohwg4bt" path="res://world/gachapon_machine.tscn" id="3_6hcyg"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_88ruy"]
-vertices = PackedVector2Array(330, 202, -10, 202, -10, -18, 330, -18)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -24, 336, -24, 336, 208, -16, 208)])
-source_geometry_mode = 2
-agent_radius = 6.0
+[ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
+[ext_resource type="PackedScene" uid="uid://dm420nd0iunuo" path="res://world/respawn_machine.tscn" id="8_s4wlq"]
+[ext_resource type="PackedScene" uid="uid://bf7b40xa60a6f" path="res://world/difficulty_machine.tscn" id="9_begq3"]
+[ext_resource type="PackedScene" uid="uid://c02ovucw1uf58" path="res://world/grass.tscn" id="10_jv6pf"]
+[ext_resource type="PackedScene" uid="uid://cnvh167nqxbsb" path="res://world/bush.tscn" id="11_6hcyg"]
 
 [node name="WorldDungeon" type="Node2D" unique_id=158855967]
+script = ExtResource("1_42e15")
 
 [node name="Room1" parent="." unique_id=1208624606 instance=ExtResource("1_52cv3")]
 
@@ -23,6 +27,13 @@ enabled = true
 [node name="Door2" parent="Room1" index="5" unique_id=281333314]
 tp_position = "Room4"
 enabled = true
+
+[node name="Door3" parent="Room1" index="6" unique_id=1313167308]
+tp_position = "Room5"
+enabled = true
+
+[node name="BullyEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=267330816 instance=ExtResource("2_u3fw2")]
+position = Vector2(240, 104)
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
@@ -35,6 +46,18 @@ enabled = true
 tp_position = "Room1"
 enabled = true
 
+[node name="BatEnemy" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="0" unique_id=1850661317 instance=ExtResource("5_8y5ks")]
+position = Vector2(48, 96)
+
+[node name="BatEnemy2" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="1" unique_id=1818253020 instance=ExtResource("5_8y5ks")]
+position = Vector2(48, 56)
+
+[node name="BatEnemy3" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="2" unique_id=1879286800 instance=ExtResource("5_8y5ks")]
+position = Vector2(272, 56)
+
+[node name="BatEnemy4" parent="Room2/Enemies" parent_id_path=PackedInt32Array(539529083, 1420077364) index="3" unique_id=463286461 instance=ExtResource("5_8y5ks")]
+position = Vector2(272, 96)
+
 [node name="Room3" parent="." unique_id=320607790 instance=ExtResource("1_52cv3")]
 position = Vector2(352, -216)
 
@@ -45,6 +68,15 @@ enabled = true
 [node name="Door4" parent="Room3" index="7" unique_id=933195664]
 tp_position = "Room2"
 enabled = true
+
+[node name="RapperEnemy" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="0" unique_id=1938019952 instance=ExtResource("2_52cv3")]
+position = Vector2(88, 136)
+
+[node name="RapperEnemy2" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="1" unique_id=465132320 instance=ExtResource("2_52cv3")]
+position = Vector2(160, 56)
+
+[node name="RapperEnemy3" parent="Room3/Enemies" parent_id_path=PackedInt32Array(320607790, 1420077364) index="2" unique_id=321672829 instance=ExtResource("2_52cv3")]
+position = Vector2(264, 136)
 
 [node name="Room4" parent="." unique_id=1925319994 instance=ExtResource("1_52cv3")]
 position = Vector2(352, 0)
@@ -57,18 +89,43 @@ enabled = true
 tp_position = "Room1"
 enabled = true
 
+[node name="NerdEnemy" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="0" unique_id=1895198795 instance=ExtResource("2_p6nxk")]
+position = Vector2(88, 40)
+
+[node name="NerdEnemy2" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="1" unique_id=1385881848 instance=ExtResource("2_p6nxk")]
+position = Vector2(224, 40)
+
+[node name="NerdEnemy3" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="2" unique_id=1264146599 instance=ExtResource("2_p6nxk")]
+position = Vector2(88, 144)
+
+[node name="NerdEnemy4" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="3" unique_id=970172164 instance=ExtResource("2_p6nxk")]
+position = Vector2(224, 152)
+
+[node name="Room5" parent="." unique_id=830723811 instance=ExtResource("1_52cv3")]
+position = Vector2(0, 216)
+combat_room = false
+
+[node name="Door" parent="Room5" index="4" unique_id=2133244952]
+tp_position = "Room1"
+enabled = true
+
+[node name="GachaponMachine" parent="Room5" unique_id=255747899 instance=ExtResource("3_6hcyg")]
+position = Vector2(64, 72)
+
+[node name="RespawnMachine" parent="Room5" unique_id=369210811 instance=ExtResource("8_s4wlq")]
+position = Vector2(256, 72)
+
+[node name="DifficultyMachine" parent="Room5" unique_id=1809678683 instance=ExtResource("9_begq3")]
+position = Vector2(160, 112)
+
 [node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
 
 [node name="Player" parent="." unique_id=537425067 instance=ExtResource("4_p6nxk")]
 position = Vector2(151.99998, 111.99999)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=66285054]
-visible = false
-navigation_polygon = SubResource("NavigationPolygon_88ruy")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=559247693]
 
-[node name="HeartsUI" parent="CanvasLayer" unique_id=2106509227 instance=ExtResource("2_8y5ks")]
+[node name="StatsUI" parent="CanvasLayer" unique_id=2106509227 instance=ExtResource("2_8y5ks")]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 48.0
@@ -79,7 +136,47 @@ position = Vector2(160, 91)
 zoom = Vector2(1, 0.95)
 position_smoothing_speed = 50.0
 
+[node name="Obstacles" type="Node2D" parent="." unique_id=749620164]
+z_index = 1
+
+[node name="Grass" parent="Obstacles" unique_id=579628287 instance=ExtResource("10_jv6pf")]
+position = Vector2(416, 144)
+
+[node name="Grass4" parent="Obstacles" unique_id=1228768353 instance=ExtResource("10_jv6pf")]
+position = Vector2(416, 128)
+
+[node name="Grass7" parent="Obstacles" unique_id=1538670667 instance=ExtResource("10_jv6pf")]
+position = Vector2(440, -104)
+
+[node name="Grass5" parent="Obstacles" unique_id=211677825 instance=ExtResource("10_jv6pf")]
+position = Vector2(464, 128)
+
+[node name="Grass3" parent="Obstacles" unique_id=1459564221 instance=ExtResource("10_jv6pf")]
+position = Vector2(464, 144)
+
+[node name="Grass2" parent="Obstacles" unique_id=1917988957 instance=ExtResource("10_jv6pf")]
+position = Vector2(456, -160)
+
+[node name="Grass8" parent="Obstacles" unique_id=1723032114 instance=ExtResource("10_jv6pf")]
+position = Vector2(456, -88)
+
+[node name="Bush2" parent="Obstacles" unique_id=1638558928 instance=ExtResource("11_6hcyg")]
+position = Vector2(464, 40)
+
+[node name="Bush3" parent="Obstacles" unique_id=1645292910 instance=ExtResource("11_6hcyg")]
+position = Vector2(416, 40)
+
+[node name="Bush4" parent="Obstacles" unique_id=1033768930 instance=ExtResource("11_6hcyg")]
+position = Vector2(80, -96)
+
+[node name="Bush6" parent="Obstacles" unique_id=1077180949 instance=ExtResource("11_6hcyg")]
+position = Vector2(264, 136)
+
+[node name="Bush5" parent="Obstacles" unique_id=1857873317 instance=ExtResource("11_6hcyg")]
+position = Vector2(80, -120)
+
 [editable path="Room1"]
 [editable path="Room2"]
 [editable path="Room3"]
 [editable path="Room4"]
+[editable path="Room5"]

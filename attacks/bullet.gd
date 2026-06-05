@@ -10,9 +10,22 @@ extends Area2D
 var direction: Vector2 = Vector2.ZERO
 var inherited_velocity: Vector2 = Vector2.ZERO
 var distance_travelled: float = 0.0
+var infection_shot := false
+var custom_color: Color = Color.WHITE
+var enemy_shot := false
 
 func _ready() -> void:
-	area_entered.connect(_on_area_entered)
+	modulate = custom_color
+	hitbox.area_entered.connect(_on_hitbox_area_entered)
+	body_entered.connect(_on_body_entered)
+	if enemy_shot:
+		hitbox.collision_layer = 8
+		hitbox.collision_mask = 8
+	
+	if infection_shot:
+		modulate = Color.GREEN
+		hitbox.infection_power = 1
+		hitbox.damage = 0
 
 func _physics_process(delta: float) -> void:
 	var movement = (direction * SPEED + inherited_velocity * MOVEMENT_INHERITANCE) * delta
@@ -27,7 +40,9 @@ func _physics_process(delta: float) -> void:
 func get_fire_rate() -> float:
 	return FIRE_RATE
 
-func _on_area_entered(area_2d: Area2D) -> void:
-	print("area enter")
-	if area_2d is not Hurtbox: return
+func _on_body_entered(body: Node2D) -> void:
+	queue_free()
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area is not Hurtbox: return
 	queue_free()

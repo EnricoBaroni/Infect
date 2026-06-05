@@ -3,12 +3,13 @@ extends CharacterBody2D
 const DROP = preload("uid://dhaw4gt67tdhp")
 const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
-const BASE_SPEED = 30
-const INFECTION_MULTIPLIER = 1.5
+const BASE_SPEED = 15
+const INFECTION_MULTIPLIER = 2
 const FRICTION = 500
 
 var infected := false
 var speed := BASE_SPEED
+var custom_color := Color.RED
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
@@ -29,7 +30,7 @@ func _ready() -> void:
 	stats = stats.duplicate()
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_health.connect(die)
-	
+	modulate = custom_color
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
@@ -47,7 +48,9 @@ func _physics_process(delta: float) -> void:
 		"ChaseState":
 			var player = get_player()
 			if player is Player:
-				velocity = global_position.direction_to(player.global_position) * speed
+				navigation_agent_2d.target_position = player.global_position
+				var next_point = navigation_agent_2d.get_next_path_position()
+				velocity = global_position.direction_to(next_point) * speed
 				if velocity.x != 0:
 					sprite_2d.scale.x = sign(velocity.x)
 			else:
@@ -103,3 +106,11 @@ func is_player_in_range() -> bool:
 		if distance_to_player < max_range and distance_to_player > min_range: 
 			result = true
 	return result
+	
+func can_see_player() -> bool:
+	if not is_player_in_range(): return false
+	var player: = get_player()
+	ray_cast_2d.target_position = player.global_position - global_position
+	ray_cast_2d.force_raycast_update()
+	var has_los_to_player: = not ray_cast_2d.is_colliding()
+	return has_los_to_player

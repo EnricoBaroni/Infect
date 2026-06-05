@@ -3,33 +3,36 @@ extends CharacterBody2D
 const DROP = preload("uid://dhaw4gt67tdhp")
 const HIT_EFFECT = preload("uid://ceyipwdhuape4")
 const DEATH_EFFECT = preload("uid://dwdgco8qr3k4f")
-const BASE_SPEED = 30
-const INFECTION_MULTIPLIER = 1.5
+
+const BASE_SPEED = 8
+const INFECTION_MULTIPLIER = 1.2
 const FRICTION = 500
 
 var infected := false
 var speed := BASE_SPEED
+var move_direction := Vector2.ZERO
+var move_timer := 0.0
+var custom_color := Color.CYAN
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
-@export var min_range: = 4
-@export var max_range: = 400
 @export var stats: Stats
+@export var BULLET: PackedScene
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var center: Marker2D = $Center
-@onready var navigation_agent_2d: NavigationAgent2D = $Marker2D/NavigationAgent2D
-@onready var marker_2d: Marker2D = $Marker2D
+@onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:
 	stats = stats.duplicate()
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_health.connect(die)
-	
+	attack_timer.timeout.connect(start_attack)
+	attack_timer.start(randf_range(0.3, 1.0))
+	modulate = custom_color
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
@@ -40,22 +43,56 @@ func _physics_process(delta: float) -> void:
 	var room = get_room()
 	if not room.active:
 		return
-	
 	var state = playback.get_current_node()
 	match state:
-		"IdleState": pass
-		"ChaseState":
-			var player = get_player()
-			if player is Player:
-				velocity = global_position.direction_to(player.global_position) * speed
-				if velocity.x != 0:
-					sprite_2d.scale.x = sign(velocity.x)
-			else:
-				velocity = Vector2.ZERO
-			move_and_slide()
+		"WanderState":
+			wander(delta)
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
+
+func wander(delta: float) -> void:
+	move_timer -= delta
+	if move_timer <= 0:
+		move_timer = randf_range(1.0, 2.0)
+		move_direction = Vector2(
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0)
+		).normalized()
+	velocity = move_direction * speed
+	if velocity.x != 0:
+		sprite_2d.scale.x = sign(velocity.x)
+	move_and_slide()
+
+func start_attack() -> void:
+	var room = get_room()
+	if not room.active:
+		return
+	attack_timer.start(randf_range(1.0, 3.0))
+	shoot_cross()
+	if infected:
+		shoot_diagonals()
+
+func shoot_cross() -> void:
+	spawn_bullet(Vector2.UP)
+	spawn_bullet(Vector2.DOWN)
+	spawn_bullet(Vector2.LEFT)
+	spawn_bullet(Vector2.RIGHT)
+
+func shoot_diagonals() -> void:
+	spawn_bullet(Vector2(1, 1).normalized())
+	spawn_bullet(Vector2(1, -1).normalized())
+	spawn_bullet(Vector2(-1, 1).normalized())
+	spawn_bullet(Vector2(-1, -1).normalized())
+
+func spawn_bullet(direction: Vector2) -> void:
+	print("RAPPER SHOOT")
+	var bullet = BULLET.instantiate()
+	bullet.enemy_shot = true
+	bullet.custom_color = custom_color
+	bullet.global_position = global_position
+	bullet.direction = direction
+	get_tree().current_scene.add_child(bullet)
 
 func die() -> void:
 	var death_effect = DEATH_EFFECT.instantiate()
@@ -91,15 +128,3 @@ func infect() -> void:
 
 func get_room():
 	return get_parent().get_parent()
-
-func get_player() -> Player:
-	return get_tree().get_first_node_in_group("player")
-
-func is_player_in_range() -> bool:
-	var result = false
-	var player: = get_player()
-	if player is Player:
-		var distance_to_player = global_position.distance_to(player.global_position)
-		if distance_to_player < max_range and distance_to_player > min_range: 
-			result = true
-	return result

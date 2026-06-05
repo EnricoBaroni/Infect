@@ -774,8 +774,10 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=537425067 groups=["player"]]
+z_index = 2
 scale = Vector2(0.8, 0.8)
 collision_layer = 2
+collision_mask = 65
 motion_mode = 1
 script = ExtResource("1_rkbax")
 BULLET = ExtResource("2_dqkch")
@@ -846,7 +848,7 @@ shape = SubResource("CircleShape2D_yw30f")
 one_shot = true
 
 [node name="ShootMarker" type="Marker2D" parent="." unique_id=1547228394]
-position = Vector2(-4.7683716e-07, -13.75)
+position = Vector2(-1.6940659e-21, -5.0000005)
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="." unique_id=360001087]
 libraries/ = SubResource("AnimationLibrary_ur7pv")

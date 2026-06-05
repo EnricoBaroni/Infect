@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d3gh83ohwg4bt"]
+
+[ext_resource type="Script" uid="uid://ci7xym8ny4dcj" path="res://world/gachapon_machine.gd" id="1_buxyn"]
+[ext_resource type="Texture2D" uid="uid://4rfqypihhxkb" path="res://assets/machines.png" id="2_5ocp1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ocp1"]
+size = Vector2(64, 54)
+
+[node name="GachaponMachine" type="Area2D" unique_id=255747899]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_buxyn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2034922220]
+texture = ExtResource("2_5ocp1")
+hframes = 11
+vframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=625383864]
+shape = SubResource("RectangleShape2D_5ocp1")
+
+[node name="PressE" type="Label" parent="." unique_id=1169363704]
+offset_left = -17.0
+offset_top = 26.0
+offset_right = 23.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 8
+text = "[E]"

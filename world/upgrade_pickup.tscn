@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://tq8rii0lj6x1"]
+
+[ext_resource type="Script" uid="uid://bnwxx2qx2to8e" path="res://world/upgrade_pickup.gd" id="1_5nm36"]
+[ext_resource type="Texture2D" uid="uid://kfcbcn2vixjb" path="res://assets/trinkets.png" id="1_lumso"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lumso"]
+radius = 13.0
+
+[node name="UpgradePickup" type="Area2D" unique_id=1435224740]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_5nm36")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=761604633]
+texture = ExtResource("1_lumso")
+hframes = 20
+vframes = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=155194787]
+shape = SubResource("CircleShape2D_lumso")
