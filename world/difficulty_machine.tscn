@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bf7b40xa60a6f"]
+
+[ext_resource type="Script" uid="uid://t02o88u25e0l" path="res://world/difficulty_machine.gd" id="1_j803i"]
+[ext_resource type="Texture2D" uid="uid://4rfqypihhxkb" path="res://assets/machines.png" id="2_5k56o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ocp1"]
+size = Vector2(64, 54)
+
+[node name="DifficultyMachine" type="Area2D" unique_id=255747899]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_j803i")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2034922220]
+texture = ExtResource("2_5k56o")
+hframes = 11
+vframes = 8
+frame = 55
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=625383864]
+shape = SubResource("RectangleShape2D_5ocp1")
+
+[node name="PressE" type="Label" parent="." unique_id=1169363704]
+offset_left = -17.0
+offset_top = 26.0
+offset_right = 23.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 8
+text = "[E]"

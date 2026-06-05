@@ -30,33 +30,33 @@ stretch_mode = 1
 
 [node name="DamageLabel" type="Label" parent="." unique_id=1458728575]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 5.0
 offset_top = 40.0
-offset_right = 56.0
+offset_right = 45.0
 offset_bottom = 63.0
 theme_override_font_sizes/font_size = 8
 
 [node name="FireRateLabel" type="Label" parent="." unique_id=562071231]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 5.0
 offset_top = 64.0
-offset_right = 56.0
+offset_right = 45.0
 offset_bottom = 87.0
 theme_override_font_sizes/font_size = 8
 
 [node name="SpeedLabel" type="Label" parent="." unique_id=1328638565]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 5.0
 offset_top = 88.0
-offset_right = 56.0
+offset_right = 45.0
 offset_bottom = 111.0
 theme_override_font_sizes/font_size = 8
 
 [node name="RangeLabel" type="Label" parent="." unique_id=1680557762]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 5.0
 offset_top = 112.0
-offset_right = 56.0
+offset_right = 45.0
 offset_bottom = 135.0
 theme_override_font_sizes/font_size = 8
 

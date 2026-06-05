@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_52cv3"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_p6nxk"]
 [ext_resource type="PackedScene" uid="uid://dpj0bdt4x2tur" path="res://enemies/bat_enemy.tscn" id="5_8y5ks"]
+[ext_resource type="PackedScene" uid="uid://dm420nd0iunuo" path="res://world/respawn_machine.tscn" id="8_s4wlq"]
+[ext_resource type="PackedScene" uid="uid://bf7b40xa60a6f" path="res://world/difficulty_machine.tscn" id="9_begq3"]
 [ext_resource type="PackedScene" uid="uid://c02ovucw1uf58" path="res://world/grass.tscn" id="10_jv6pf"]
 [ext_resource type="PackedScene" uid="uid://cnvh167nqxbsb" path="res://world/bush.tscn" id="11_6hcyg"]
 
@@ -108,7 +110,13 @@ tp_position = "Room1"
 enabled = true
 
 [node name="GachaponMachine" parent="Room5" unique_id=255747899 instance=ExtResource("3_6hcyg")]
-position = Vector2(128, 96)
+position = Vector2(64, 72)
+
+[node name="RespawnMachine" parent="Room5" unique_id=369210811 instance=ExtResource("8_s4wlq")]
+position = Vector2(256, 72)
+
+[node name="DifficultyMachine" parent="Room5" unique_id=1809678683 instance=ExtResource("9_begq3")]
+position = Vector2(160, 112)
 
 [node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
 

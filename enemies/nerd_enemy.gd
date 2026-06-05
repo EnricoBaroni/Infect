@@ -10,6 +10,8 @@ const FRICTION = 500
 var infected := false
 var speed := BASE_SPEED
 var custom_color := Color.YELLOW
+var health_multiplier := 1.0
+var speed_multiplier := 1.0
 
 @export var min_range: = 4
 @export var max_range: = 80
@@ -33,7 +35,12 @@ func _ready() -> void:
 	attack_timer.timeout.connect(start_attack)
 	attack_timer.start()
 	modulate = custom_color
+	
+	stats.health *= health_multiplier
+	stats.max_health *= health_multiplier
+
 	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
 	var room = get_room()

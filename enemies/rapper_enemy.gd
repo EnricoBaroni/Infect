@@ -13,6 +13,8 @@ var speed := BASE_SPEED
 var move_direction := Vector2.ZERO
 var move_timer := 0.0
 var custom_color := Color.CYAN
+var health_multiplier := 1.0
+var speed_multiplier := 1.0
 
 @export var stats: Stats
 @export var BULLET: PackedScene
@@ -31,7 +33,11 @@ func _ready() -> void:
 	attack_timer.timeout.connect(start_attack)
 	attack_timer.start(randf_range(0.3, 1.0))
 	modulate = custom_color
-	speed = BASE_SPEED * randf_range(0.9, 1.3)
+	stats.health *= health_multiplier
+	stats.max_health *= health_multiplier
+
+	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
 	var room = get_room()

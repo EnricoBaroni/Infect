@@ -10,6 +10,8 @@ const FRICTION = 500
 var infected := false
 var speed := BASE_SPEED
 var custom_color := Color.RED
+var health_multiplier := 1.0
+var speed_multiplier := 1.0
 
 @export var min_range: = 4
 @export var max_range: = 400
@@ -29,7 +31,11 @@ func _ready() -> void:
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_health.connect(die)
 	modulate = custom_color
+	stats.health *= health_multiplier
+	stats.max_health *= health_multiplier
+
 	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
 	var room = get_room()
