@@ -10,6 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_xglh5"]
 script = ExtResource("2_3yvyj")
+move_speed = 30.0
 metadata/_custom_type_script = "uid://b468jftlj52qv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftvvf"]

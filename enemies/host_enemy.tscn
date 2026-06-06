@@ -9,8 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_wuicn"]
 script = ExtResource("2_oaf8j")
-health = 3
-max_health = 3
+move_speed = 12.0
 metadata/_custom_type_script = "uid://b468jftlj52qv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftvvf"]

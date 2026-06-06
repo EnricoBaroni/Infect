@@ -1,7 +1,5 @@
 extends EnemyBase
 
-const BASE_SPEED = 15
-const INFECTION_MULTIPLIER = 2
 const FRICTION = 500
 
 var custom_color := Color.RED
@@ -24,7 +22,7 @@ func _ready() -> void:
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
-	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
@@ -36,26 +34,9 @@ func _physics_process(delta: float) -> void:
 	match state:
 		"IdleState": pass
 		"ChaseState":
-			chase_player()
+			chase_player_with_navigation(
+				navigation_agent_2d
+			)
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
-
-func on_infected() -> void:
-	speed = BASE_SPEED * INFECTION_MULTIPLIER
-
-func get_chase_target_position() -> Vector2:
-	var player = get_player()
-
-	if player is Player:
-		navigation_agent_2d.target_position = player.global_position
-		return navigation_agent_2d.get_next_path_position()
-
-	return global_position
-
-func can_see_player() -> bool:
-	return has_line_of_sight(
-		ray_cast_2d,
-		min_range,
-		max_range
-	)

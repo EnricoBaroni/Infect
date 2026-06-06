@@ -38,6 +38,8 @@ position = Vector2(232, 56)
 
 [node name="HostEnemy" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="1" unique_id=1584254268 instance=ExtResource("4_i4p58")]
 position = Vector2(112, 64)
+min_range = null
+max_range = null
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
@@ -83,6 +85,8 @@ enabled = true
 
 [node name="NerdEnemy" parent="Room4/Enemies" parent_id_path=PackedInt32Array(1925319994, 1420077364) index="0" unique_id=1895198795 instance=ExtResource("2_p6nxk")]
 position = Vector2(88, 40)
+min_range = null
+max_range = null
 
 [node name="Room5" parent="." unique_id=830723811 instance=ExtResource("1_52cv3")]
 position = Vector2(0, 216)

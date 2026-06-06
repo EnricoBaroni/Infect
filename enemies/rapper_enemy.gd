@@ -1,7 +1,5 @@
 extends EnemyBase
 
-const BASE_SPEED = 8
-const INFECTION_MULTIPLIER = 1.2
 const FRICTION = 500
 
 var custom_color := Color.CYAN
@@ -23,7 +21,7 @@ func _ready() -> void:
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
-	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
@@ -47,8 +45,6 @@ func start_attack() -> void:
 	if infected:
 		shoot_diagonals()
 
-func on_infected() -> void:
-	speed = BASE_SPEED * INFECTION_MULTIPLIER
 func get_bullet_scene() -> PackedScene:
 	return BULLET
 func get_bullet_color() -> Color:

@@ -1,7 +1,5 @@
 extends EnemyBase
 
-const BASE_SPEED = 30
-const INFECTION_MULTIPLIER = 1.5
 const FRICTION = 500
 
 var custom_color := Color.BLACK
@@ -26,7 +24,7 @@ func _ready() -> void:
 	stats.max_health *= health_multiplier
 	modulate = custom_color
 
-	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
@@ -43,15 +41,9 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
 
-func on_infected() -> void:
-	speed = BASE_SPEED * INFECTION_MULTIPLIER
-	
 func die() -> void:
 	if TRANSFORMED_ENEMY:
-		var transformed_enemy = TRANSFORMED_ENEMY.instantiate()
-
-		transformed_enemy.global_position = global_position
-
-		get_parent().add_child(transformed_enemy)
-
+		spawn_enemy_on_death(
+		TRANSFORMED_ENEMY
+		)
 	super()

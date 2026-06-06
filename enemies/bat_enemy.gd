@@ -1,7 +1,5 @@
 extends EnemyBase
 
-const BASE_SPEED = 30
-const INFECTION_MULTIPLIER = 1.5
 const FRICTION = 500
 
 var health_multiplier := 1.0
@@ -23,7 +21,7 @@ func _ready() -> void:
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
-	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +37,3 @@ func _physics_process(delta: float) -> void:
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
-
-func on_infected() -> void:
-	speed = BASE_SPEED * INFECTION_MULTIPLIER

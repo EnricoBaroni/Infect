@@ -1,14 +1,10 @@
 extends EnemyBase
 
-const BASE_SPEED = 20
-const INFECTION_MULTIPLIER = 1.5
 const FRICTION = 500
 
 var custom_color := Color.PURPLE
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
-var charging := false
-var charge_direction := Vector2.ZERO
 
 @export var min_range: = 4
 @export var max_range: = 80
@@ -30,7 +26,7 @@ func _ready() -> void:
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
-	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
@@ -46,8 +42,7 @@ func _physics_process(delta: float) -> void:
 				charge()
 				return
 			if is_aligned_with_player():
-				charging = true
-				charge_direction = get_direction_to_player().round()
+				start_charge()
 				return
 			wander(delta)
 		"HitState":
@@ -57,25 +52,5 @@ func _physics_process(delta: float) -> void:
 func start_attack() -> void:
 	pass
 
-func on_infected() -> void:
-	attack_timer.wait_time *= 0.5
-
-func can_see_player() -> bool:
-	return has_line_of_sight(
-		ray_cast_2d,
-		min_range,
-		max_range
-	)
-
 func get_bullet_color() -> Color:
 	return custom_color
-
-func charge() -> void:
-	velocity = charge_direction * speed * 3.0
-	face_direction(velocity)
-	move_and_slide()
-	if is_hitting_wall():
-		charging = false
-
-func is_hitting_wall() -> bool:
-	return get_slide_collision_count() > 0

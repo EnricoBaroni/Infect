@@ -10,11 +10,15 @@ const DEFAULT_ENEMY_BULLET = preload("uid://cwe1h0ebu2ech")
 
 # STATE
 
+const INFECTION_MULTIPLIER = 1.5
 var infected := false
 var speed := 0.0
 
 var move_direction := Vector2.ZERO
 var move_timer := 0.0
+var charging := false
+var charge_direction := Vector2.ZERO
+var jump_timer := 0.0
 
 # DATA
 
@@ -46,10 +50,25 @@ func die() -> void:
 
 	queue_free()
 
+func spawn_enemy_on_death(
+	enemy_scene: PackedScene
+) -> void:
+
+	if not enemy_scene:
+		return
+
+	var enemy = enemy_scene.instantiate()
+
+	enemy.global_position = global_position
+
+	get_parent().add_child(enemy)
+
 func take_hit(other_hitbox: Hitbox) -> void:
 	var hit_effect = HIT_EFFECT.instantiate()
 	get_tree().current_scene.add_child(hit_effect)
 	hit_effect.global_position = center.global_position
+	if not can_take_damage():
+		return
 
 	if other_hitbox.infection_power > 0:
 		infect()
@@ -64,6 +83,7 @@ func infect() -> void:
 
 	infected = true
 	modulate = Color.GREEN
+	speed = stats.move_speed * INFECTION_MULTIPLIER
 
 	on_infected()
 
@@ -77,6 +97,9 @@ func on_hit(other_hitbox: Hitbox) -> void:
 
 func on_infected() -> void:
 	pass
+
+func can_take_damage() -> bool:
+	return true
 
 func play_hit_animation() -> void:
 	pass
@@ -143,7 +166,30 @@ func has_line_of_sight(
 
 	return not raycast.is_colliding()
 
+func can_see_player(
+	raycast: RayCast2D,
+	min_range: float,
+	max_range: float
+) -> bool:
+	return has_line_of_sight(
+		raycast,
+		min_range,
+		max_range
+	)
+
 # MOVEMENT
+
+func get_navigation_chase_target_position(
+	navigation_agent: NavigationAgent2D
+) -> Vector2:
+
+	var player = get_player()
+
+	if player is Player:
+		navigation_agent.target_position = player.global_position
+		return navigation_agent.get_next_path_position()
+
+	return global_position
 
 func chase_player() -> void:
 	var player = get_player()
@@ -155,6 +201,22 @@ func chase_player() -> void:
 		face_direction(velocity)
 	else:
 		velocity = Vector2.ZERO
+
+	move_and_slide()
+
+func chase_player_with_navigation(
+	navigation_agent: NavigationAgent2D
+) -> void:
+
+	var target_position = get_navigation_chase_target_position(
+		navigation_agent
+	)
+
+	velocity = global_position.direction_to(
+		target_position
+	) * speed
+
+	face_direction(velocity)
 
 	move_and_slide()
 
@@ -207,6 +269,35 @@ func wander(delta: float) -> void:
 	face_direction(velocity)
 
 	move_and_slide()
+
+func jump_randomly(delta: float) -> void:
+	jump_timer -= delta
+	if jump_timer > 0:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	jump_timer = 1
+	move_direction = Vector2(
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0)
+	).normalized()
+	velocity = move_direction * speed * 50.0
+	face_direction(velocity)
+	move_and_slide()
+
+func charge() -> void:
+	velocity = charge_direction * speed * 3.0
+	face_direction(velocity)
+	move_and_slide()
+	if is_hitting_wall():
+		charging = false
+
+func start_charge() -> void:
+	charging = true
+	charge_direction = get_direction_to_player().round()
+
+func is_hitting_wall() -> bool:
+	return get_slide_collision_count() > 0
 
 # ATTACK INFRASTRUCTURE
 

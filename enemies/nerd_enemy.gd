@@ -1,7 +1,5 @@
 extends EnemyBase
 
-const BASE_SPEED = 30
-const INFECTION_MULTIPLIER = 1.5
 const FRICTION = 500
 
 var custom_color := Color.YELLOW
@@ -28,7 +26,7 @@ func _ready() -> void:
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
-	speed = BASE_SPEED * randf_range(0.9, 1.1)
+	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
 
 func _physics_process(delta: float) -> void:
@@ -50,7 +48,11 @@ func start_attack() -> void:
 	var room = get_room()
 	if not room.active:
 		return
-	if not can_see_player():
+	if not can_see_player(
+	ray_cast_2d,
+	min_range,
+	max_range
+):
 		return
 	var player = get_player()
 	if not player:
@@ -58,14 +60,8 @@ func start_attack() -> void:
 	shoot_at_player()
 
 func on_infected() -> void:
+	super()
 	attack_timer.wait_time *= 0.5
-
-func can_see_player() -> bool:
-	return has_line_of_sight(
-		ray_cast_2d,
-		min_range,
-		max_range
-	)
 
 func get_bullet_color() -> Color:
 	return custom_color
