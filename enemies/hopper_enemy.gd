@@ -2,12 +2,12 @@ extends EnemyBase
 
 const FRICTION = 500
 
-var custom_color := Color.RED
+var custom_color := Color.PINK
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
 @export var min_range: = 4
-@export var max_range: = 400
+@export var max_range: = 80
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -15,10 +15,14 @@ var speed_multiplier := 1.0
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var navigation_agent_2d: NavigationAgent2D = $Marker2D/NavigationAgent2D
 @onready var marker_2d: Marker2D = $Marker2D
+@onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:
 	super()
+	attack_timer.timeout.connect(start_attack)
+	attack_timer.start()
 	modulate = custom_color
+	
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
@@ -33,10 +37,18 @@ func _physics_process(delta: float) -> void:
 	var state = playback.get_current_node()
 	match state:
 		"IdleState": pass
-		"ChaseState":
-			chase_player_with_navigation(
-				navigation_agent_2d
-			)
+		"WanderState":
+			jump_randomly(delta)
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
+
+func start_attack() -> void:
+	pass
+
+func on_infected() -> void:
+	super()
+	attack_timer.wait_time *= 0.5
+
+func get_bullet_color() -> Color:
+	return custom_color

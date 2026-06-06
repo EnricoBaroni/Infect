@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://ddkgjhueqj63v" path="res://enemies/nerd_enemy.gd" id="1_cjufs"]
 [ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="2_cd5tq"]
 [ext_resource type="Texture2D" uid="uid://cqxkuslu7o0n0" path="res://assets/bat.png" id="3_a0bqx"]
-[ext_resource type="PackedScene" uid="uid://cwe1h0ebu2ech" path="res://attacks/bullet.tscn" id="3_cd5tq"]
 [ext_resource type="Texture2D" uid="uid://birymg7a6vh3j" path="res://assets/small_shadow.png" id="4_403xh"]
 [ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="5_083uh"]
 [ext_resource type="Script" uid="uid://ck4dpilw310u0" path="res://system/hitbox.gd" id="6_38xvw"]
@@ -12,6 +11,7 @@
 script = ExtResource("2_cd5tq")
 health = 3
 max_health = 3
+move_speed = 30.0
 metadata/_custom_type_script = "uid://b468jftlj52qv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftvvf"]
@@ -155,7 +155,7 @@ transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-141, 16)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6jij"]
-graph_offset = Vector2(-174, 157)
+graph_offset = Vector2(0, 157)
 nodes/output/position = Vector2(360, 220)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_tm0s6")
 nodes/StateMachine/position = Vector2(46, 194)
@@ -173,7 +173,6 @@ collision_mask = 69
 motion_mode = 1
 script = ExtResource("1_cjufs")
 stats = SubResource("Resource_d8yms")
-BULLET = ExtResource("3_cd5tq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1822061733]
 texture = ExtResource("3_a0bqx")

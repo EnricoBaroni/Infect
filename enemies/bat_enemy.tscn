@@ -11,6 +11,7 @@
 script = ExtResource("2_v6jij")
 health = 2
 max_health = 2
+move_speed = 30.0
 metadata/_custom_type_script = "uid://b468jftlj52qv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftvvf"]
@@ -135,7 +136,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tm0s6"]
 advance_mode = 2
-advance_expression = "is_player_in_range()"
+advance_expression = "is_player_in_range(min_range, max_range)"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6jij"]
 
@@ -154,7 +155,7 @@ transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-141, 16)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6jij"]
-graph_offset = Vector2(-194, 110)
+graph_offset = Vector2(-95.63638, 108.17355)
 nodes/output/position = Vector2(360, 220)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_tm0s6")
 nodes/StateMachine/position = Vector2(46, 194)

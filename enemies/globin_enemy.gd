@@ -2,12 +2,13 @@ extends EnemyBase
 
 const FRICTION = 500
 
-var custom_color := Color.RED
+var custom_color := Color.BLACK
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
 @export var min_range: = 4
 @export var max_range: = 400
+@export var TRANSFORMED_ENEMY: PackedScene
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -18,9 +19,10 @@ var speed_multiplier := 1.0
 
 func _ready() -> void:
 	super()
-	modulate = custom_color
+	
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
+	modulate = custom_color
 
 	speed = stats.move_speed * randf_range(0.9, 1.1)
 	speed *= speed_multiplier
@@ -34,9 +36,14 @@ func _physics_process(delta: float) -> void:
 	match state:
 		"IdleState": pass
 		"ChaseState":
-			chase_player_with_navigation(
-				navigation_agent_2d
-			)
+			chase_player()
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()
+
+func die() -> void:
+	if TRANSFORMED_ENEMY:
+		spawn_enemy_on_death(
+		TRANSFORMED_ENEMY
+		)
+	super()

@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://dqtrghe7ri027"]
+[gd_scene format=3 uid="uid://bodkg0j42qgtd"]
 
-[ext_resource type="Script" uid="uid://dvtpucxfj4jyg" path="res://enemies/bully_enemy.gd" id="1_to7im"]
-[ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="2_va5ym"]
-[ext_resource type="Texture2D" uid="uid://cqxkuslu7o0n0" path="res://assets/bat.png" id="3_bdhig"]
-[ext_resource type="Texture2D" uid="uid://birymg7a6vh3j" path="res://assets/small_shadow.png" id="4_07fk4"]
-[ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="5_e1wln"]
-[ext_resource type="Script" uid="uid://ck4dpilw310u0" path="res://system/hitbox.gd" id="6_18cxu"]
+[ext_resource type="Script" uid="uid://22bgwq7gxryy" path="res://enemies/mulligan_enemy.gd" id="1_cerr4"]
+[ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="2_e8td7"]
+[ext_resource type="Texture2D" uid="uid://cqxkuslu7o0n0" path="res://assets/bat.png" id="3_alptj"]
+[ext_resource type="Texture2D" uid="uid://birymg7a6vh3j" path="res://assets/small_shadow.png" id="4_4ce4h"]
+[ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="5_rnlg5"]
+[ext_resource type="Script" uid="uid://ck4dpilw310u0" path="res://system/hitbox.gd" id="6_v2p08"]
 
-[sub_resource type="Resource" id="Resource_iidie"]
-script = ExtResource("2_va5ym")
-move_speed = 15.0
+[sub_resource type="Resource" id="Resource_vpflk"]
+script = ExtResource("2_e8td7")
+move_speed = 20.0
 metadata/_custom_type_script = "uid://b468jftlj52qv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftvvf"]
@@ -120,13 +120,13 @@ _data = {
 &"hit": SubResource("Animation_8d0ax")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a1g8r"]
-animation = &"fly"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tm0s6"]
 animation = &"hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ejt7"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a1g8r"]
 animation = &"fly"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1g8r"]
@@ -143,17 +143,17 @@ advance_mode = 2
 advance_expression = "velocity == Vector2(0, 0)"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tm0s6"]
-states/ChaseState/node = SubResource("AnimationNodeAnimation_a1g8r")
-states/ChaseState/position = Vector2(367, 188)
 states/HitState/node = SubResource("AnimationNodeAnimation_tm0s6")
 states/HitState/position = Vector2(552, 100)
 states/IdleState/node = SubResource("AnimationNodeAnimation_5ejt7")
 states/IdleState/position = Vector2(367, 100)
-transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTransition_a1g8r"), "IdleState", "ChaseState", SubResource("AnimationNodeStateMachineTransition_tm0s6"), "ChaseState", "IdleState", SubResource("AnimationNodeStateMachineTransition_v6jij"), "HitState", "IdleState", SubResource("AnimationNodeStateMachineTransition_8d0ax")]
+states/WanderState/node = SubResource("AnimationNodeAnimation_a1g8r")
+states/WanderState/position = Vector2(367, 188)
+transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTransition_a1g8r"), "IdleState", "WanderState", SubResource("AnimationNodeStateMachineTransition_tm0s6"), "WanderState", "IdleState", SubResource("AnimationNodeStateMachineTransition_v6jij"), "HitState", "IdleState", SubResource("AnimationNodeStateMachineTransition_8d0ax")]
 graph_offset = Vector2(-141, 16)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6jij"]
-graph_offset = Vector2(0, 157)
+graph_offset = Vector2(-174, 157)
 nodes/output/position = Vector2(360, 220)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_tm0s6")
 nodes/StateMachine/position = Vector2(46, 194)
@@ -165,21 +165,21 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikmo2"]
 radius = 8.0
 
-[node name="BullyEnemy" type="CharacterBody2D" unique_id=267330816]
+[node name="MulliganEnemy" type="CharacterBody2D" unique_id=267330816]
 collision_layer = 4
 collision_mask = 69
 motion_mode = 1
-script = ExtResource("1_to7im")
-stats = SubResource("Resource_iidie")
+script = ExtResource("1_cerr4")
+stats = SubResource("Resource_vpflk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1822061733]
-texture = ExtResource("3_bdhig")
+texture = ExtResource("3_alptj")
 offset = Vector2(-1, -4)
 hframes = 5
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="." unique_id=1347354646]
 show_behind_parent = true
-texture = ExtResource("4_07fk4")
+texture = ExtResource("4_4ce4h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=738081806]
 position = Vector2(0, -5)
@@ -199,7 +199,7 @@ target_position = Vector2(8, 0)
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1179168837]
 collision_layer = 16
 collision_mask = 16
-script = ExtResource("5_e1wln")
+script = ExtResource("5_rnlg5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2020317422]
 position = Vector2(0, -5)
@@ -209,7 +209,7 @@ debug_color = Color(0.12672248, 0.55439305, 0.88826007, 0.41960785)
 [node name="Hitbox" type="Area2D" parent="." unique_id=837343085]
 collision_layer = 8
 collision_mask = 8
-script = ExtResource("6_18cxu")
+script = ExtResource("6_v2p08")
 metadata/_custom_type_script = "uid://ck4dpilw310u0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=591692733]
@@ -226,3 +226,6 @@ position = Vector2(0, -5)
 path_desired_distance = 4.0
 target_desired_distance = 4.0
 debug_enabled = true
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=256096582]
+wait_time = 1.5
