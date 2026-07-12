@@ -1,0 +1,117 @@
+# Mapa de arquitectura funcional
+
+Este documento es la referencia técnica mínima del proyecto para el desarrollo actual. No sustituye a [README.md](README.md) ni a [ITEM_ARCHITECTURE.md](ITEM_ARCHITECTURE.md); los complementa.
+
+## Propósito
+
+Definir de forma compacta qué sistema es responsable de qué parte del gameplay, con el nivel de complejidad que este repositorio realmente necesita en esta fase.
+
+## Sistema principal: `Player`
+
+Responsabilidad:
+- mover al personaje;
+- recibir input;
+- disparar normal;
+- disparar en modo Infection;
+- recibir daño;
+- exponer el estado final del personaje al resto del flujo.
+
+No debe convertirse en un coordinador global de todos los sistemas.
+
+## Sistema principal: `EnemyBase`
+
+Responsabilidad:
+- comportamiento base del enemigo;
+- movimiento y IA mínima;
+- reacción a colisiones;
+- reacción al estado de Infection;
+- muerte y drops.
+
+La base común debe permitir crear variantes sin duplicar toda la lógica.
+
+## Sistema de ataque: `AttackData`
+
+Responsabilidad:
+- encapsular una intención de ataque antes de convertirla en entidad física;
+- transportar daño, rango, dirección, tipo de ataque y flags de estado.
+
+Debe ser una estructura ligera, no una entidad del árbol de escena.
+
+## Sistema de proyectiles
+
+Responsabilidad:
+- materializar `AttackData` en un proyectil o entidad física;
+- moverla;
+- aplicar duración útil;
+- responder a colisiones.
+
+El proyectil no debe ser el lugar donde vive la lógica completa del juego.
+
+## Sistema de colisión: `Hitbox` y `Hurtbox`
+
+Responsabilidad:
+- `Hitbox` emite el golpe;
+- `Hurtbox` recibe el golpe y lo reenvía al receptor.
+
+Estos dos sistemas deben seguir siendo una capa de contacto físico y no una capa de economía ni de contenido.
+
+## Sistema de Infection: `InfectionState`
+
+Responsabilidad:
+- representarla como un estado explícito del enemigo infectado;
+- permitir que el enemigo tenga una reacción clara y verificable;
+- impedir que Infection siga siendo un simple flag disperso en varias partes del código.
+
+## Sistema de contenido: `ItemDefinition`
+
+Responsabilidad:
+- describir un ítem como dato;
+- no contener gameplay ejecutable.
+
+Un ítem debe decir qué es, no cómo se ejecuta.
+
+## Sistema de ejecución de efectos: `EffectInstance`
+
+Responsabilidad:
+- encapsular la ejecución de un efecto de un ítem;
+- aplicarse a un runtime específico del jugador o del combate.
+
+Debe existir para evitar mezclar contenido y comportamiento.
+
+## Sistema de inventario: `Inventory`
+
+Responsabilidad:
+- registrar ítems recogidos;
+- registrar instancias de efectos;
+- mantener el registro del estado del jugador dentro de una run.
+
+No debe hacerse cargo de todo el combate.
+
+## Sistema de stats: `StatResolver`
+
+Responsabilidad:
+- construir el estado final del jugador a partir de:
+  - stats base;
+  - ítems activos;
+  - efectos registrados;
+  - modificadores internos temporales.
+
+La regla es clara: no mutar stats desde pickups o efectos de forma aislada.
+
+## Límites de la arquitectura actual
+
+No crear todavía:
+- un `EventBus` global grande;
+- un `WeaponController` separado como abstracción de alto nivel;
+- un `CombatResolver` independiente;
+- un `EnemyStatusModel` paralelo al enemigo;
+- un `RoomEncounterController` separado de la room.
+
+Estas capas pueden llegar más adelante si el gameplay lo exige, pero hoy no son la prioridad.
+
+## Reglas de mantenimiento
+
+- Mantener el proyecto jugable tras cada tarea.
+- Enfocar el trabajo en slices pequeños.
+- Validar gameplay antes de ampliar sistema.
+- Si una decisión deja de ser válida, actualizar esta referencia y dejar constancia en la documentación que corresponda.

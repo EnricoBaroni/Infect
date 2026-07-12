@@ -11,12 +11,27 @@ extends Control
 @onready var drops_label = $DropsLabel
 
 func _ready() -> void:
+	bind_player_stats()
+
+func bind_player_stats() -> void:
+	var player_node = get_tree().get_first_node_in_group("player") as Player
+	if player_node and player_node.stats:
+		player_stats = player_node.stats
+
+	if player_stats == null:
+		return
+
 	player_stats.max_health_changed.connect(set_empty_hearts)
 	player_stats.health_changed.connect(set_full_hearts)
 	set_empty_hearts(player_stats.max_health)
 	set_full_hearts(player_stats.health)
 
 func _process(_delta):
+	if player_stats == null:
+		bind_player_stats()
+		if player_stats == null:
+			return
+
 	damage_label.text = "⚔ " + str(player_stats.damage)
 	fire_rate_label.text = "🔥 " + str(player_stats.fire_rate)
 	speed_label.text = "👟 " + str(player_stats.move_speed)

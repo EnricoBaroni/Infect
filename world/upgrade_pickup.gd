@@ -9,56 +9,54 @@ enum UpgradeType {
 }
 
 @export var upgrade_type := UpgradeType.DAMAGE
+@export var item_data: ItemData
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	update_sprite()
 
-func update_sprite() -> void:
+func _get_item_id() -> String:
+	if item_data and item_data.id != "":
+		return item_data.id
+
 	match upgrade_type:
 		UpgradeType.DAMAGE:
+			return "damage"
+		UpgradeType.HEALTH:
+			return "health"
+		UpgradeType.SPEED:
+			return "speed"
+		UpgradeType.FIRE_RATE:
+			return "fire_rate"
+		UpgradeType.RANGE:
+			return "range"
+
+	return "damage"
+
+func update_sprite() -> void:
+	match _get_item_id():
+		"damage":
+			$Sprite2D.frame = 0
+		"health":
+			$Sprite2D.frame = 1
+		"speed":
+			$Sprite2D.frame = 2
+		"fire_rate":
+			$Sprite2D.frame = 3
+		"range":
+			$Sprite2D.frame = 4
+		_:
 			$Sprite2D.frame = 0
 
-		UpgradeType.HEALTH:
-			$Sprite2D.frame = 1
-
-		UpgradeType.SPEED:
-			$Sprite2D.frame = 2
-
-		UpgradeType.FIRE_RATE:
-			$Sprite2D.frame = 3
-
-		UpgradeType.RANGE:
-			$Sprite2D.frame = 4
-
 func _on_body_entered(body: Node2D) -> void:
-	print("UPGRADE TYPE:", upgrade_type)
+	print("UPGRADE TYPE:", _get_item_id())
 
-	if body.name != "Player":
+	if not body is Player:
 		return
 
-	var stats = body.stats
+	if not item_data:
+		queue_free()
+		return
 
-	match upgrade_type:
-		UpgradeType.DAMAGE:
-			print("DAMAGE")
-			stats.damage += 0.5
-
-		UpgradeType.HEALTH:
-			print("HEALTH")
-			stats.max_health += 1
-			stats.health += 1
-
-		UpgradeType.SPEED:
-			print("SPEED")
-			stats.move_speed += 10
-
-		UpgradeType.FIRE_RATE:
-			print("FIRE RATE")
-			stats.fire_rate = max(0.1, stats.fire_rate - 0.05)
-
-		UpgradeType.RANGE:
-			print("RANGE")
-			stats.range += 25
-
+	body.inventory.add_passive_item(item_data)
 	queue_free()

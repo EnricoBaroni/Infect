@@ -27,6 +27,16 @@ func _ready() -> void:
 		hitbox.infection_power = 1
 		hitbox.damage = 0
 
+func setup_attack(attack_data: AttackData) -> void:
+	direction = attack_data.direction
+	inherited_velocity = attack_data.inherited_velocity
+	SPEED = attack_data.speed
+	DAMAGE = attack_data.damage
+	MAX_DISTANCE = attack_data.max_distance
+	MOVEMENT_INHERITANCE = attack_data.movement_inheritance
+	infection_shot = attack_data.infection_shot
+	hitbox.damage = DAMAGE
+
 func _physics_process(delta: float) -> void:
 	var movement = (direction * SPEED + inherited_velocity * MOVEMENT_INHERITANCE) * delta
 	global_position += movement

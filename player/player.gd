@@ -15,12 +15,23 @@ var infection_mode := false
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
 @onready var hurt_audio_stream_player: AudioStreamPlayer2D = $HurtAudioStreamPlayer
-
+@onready var inventory: InventorySystem = $InventorySystem
+@onready var stat_evaluation: StatEvaluationSystem = $StatEvaluationSystem
 
 @onready var body_playback = body_animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 @onready var head_playback = head_animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
+	if stat_evaluation:
+		if stat_evaluation.current_stats:
+			stats = stat_evaluation.current_stats
+		elif stat_evaluation.base_stats:
+			stats = stat_evaluation.base_stats
+		stat_evaluation.recalculate()
+
+	if stats == null:
+		return
+
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_health.connect(die)
 
@@ -61,17 +72,20 @@ func attack_state(delta: float) -> void:
 			shoot(attack_direction_vector)
 
 func shoot(direction_vector: Vector2) -> void:
-	var bullet_instance = BULLET.instantiate()
-	bullet_instance.global_position = shoot_marker.global_position
-	bullet_instance.direction = attack_vector
-	bullet_instance.DAMAGE = stats.damage
-	bullet_instance.SPEED = stats.bullet_speed
-	bullet_instance.MAX_DISTANCE = stats.range
+	var attack_data = AttackData.new()
+	attack_data.direction = attack_vector
+	attack_data.damage = stats.damage
+	attack_data.speed = stats.bullet_speed
+	attack_data.max_distance = stats.range
+	attack_data.movement_inheritance = 0.4
 	
 	var perpendicular_velocity = velocity - attack_vector * velocity.dot(attack_vector)
-	bullet_instance.inherited_velocity = perpendicular_velocity
+	attack_data.inherited_velocity = perpendicular_velocity
+	attack_data.infection_shot = infection_mode
 	
-	bullet_instance.infection_shot = infection_mode
+	var bullet_instance = BULLET.instantiate()
+	bullet_instance.global_position = shoot_marker.global_position
+	bullet_instance.setup_attack(attack_data)
 	fire_rate.start(stats.fire_rate)
 	get_tree().current_scene.add_child(bullet_instance)
 

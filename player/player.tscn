@@ -8,6 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://b0cpgmathenyb" path="res://audio/swipe.wav" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="5_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://dkutv8h47e6dv" path="res://audio/hurt.wav" id="8_smehm"]
+[ext_resource type="Script" uid="uid://cb7yrfioxieja" path="res://player/systems/inventory_system.gd" id="9_hg6s5"]
+[ext_resource type="Script" uid="uid://ba1ltsgnk2gi3" path="res://player/systems/stat_evaluation_system.gd" id="10_8t03j"]
+[ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="11_2ieo8"]
+[ext_resource type="Resource" uid="uid://4yryus6nlqeg" path="res://player/player_base_stats.tres" id="11_ebec5"]
 
 [sub_resource type="Animation" id="Animation_g6k8r"]
 length = 0.001
@@ -250,15 +254,19 @@ animation = &"run_right"
 animation = &"run_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yw30f"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_g6k8r")
 blend_point_0/pos = Vector2(-0.90000004, 0)
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_boad6")
 blend_point_1/pos = Vector2(0, 1)
+blend_point_1/name = &"1"
 blend_point_2/node = SubResource("AnimationNodeAnimation_rgyib")
 blend_point_2/pos = Vector2(0.90000004, 0)
+blend_point_2/name = &"2"
 blend_point_3/node = SubResource("AnimationNodeAnimation_hg6s5")
 blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
+blend_point_3/name = &"3"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkbax"]
 animation = &"stand_left"
@@ -273,15 +281,19 @@ animation = &"stand_up"
 animation = &"stand_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_rkbax"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_rkbax")
 blend_point_0/pos = Vector2(-0.90000004, 0)
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_g1dw6")
 blend_point_1/pos = Vector2(0.90000004, 0)
+blend_point_1/name = &"1"
 blend_point_2/node = SubResource("AnimationNodeAnimation_yw30f")
 blend_point_2/pos = Vector2(0, 1)
+blend_point_2/name = &"2"
 blend_point_3/node = SubResource("AnimationNodeAnimation_qjkh3")
 blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
+blend_point_3/name = &"3"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yw30f"]
 advance_mode = 2
@@ -617,15 +629,19 @@ animation = &"attack_right"
 animation = &"attack_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_qjkh3"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_kb6p2")
 blend_point_0/pos = Vector2(-1, 0)
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_wodsf")
 blend_point_1/pos = Vector2(0, 1)
+blend_point_1/name = &"1"
 blend_point_2/node = SubResource("AnimationNodeAnimation_32hag")
 blend_point_2/pos = Vector2(1, 0)
+blend_point_2/name = &"2"
 blend_point_3/node = SubResource("AnimationNodeAnimation_tqiix")
 blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
+blend_point_3/name = &"3"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8t03j"]
 animation = &"stand_left"
@@ -640,15 +656,19 @@ animation = &"stand_right"
 animation = &"stand_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_g1dw6"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_8t03j")
 blend_point_0/pos = Vector2(-0.90000004, 0)
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_2ieo8")
 blend_point_1/pos = Vector2(0, 1)
+blend_point_1/name = &"1"
 blend_point_2/node = SubResource("AnimationNodeAnimation_ebec5")
 blend_point_2/pos = Vector2(0.90000004, 0)
+blend_point_2/name = &"2"
 blend_point_3/node = SubResource("AnimationNodeAnimation_yllr7")
 blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
+blend_point_3/name = &"3"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g6k8r"]
 advance_mode = 2
@@ -773,6 +793,10 @@ _data = {
 &"blink": SubResource("Animation_smehm")
 }
 
+[sub_resource type="Resource" id="Resource_arayt"]
+script = ExtResource("11_2ieo8")
+metadata/_custom_type_script = "uid://b468jftlj52qv"
+
 [node name="Player" type="CharacterBody2D" unique_id=537425067 groups=["player"]]
 z_index = 2
 scale = Vector2(0.8, 0.8)
@@ -859,3 +883,13 @@ bus = &"Sounds"
 [node name="HurtAudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2002990313]
 stream = ExtResource("8_smehm")
 bus = &"Sounds"
+
+[node name="InventorySystem" type="Node" parent="." unique_id=1135983657]
+script = ExtResource("9_hg6s5")
+metadata/_custom_type_script = "uid://cb7yrfioxieja"
+
+[node name="StatEvaluationSystem" type="Node" parent="." unique_id=230325375]
+script = ExtResource("10_8t03j")
+base_stats = ExtResource("11_ebec5")
+current_stats = SubResource("Resource_arayt")
+metadata/_custom_type_script = "uid://ba1ltsgnk2gi3"

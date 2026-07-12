@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bs066t7ngbxci"]
+
+[ext_resource type="Script" uid="uid://c2kscot8x8qqu" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://ct8jc2xjlj6xy" path="res://items/effects/effect_data.gd" id="1_0gltt"]
+[ext_resource type="Script" uid="uid://bdhil8qt1aep0" path="res://items/effects/damage_up_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_95b2a"]
+resource_name = "DamageUpEffect"
+script = ExtResource("2")
+
+[resource]
+script = ExtResource("1")
+id = "sad_onion"
+name = "Sad Onion"
+description = "Increases the player's damage."
+effects = Array[ExtResource("1_0gltt")]([SubResource("Resource_95b2a")])

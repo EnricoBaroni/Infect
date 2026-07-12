@@ -11,6 +11,7 @@ const DEFAULT_ENEMY_BULLET = preload("uid://cwe1h0ebu2ech")
 # STATE
 
 const INFECTION_MULTIPLIER = 1.5
+var infection_state: InfectionState = InfectionState.new()
 var infected := false
 var speed := 0.0
 
@@ -78,10 +79,11 @@ func take_hit(other_hitbox: Hitbox) -> void:
 	on_hit(other_hitbox)
 
 func infect() -> void:
-	if infected:
+	if infection_state.is_infected:
 		return
 
-	infected = true
+	infection_state.is_infected = true
+	infected = infection_state.is_infected
 	modulate = Color.GREEN
 	speed = stats.move_speed * INFECTION_MULTIPLIER
 

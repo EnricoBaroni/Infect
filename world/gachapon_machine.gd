@@ -26,7 +26,9 @@ func use_machine() -> void:
 		return
 	Global.drops -= cost
 	var pickup = UPGRADE_PICKUP.instantiate()
-	pickup.upgrade_type = randi() % 5
+	var item_data := preload("res://items/data/sad_onion.tres").duplicate()
+	pickup.item_data = item_data
+	pickup.upgrade_type = 0
 	get_tree().current_scene.add_child(pickup)
 	pickup.global_position = global_position + Vector2(48, 0)
 	print("PURCHASE")
