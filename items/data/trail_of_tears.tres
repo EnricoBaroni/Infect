@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/projectile_hazard_pulse_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_hazard"]
+resource_name = "ProjectileHazardPulseEffect"
+script = ExtResource("2")
+radius = 46.0
+damage = 0.5
+apply_slow = true
+slow_duration = 1.2
+slow_intensity = 0.52
+trigger_chance = 0.65
+luck_to_full = 10.0
+max_trigger_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "trail_of_tears"
+name = "Trail of Tears"
+description = "Tears frequently leave hazardous puddles."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_hazard")])

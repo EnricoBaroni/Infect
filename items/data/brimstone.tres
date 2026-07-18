@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_set_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "segmented_beam"
+damage_multiplier = 0.65
+beam_segment_count = 9
+beam_segment_spacing = 14.0
+beam_segment_duration = 0.16
+charge_enabled = true
+charge_min_time = 0.12
+charge_max_time = 0.95
+charge_damage_scale_min = 0.75
+charge_damage_scale_max = 1.7
+charge_range_scale_min = 0.9
+charge_range_scale_max = 1.25
+charge_size_scale_min = 0.85
+charge_size_scale_max = 1.55
+continuous_fire = false
+
+[resource]
+script = ExtResource("1")
+id = "brimstone"
+name = "Brimstone"
+description = "Charge up a segmented blood beam."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_set_weapon")])

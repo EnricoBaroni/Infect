@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "remote_orb"
+damage_multiplier = 0.68
+remote_lifetime = 6.0
+remote_speed = 130.0
+remote_contact_cooldown = 0.12
+remote_turn_rate = 5.8
+
+[resource]
+script = ExtResource("1")
+id = "ludovico_technique"
+name = "Ludovico Technique"
+description = "Control one persistent tear."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])

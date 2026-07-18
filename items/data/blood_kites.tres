@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/companion_formation_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_companion"]
+resource_name = "CompanionFormationEffect"
+script = ExtResource("2")
+orbital_count = 3
+orbital_radius = 54.0
+orbital_speed = 4.3
+orbital_contact_damage = 1.1
+orbital_contact_cooldown = 0.24
+follower_count = 1
+follower_distance = 70.0
+follower_follow_speed = 7.0
+follower_contact_damage = 0.8
+follower_contact_cooldown = 0.35
+
+[sub_resource type="Resource" id="Resource_damage_down"]
+resource_name = "DamageUpEffect"
+script = ExtResource("3")
+amount = -0.5
+
+[resource]
+script = ExtResource("1")
+id = "blood_kites"
+name = "Blood Kites"
+description = "Aggressive companions, weaker direct tears."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_companion"), SubResource("Resource_damage_down")])

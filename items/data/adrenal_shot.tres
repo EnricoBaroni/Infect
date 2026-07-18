@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_damage_up"]
+resource_name = "DamageUpEffect"
+script = ExtResource("2")
+amount = 0.4
+
+[sub_resource type="Resource" id="Resource_fire_rate_up"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = 0.05
+
+[resource]
+script = ExtResource("1")
+id = "adrenal_shot"
+name = "Adrenal Shot"
+description = "Damage and tears up."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_damage_up"), SubResource("Resource_fire_rate_up")])

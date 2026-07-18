@@ -6,12 +6,12 @@ var custom_color := Color.LIME_GREEN
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
-@export var min_range: = 4
-@export var max_range: = 80
+@export var min_range: float = 4.0
+@export var max_range: float = 80.0
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var navigation_agent_2d: NavigationAgent2D = $Marker2D/NavigationAgent2D
 @onready var marker_2d: Marker2D = $Marker2D

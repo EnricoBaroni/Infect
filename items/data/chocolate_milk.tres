@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/charge_shot_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_charge"]
+resource_name = "ChargeShotEffect"
+script = ExtResource("2")
+charge_enabled = true
+charge_min_time = 0.08
+charge_max_time = 0.9
+charge_damage_scale_min = 0.35
+charge_damage_scale_max = 2.1
+charge_speed_scale_min = 0.9
+charge_speed_scale_max = 1.15
+charge_range_scale_min = 0.85
+charge_range_scale_max = 1.25
+charge_size_scale_min = 0.75
+charge_size_scale_max = 1.5
+
+[sub_resource type="Resource" id="Resource_tears_down"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = -0.14
+
+[resource]
+script = ExtResource("1")
+id = "chocolate_milk"
+name = "Chocolate Milk"
+description = "Charge tears for variable power."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_charge"), SubResource("Resource_tears_down")])

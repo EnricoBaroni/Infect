@@ -1,11 +1,16 @@
 class_name Player extends CharacterBody2D
 
 const SPEED = 100
+const EFFECT_RUNTIME_SYSTEM_SCRIPT = preload("res://player/systems/effect_runtime_system.gd")
+const ATTACK_EVALUATION_SYSTEM_SCRIPT = preload("res://player/systems/attack_evaluation_system.gd")
+const PROJECTILE_SYSTEM_SCRIPT = preload("res://player/systems/projectile_system.gd")
+const WEAPON_SYSTEM_SCRIPT = preload("res://player/systems/weapon_system.gd")
+const COMPANION_SYSTEM_SCRIPT = preload("res://player/systems/companion_system.gd")
 @export var BULLET: PackedScene
 @export var stats: Stats
 
-var input_vector: = Vector2.ZERO
-var attack_vector: = Vector2.ZERO
+var input_vector: Vector2 = Vector2.ZERO
+var attack_vector: Vector2 = Vector2.ZERO
 var infection_mode := false
 
 @onready var body_animation_tree: AnimationTree = $Body/BodyAnimationTree
@@ -17,11 +22,19 @@ var infection_mode := false
 @onready var hurt_audio_stream_player: AudioStreamPlayer2D = $HurtAudioStreamPlayer
 @onready var inventory: InventorySystem = $InventorySystem
 @onready var stat_evaluation: StatEvaluationSystem = $StatEvaluationSystem
+@onready var weapon_system: WeaponSystem = get_node_or_null("WeaponSystem")
 
-@onready var body_playback = body_animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
-@onready var head_playback = head_animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var body_playback: AnimationNodeStateMachinePlayback = body_animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var head_playback: AnimationNodeStateMachinePlayback = head_animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
+	_ensure_companion_system()
+	_ensure_effect_runtime_system()
+	_ensure_attack_evaluation_system()
+	_ensure_projectile_system()
+	_ensure_weapon_system()
+	weapon_system = get_node_or_null("WeaponSystem")
+
 	if stat_evaluation:
 		if stat_evaluation.current_stats:
 			stats = stat_evaluation.current_stats
@@ -36,6 +49,11 @@ func _ready() -> void:
 	stats.no_health.connect(die)
 
 func _physics_process(delta: float) -> void:
+	if stats == null:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	var bodyState = body_playback.get_current_node()
 	match bodyState:
 		"MoveState": move_state(delta)
@@ -53,41 +71,89 @@ func die() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 func take_hit(other_hitbox: Hitbox) -> void:
+	var preprocess_payload := {
+		"player": self,
+		"source": other_hitbox,
+		"damage": other_hitbox.damage,
+		"position": global_position
+	}
+	EventBus.emit_player_damage_preprocess(preprocess_payload)
+	var resolved_damage := maxf(0.0, float(preprocess_payload.get("damage", other_hitbox.damage)))
+	if resolved_damage <= 0.0:
+		return
+
 	hurt_audio_stream_player.play()
-	stats.health -= other_hitbox.damage
+	stats.health -= resolved_damage
+	EventBus.emit_player_damaged({
+		"player": self,
+		"source": other_hitbox,
+		"damage": resolved_damage,
+		"current_health": stats.health,
+		"max_health": stats.max_health,
+		"position": global_position
+	})
 	blink_animation_player.play("blink")
+
+func _ensure_effect_runtime_system() -> void:
+	if has_node("EffectRuntimeSystem"):
+		return
+
+	var effect_runtime_system = EFFECT_RUNTIME_SYSTEM_SCRIPT.new()
+	effect_runtime_system.name = "EffectRuntimeSystem"
+	add_child(effect_runtime_system)
+
+func _ensure_companion_system() -> void:
+	if has_node("CompanionSystem"):
+		return
+
+	var companion_system = COMPANION_SYSTEM_SCRIPT.new()
+	companion_system.name = "CompanionSystem"
+	add_child(companion_system)
+
+func _ensure_weapon_system() -> void:
+	if has_node("WeaponSystem"):
+		return
+
+	var new_weapon_system = WEAPON_SYSTEM_SCRIPT.new()
+	new_weapon_system.name = "WeaponSystem"
+	add_child(new_weapon_system)
+
+func _ensure_attack_evaluation_system() -> void:
+	if has_node("AttackEvaluationSystem"):
+		return
+
+	var new_attack_evaluation_system = ATTACK_EVALUATION_SYSTEM_SCRIPT.new()
+	new_attack_evaluation_system.name = "AttackEvaluationSystem"
+	add_child(new_attack_evaluation_system)
+
+func _ensure_projectile_system() -> void:
+	if has_node("ProjectileSystem"):
+		return
+
+	var new_projectile_system = PROJECTILE_SYSTEM_SCRIPT.new()
+	new_projectile_system.name = "ProjectileSystem"
+	add_child(new_projectile_system)
 
 func move_state(delta: float) -> void:
 	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_vector != Vector2.ZERO:
-		var move_direction_vector: = Vector2(input_vector.x, -input_vector.y)
+		var move_direction_vector: Vector2 = Vector2(input_vector.x, -input_vector.y)
 		update_blend_positions(move_direction_vector, "Body")
 
 func attack_state(delta: float) -> void:
 	attack_vector = Input.get_vector("attack_left", "attack_right", "attack_up", "attack_down")
 	if attack_vector != Vector2.ZERO:
-		var attack_direction_vector: = Vector2(attack_vector.x, -attack_vector.y)
+		var attack_direction_vector: Vector2 = Vector2(attack_vector.x, -attack_vector.y)
 		update_blend_positions(attack_direction_vector, "Head")
-		if fire_rate.is_stopped():
-			shoot(attack_direction_vector)
-
-func shoot(direction_vector: Vector2) -> void:
-	var attack_data = AttackData.new()
-	attack_data.direction = attack_vector
-	attack_data.damage = stats.damage
-	attack_data.speed = stats.bullet_speed
-	attack_data.max_distance = stats.range
-	attack_data.movement_inheritance = 0.4
-	
-	var perpendicular_velocity = velocity - attack_vector * velocity.dot(attack_vector)
-	attack_data.inherited_velocity = perpendicular_velocity
-	attack_data.infection_shot = infection_mode
-	
-	var bullet_instance = BULLET.instantiate()
-	bullet_instance.global_position = shoot_marker.global_position
-	bullet_instance.setup_attack(attack_data)
-	fire_rate.start(stats.fire_rate)
-	get_tree().current_scene.add_child(bullet_instance)
+	if weapon_system:
+		weapon_system.try_fire(
+			attack_vector,
+			infection_mode,
+			stats,
+			velocity,
+			BULLET,
+			delta
+		)
 
 func update_blend_positions(direction_vector: Vector2, type: String) -> void:
 	match type:

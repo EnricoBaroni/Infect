@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/companion_formation_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_companion"]
+resource_name = "CompanionFormationEffect"
+script = ExtResource("2")
+orbital_count = 2
+orbital_radius = 62.0
+orbital_speed = 2.9
+orbital_contact_damage = 0.85
+orbital_contact_cooldown = 0.32
+follower_count = 0
+
+[resource]
+script = ExtResource("1")
+id = "twin_satellites"
+name = "Twin Satellites"
+description = "Two stable orbitals."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_companion")])

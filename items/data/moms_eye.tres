@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/chance_split_shots_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/luck_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "ChanceSplitShotsEffect"
+script = ExtResource("2")
+extra_shots = 1
+spread_degrees = 150.0
+proc_chance = 0.2
+luck_to_full = 10.0
+max_proc_chance = 0.65
+
+[sub_resource type="Resource" id="Resource_luck"]
+resource_name = "LuckUpEffect"
+script = ExtResource("3")
+amount = 0.5
+
+[resource]
+script = ExtResource("1")
+id = "moms_eye"
+name = "Mom's Eye"
+description = "Chance to fire an additional odd-angle tear."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_split"), SubResource("Resource_luck")])

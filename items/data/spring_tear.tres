@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "elastic_ricochet"
+damage_multiplier = 1.04
+elastic_bonus_bounces = 11
+elastic_min_bounces = 8
+elastic_random_angle_degrees = 24
+elastic_speed_retention = 1.02
+
+[resource]
+script = ExtResource("1")
+id = "spring_tear"
+name = "Spring Tear"
+description = "Fast elastic shots that keep momentum."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])
+

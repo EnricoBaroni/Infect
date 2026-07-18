@@ -31,11 +31,8 @@ enabled = true
 tp_position = "Room5"
 enabled = true
 
-[node name="BatEnemy3" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=1879286800 instance=ExtResource("5_8y5ks")]
-position = Vector2(248, 48)
-
-[node name="BatEnemy4" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="1" unique_id=463286461 instance=ExtResource("5_8y5ks")]
-position = Vector2(248, 88)
+[node name="BatEnemy4" parent="Room1/Enemies" parent_id_path=PackedInt32Array(1208624606, 1420077364) index="0" unique_id=463286461 instance=ExtResource("5_8y5ks")]
+position = Vector2(153, 143)
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
@@ -85,18 +82,18 @@ tp_position = "Room1"
 enabled = true
 
 [node name="GachaponMachine" parent="Room5" unique_id=255747899 instance=ExtResource("3_6hcyg")]
-position = Vector2(64, 72)
+position = Vector2(113, 91)
 
 [node name="RespawnMachine" parent="Room5" unique_id=369210811 instance=ExtResource("8_s4wlq")]
-position = Vector2(256, 72)
+position = Vector2(259, 56)
 
 [node name="DifficultyMachine" parent="Room5" unique_id=1809678683 instance=ExtResource("9_begq3")]
-position = Vector2(160, 112)
+position = Vector2(258, 128)
 
 [node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
 
 [node name="Player" parent="." unique_id=537425067 instance=ExtResource("4_p6nxk")]
-position = Vector2(151.99998, 111.99999)
+position = Vector2(152.00002, 93.00001)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=559247693]
 

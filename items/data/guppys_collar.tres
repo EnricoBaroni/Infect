@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/damage_prevention_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_life"]
+resource_name = "DamagePreventionEffect"
+script = ExtResource("2")
+charges_per_room = 1
+reset_on_room_enter = false
+full_block = true
+proc_chance = 0.5
+proc_luck_to_full = 12.0
+proc_max_chance = 0.85
+only_if_lethal = true
+
+[resource]
+script = ExtResource("1")
+id = "guppys_collar"
+name = "Guppy's Collar"
+description = "Chance to prevent lethal damage."
+quality = 2
+pool_tags = PackedStringArray("devil", "treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_life")])

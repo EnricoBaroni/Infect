@@ -1,4 +1,5 @@
 extends Node2D
+class_name Door
 
 @onready var area_2d: Area2D = $Area2D
 @onready var marker_2d: Marker2D = $Marker2D
@@ -17,10 +18,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	move_body_to(body, marker_2d.global_position)
 	move_camera_to(get_tree().current_scene.get_node(tp_position).get_node("Marker2D").global_position)
 	
-	var current_room = get_parent()
+	var current_room := get_parent() as Room
+	if current_room == null:
+		return
 	current_room.deactivate()
 
-	var destination_room = get_tree().current_scene.get_node(tp_position)
+	var destination_room := get_tree().current_scene.get_node(tp_position) as Room
+	if destination_room == null:
+		return
 	destination_room.activate()
 	
 	_start_move_cooldown()

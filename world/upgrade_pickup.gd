@@ -58,5 +58,12 @@ func _on_body_entered(body: Node2D) -> void:
 		queue_free()
 		return
 
+	EventBus.emit_item_collected({
+		"item": item_data,
+		"item_id": item_data.id,
+		"item_name": item_data.name,
+		"position": global_position
+	})
+
 	body.inventory.add_passive_item(item_data)
 	queue_free()

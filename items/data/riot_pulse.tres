@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/knockback_modifier_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/split_shots_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_knockback"]
+resource_name = "KnockbackModifierEffect"
+script = ExtResource("2")
+knockback_multiplier = 1.2
+knockback_flat_bonus = 12.0
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "SplitShotsEffect"
+script = ExtResource("3")
+extra_shots = 1
+spread_degrees = 10.0
+
+[resource]
+script = ExtResource("1")
+id = "riot_pulse"
+name = "Riot Pulse"
+description = "Split tears that shove enemies around."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_knockback"), SubResource("Resource_split")])

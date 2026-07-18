@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "expanding_ring"
+damage_multiplier = 0.8
+ring_max_radius = 126
+ring_expand_rate = 140
+ring_contact_cooldown = 0.2
+ring_lifetime = 0.95
+
+[resource]
+script = ExtResource("1")
+id = "corona_drive"
+name = "Corona Drive"
+description = "Slow-growing ring with long reach."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])
+

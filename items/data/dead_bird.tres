@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/spawn_companions_on_player_damaged_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_spawn"]
+resource_name = "SpawnCompanionsOnPlayerDamagedEffect"
+script = ExtResource("2")
+companion_type = "follower"
+spawn_count = 1
+max_companions = 2
+proc_chance = 1.0
+reset_on_room_enter = true
+follower_distance = 64.0
+follower_follow_speed = 8.0
+follower_contact_damage = 1.1
+follower_contact_cooldown = 0.2
+follower_shot_interval = 0.0
+
+[resource]
+script = ExtResource("1")
+id = "dead_bird"
+name = "Dead Bird"
+description = "Taking damage summons an aggressive bird familiar."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_spawn")])

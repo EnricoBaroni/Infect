@@ -19,10 +19,48 @@ vframes = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=625383864]
 shape = SubResource("RectangleShape2D_5ocp1")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1909563374]
+z_index = 50
+offset_left = 35.0
+offset_top = -45.0
+offset_right = 165.0
+offset_bottom = 25.0
+color = Color(0, 0, 0, 0.69803923)
+
 [node name="PressE" type="Label" parent="." unique_id=1169363704]
-offset_left = -17.0
-offset_top = 26.0
-offset_right = 23.0
-offset_bottom = 49.0
+z_index = 50
+offset_left = -38.0
+offset_top = 27.0
+offset_right = 42.0
+offset_bottom = 50.0
 theme_override_font_sizes/font_size = 8
 text = "[E]"
+
+[node name="ItemName" type="Label" parent="." unique_id=505342905]
+z_index = 50
+offset_left = 40.0
+offset_top = -45.0
+offset_right = 80.0
+offset_bottom = -22.0
+theme_override_colors/font_color = Color(1, 0.8509804, 0.3529412, 1)
+theme_override_font_sizes/font_size = 7
+horizontal_alignment = 1
+
+[node name="ItemDescription" type="RichTextLabel" parent="." unique_id=337320893]
+z_index = 50
+offset_left = 40.0
+offset_top = -30.0
+offset_right = 130.0
+theme_override_font_sizes/normal_font_size = 5
+theme_override_font_sizes/bold_font_size = 5
+theme_override_font_sizes/bold_italics_font_size = 5
+theme_override_font_sizes/italics_font_size = 5
+theme_override_font_sizes/mono_font_size = 5
+scroll_active = false
+
+[node name="ItemStats" type="Label" parent="." unique_id=244249996]
+z_index = 50
+offset_left = 37.0
+offset_right = 127.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 5

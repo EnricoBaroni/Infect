@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/companion_formation_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_companion"]
+resource_name = "CompanionFormationEffect"
+script = ExtResource("2")
+orbital_count = 2
+orbital_radius = 64.0
+orbital_speed = 3.0
+orbital_contact_damage = 0.9
+orbital_contact_cooldown = 0.28
+follower_count = 3
+follower_distance = 80.0
+follower_follow_speed = 6.4
+follower_contact_damage = 0.75
+follower_contact_cooldown = 0.33
+
+[sub_resource type="Resource" id="Resource_fire_rate_down"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = -0.08
+min_fire_rate = 0.05
+
+[resource]
+script = ExtResource("1")
+id = "bulwark_hive"
+name = "Bulwark Hive"
+description = "Large companion fleet, slower firing."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_companion"), SubResource("Resource_fire_rate_down")])

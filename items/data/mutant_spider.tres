@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/split_shots_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "SplitShotsEffect"
+script = ExtResource("2")
+extra_shots = 3
+spread_degrees = 22.0
+
+[sub_resource type="Resource" id="Resource_tears_down"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = -0.28
+
+[resource]
+script = ExtResource("1")
+id = "mutant_spider"
+name = "Mutant Spider"
+description = "Quad shot with a heavy tears down."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_split"), SubResource("Resource_tears_down")])

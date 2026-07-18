@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/explosive_projectiles_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/spectral_projectiles_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_explosion"]
+resource_name = "ExplosiveProjectilesEffect"
+script = ExtResource("2")
+explosion_radius = 42.0
+extra_explosion_damage_multiplier = 0.7
+inherit_infection = false
+
+[sub_resource type="Resource" id="Resource_spectral"]
+resource_name = "SpectralProjectilesEffect"
+script = ExtResource("3")
+
+[resource]
+script = ExtResource("1")
+id = "ghost_bombs"
+name = "Ghost Bombs"
+description = "Explosive shots pass through obstacles."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_explosion"), SubResource("Resource_spectral")])

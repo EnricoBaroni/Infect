@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/explosive_projectiles_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "lob_burst"
+damage_multiplier = 0.95
+lob_gravity = 470.0
+lob_burst_count = 5
+lob_burst_spread_degrees = 300.0
+lob_burst_speed_multiplier = 0.6
+lob_burst_damage_multiplier = 0.48
+lob_burst_inherit_status = true
+
+[sub_resource type="Resource" id="Resource_explosion"]
+resource_name = "ExplosiveProjectilesEffect"
+script = ExtResource("3")
+explosion_radius = 48.0
+extra_explosion_damage_multiplier = 0.9
+inherit_infection = false
+
+[resource]
+script = ExtResource("1")
+id = "dr_fetus"
+name = "Dr. Fetus"
+description = "Launches explosive lobbed bombs."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon"), SubResource("Resource_explosion")])

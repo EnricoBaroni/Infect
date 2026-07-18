@@ -13,4 +13,6 @@ script = ExtResource("1")
 id = "sad_onion"
 name = "Sad Onion"
 description = "Increases the player's damage."
+quality = 2
+pool_tags = PackedStringArray("treasure")
 effects = Array[ExtResource("1_0gltt")]([SubResource("Resource_95b2a")])

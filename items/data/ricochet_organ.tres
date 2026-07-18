@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "elastic_ricochet"
+damage_multiplier = 0.93
+elastic_bonus_bounces = 14
+elastic_min_bounces = 9
+elastic_random_angle_degrees = 18
+elastic_speed_retention = 0.97
+
+[resource]
+script = ExtResource("1")
+id = "ricochet_organ"
+name = "Ricochet Organ"
+description = "Dense rebound pattern with high persistence."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])
+

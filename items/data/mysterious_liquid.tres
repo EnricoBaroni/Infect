@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/projectile_hazard_pulse_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_hazard"]
+resource_name = "ProjectileHazardPulseEffect"
+script = ExtResource("2")
+radius = 58.0
+damage = 0.42
+apply_poison = true
+poison_duration = 2.6
+poison_dps = 0.7
+trigger_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "mysterious_liquid"
+name = "Mysterious Liquid"
+description = "Tears create toxic hazard puddles."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_hazard")])

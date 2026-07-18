@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "orbit_shot"
+damage_multiplier = 0.66
+orbit_contact_cooldown = 0.18
+orbit_radius = 74
+orbit_angular_speed = 3.6
+orbit_duration = 2.4
+orbit_radial_drift = 10
+
+[resource]
+script = ExtResource("1")
+id = "micro_planetarium"
+name = "Micro Planetarium"
+description = "Wider orbit and extended lifetime."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])
+

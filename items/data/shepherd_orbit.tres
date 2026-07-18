@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/companion_formation_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_companion"]
+resource_name = "CompanionFormationEffect"
+script = ExtResource("2")
+orbital_count = 1
+orbital_radius = 58.0
+orbital_speed = 3.0
+orbital_contact_damage = 0.8
+orbital_contact_cooldown = 0.34
+follower_count = 1
+follower_distance = 66.0
+follower_follow_speed = 6.6
+follower_contact_damage = 0.7
+follower_contact_cooldown = 0.4
+
+[resource]
+script = ExtResource("1")
+id = "shepherd_orbit"
+name = "Shepherd Orbit"
+description = "One orbital and one follower for balanced control."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_companion")])

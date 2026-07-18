@@ -25,4 +25,12 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		Global.drops += 1
 
+	EventBus.emit_drop_collected({
+		"drop": self,
+		"infected": infected_drop,
+		"value": 2 if infected_drop else 1,
+		"player": body,
+		"position": global_position
+	})
+
 	queue_free()

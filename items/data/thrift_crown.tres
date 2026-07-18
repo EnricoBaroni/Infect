@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/gain_drops_on_kill_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_kill_drops"]
+resource_name = "GainDropsOnKillEffect"
+script = ExtResource("2")
+drops_per_kill = 1
+infected_bonus = 1
+
+[sub_resource type="Resource" id="Resource_fire_rate_down"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = -0.06
+min_fire_rate = 0.05
+
+[resource]
+script = ExtResource("1")
+id = "thrift_crown"
+name = "Thrift Crown"
+description = "Earn more, shoot slower."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_kill_drops"), SubResource("Resource_fire_rate_down")])

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "lob_burst"
+damage_multiplier = 0.94
+lob_burst_damage_multiplier = 0.44
+lob_burst_inherit_status = false
+lob_burst_spread_degrees = 130
+lob_gravity = 470
+lob_burst_speed_multiplier = 0.84
+lob_burst_count = 6
+
+[resource]
+script = ExtResource("1")
+id = "gland_grenade"
+name = "Gland Grenade"
+description = "Compact burst with fast shrapnel."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])
+

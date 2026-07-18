@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/explosive_projectiles_effect.gd" id="3"]
+[ext_resource type="Script" path="res://items/effects/homing_projectiles_effect.gd" id="4"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="5"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "lob_burst"
+damage_multiplier = 1.35
+lob_gravity = 300.0
+lob_burst_count = 4
+lob_burst_spread_degrees = 180.0
+lob_burst_speed_multiplier = 0.9
+lob_burst_damage_multiplier = 0.95
+lob_burst_inherit_status = true
+
+[sub_resource type="Resource" id="Resource_explosion"]
+resource_name = "ExplosiveProjectilesEffect"
+script = ExtResource("3")
+explosion_radius = 56.0
+extra_explosion_damage_multiplier = 1.4
+inherit_infection = false
+
+[sub_resource type="Resource" id="Resource_homing"]
+resource_name = "HomingProjectilesEffect"
+script = ExtResource("4")
+strength = 4.0
+radius = 220.0
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("5")
+amount = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "epic_fetus"
+name = "Epic Fetus"
+description = "Calls devastating guided explosive strikes."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon"), SubResource("Resource_explosion"), SubResource("Resource_homing"), SubResource("Resource_damage")])

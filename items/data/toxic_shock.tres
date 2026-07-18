@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/room_entry_hazard_pulse_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_pulse"]
+resource_name = "RoomEntryHazardPulseEffect"
+script = ExtResource("2")
+radius = 520.0
+damage = 1.25
+apply_poison = true
+poison_duration = 2.2
+poison_dps = 0.75
+proc_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "toxic_shock"
+name = "Toxic Shock"
+description = "Entering a room releases a toxic pulse."
+quality = 3
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_pulse")])

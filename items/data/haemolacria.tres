@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="3"]
+[ext_resource type="Script" path="res://items/effects/fracture_on_hit_effect.gd" id="4"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "lob_burst"
+damage_multiplier = 0.85
+lob_gravity = 430.0
+lob_burst_count = 8
+lob_burst_spread_degrees = 310.0
+lob_burst_speed_multiplier = 0.62
+lob_burst_damage_multiplier = 0.5
+lob_burst_inherit_status = true
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("3")
+amount = 1.1
+
+[sub_resource type="Resource" id="Resource_fracture"]
+resource_name = "FractureOnHitEffect"
+script = ExtResource("4")
+fragment_count = 3
+spread_degrees = 34.0
+damage_multiplier = 0.5
+speed_multiplier = 1.0
+range_multiplier = 0.6
+generations = 1
+
+[resource]
+script = ExtResource("1")
+id = "haemolacria"
+name = "Haemolacria"
+description = "Arcing blood tears that fracture on impact."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon"), SubResource("Resource_damage"), SubResource("Resource_fracture")])

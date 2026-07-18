@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/knockback_modifier_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_knockback"]
+resource_name = "KnockbackModifierEffect"
+script = ExtResource("2")
+knockback_multiplier = 1.6
+knockback_flat_bonus = 0.0
+
+[resource]
+script = ExtResource("1")
+id = "impact_driver"
+name = "Impact Driver"
+description = "Shots hit with more push force."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_knockback")])

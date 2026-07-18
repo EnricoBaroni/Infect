@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="3"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="4"]
+
+[sub_resource type="Resource" id="Resource_charge"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "tear"
+damage_multiplier = 1.0
+charge_enabled = true
+charge_min_time = 0.15
+charge_max_time = 0.95
+charge_damage_scale_min = 0.75
+charge_damage_scale_max = 1.9
+charge_speed_scale_min = 0.8
+charge_speed_scale_max = 1.25
+charge_range_scale_min = 0.8
+charge_range_scale_max = 1.35
+charge_split_min = 1
+charge_split_max = 5
+charge_size_scale_min = 1.0
+charge_size_scale_max = 1.8
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("3")
+amount = 0.45
+
+[sub_resource type="Resource" id="Resource_fire_rate_down"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("4")
+amount = -0.28
+min_fire_rate = 0.05
+
+[resource]
+script = ExtResource("1")
+id = "monstros_lung"
+name = "Monstro's Lung"
+description = "Charges up and releases clustered bursts."
+quality = 4
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_charge"), SubResource("Resource_damage"), SubResource("Resource_fire_rate_down")])

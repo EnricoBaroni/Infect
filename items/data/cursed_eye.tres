@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/charge_shot_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_charge"]
+resource_name = "ChargeShotEffect"
+script = ExtResource("2")
+charge_enabled = true
+charge_min_time = 0.1
+charge_max_time = 0.75
+charge_damage_scale_min = 0.75
+charge_damage_scale_max = 1.2
+charge_speed_scale_min = 1.0
+charge_speed_scale_max = 1.1
+charge_range_scale_min = 1.0
+charge_range_scale_max = 1.1
+charge_split_min = 0
+charge_split_max = 4
+charge_size_scale_min = 1.0
+charge_size_scale_max = 1.2
+
+[sub_resource type="Resource" id="Resource_tears_up"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = 0.05
+
+[resource]
+script = ExtResource("1")
+id = "cursed_eye"
+name = "Cursed Eye"
+description = "Charge to fire burst volleys."
+quality = 2
+pool_tags = PackedStringArray("treasure", "devil")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_charge"), SubResource("Resource_tears_up")])

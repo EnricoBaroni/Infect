@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/bleed_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/critical_hits_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_bleed"]
+resource_name = "BleedStatusEffect"
+script = ExtResource("2")
+duration = 2.4
+damage_per_second = 0.62
+tick_interval = 0.4
+max_stacks = 4
+stack_rule = "refresh"
+proc_chance = 0.22
+proc_luck_to_full = 10.0
+proc_max_chance = 0.7
+
+[sub_resource type="Resource" id="Resource_crit"]
+resource_name = "CriticalHitsEffect"
+script = ExtResource("3")
+crit_chance = 0.05
+crit_multiplier = 1.8
+crit_luck_to_full = 14.0
+crit_max_chance = 0.45
+
+[resource]
+script = ExtResource("1")
+id = "razor_blade"
+name = "Razor Blade"
+description = "Sharper tears inflict bleeding wounds."
+quality = 2
+pool_tags = PackedStringArray("treasure")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_bleed"), SubResource("Resource_crit")])
