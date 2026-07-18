@@ -1,0 +1,164 @@
+# AI Development Strategy
+
+## Purpose
+
+This document defines how AI tools should be used during the development of Infect.
+
+The objective is **not** to maximise code generation, but to maximise development efficiency by using each AI tool for the tasks where it provides the highest value.
+
+---
+
+# Roles
+
+## ChatGPT (Main Assistant)
+
+Primary design and development partner.
+
+Responsibilities:
+
+- Gameplay design.
+- Architecture discussions.
+- Debugging.
+- Code reviews.
+- Feature planning.
+- Boss and enemy design.
+- Item design.
+- Balancing discussions.
+- Roadmap planning.
+- Technical decision making.
+
+Most day-to-day development should happen here.
+
+---
+
+## GitHub Copilot
+
+Primary coding assistant.
+
+Responsibilities:
+
+- Implementing new features.
+- Generating boilerplate.
+- Small refactorings.
+- Completing repetitive code.
+- Suggesting implementations.
+
+Copilot should be treated as a fast programmer, not as an architect.
+
+---
+
+## ChatGPT Work
+
+Reserved for tasks that require understanding a very large portion of the project.
+
+Because context is expensive, it should only be used when the expected benefit is significantly higher than a normal conversation.
+
+The goal is to replace hours of manual investigation.
+
+---
+
+# When to use ChatGPT Work
+
+Good examples:
+
+- Audit an entire gameplay system.
+- Review hundreds of files.
+- Investigate architecture.
+- Compare current implementation against Godot 4.7 best practices.
+- Detect duplicated systems.
+- Detect dead code.
+- Suggest large-scale refactors.
+- Review performance across the whole project.
+- Review balancing across the whole game.
+
+Bad examples:
+
+- Implement one enemy.
+- Create one boss.
+- Fix a small bug.
+- Create a new item.
+- Write a single class.
+- Small refactors.
+
+Those tasks should be handled by ChatGPT + Copilot.
+
+---
+
+# Expected Workflow
+
+Normal development:
+
+Player
+↓
+
+ChatGPT
+(Gameplay, architecture, debugging, planning)
+
+↓
+
+GitHub Copilot
+(Implementation)
+
+↓
+
+Testing
+
+Only when a complete subsystem needs to be understood:
+
+Player
+↓
+
+ChatGPT Work
+
+↓
+
+Architecture report
+
+↓
+
+Back to ChatGPT
+
+↓
+
+Implementation with Copilot
+
+---
+
+# Planned ChatGPT Work Audits
+
+The following investigations provide the highest return for the available context budget.
+
+## Completed
+
+- Room System Audit
+
+## Planned
+
+- Item & Effect System Audit
+- Combat System Audit
+- Enemy AI Audit
+- Boss Architecture Review
+- Performance Audit
+- Demo Balance Review
+- Post-demo Architecture Review
+- Final Project Architecture Review
+
+---
+
+# Philosophy
+
+ChatGPT Work is not used because it writes better code.
+
+It is used because it can understand and connect hundreds of project files in a single investigation.
+
+The result should always be:
+
+Large investigation
+↓
+
+Clear technical report
+↓
+
+Normal development continues with ChatGPT + Copilot.
+
+This keeps development efficient while preserving the limited ChatGPT Work context budget.
