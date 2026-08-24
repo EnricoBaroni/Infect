@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b24c6wj3a78a3" path="res://assets/heart_ui_full.png" id="2_h0tmb"]
 [ext_resource type="Resource" uid="uid://dogj0kplr5v1o" path="res://player/player_stats.tres" id="2_upw2t"]
 
-[node name="StatsUI" type="Control"]
+[node name="StatsUI" type="Control" unique_id=76482925]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -13,14 +13,14 @@ offset_bottom = 40.0
 script = ExtResource("1_h0tmb")
 player_stats = ExtResource("2_upw2t")
 
-[node name="EmptyHearts" type="TextureRect" parent="."]
+[node name="EmptyHearts" type="TextureRect" parent="." unique_id=835064233]
 layout_mode = 0
 offset_right = 15.0
 offset_bottom = 11.0
 texture = ExtResource("1_o0f0s")
 stretch_mode = 1
 
-[node name="FullHearts" type="TextureRect" parent="."]
+[node name="FullHearts" type="TextureRect" parent="." unique_id=1635846504]
 layout_mode = 0
 offset_right = 15.0
 offset_bottom = 11.0
@@ -28,7 +28,7 @@ texture = ExtResource("2_h0tmb")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="DamageLabel" type="Label" parent="."]
+[node name="DamageLabel" type="Label" parent="." unique_id=1630749904]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 40.0
@@ -36,16 +36,16 @@ offset_right = 56.0
 offset_bottom = 63.0
 theme_override_font_sizes/font_size = 8
 
-[node name="DamageDeltaLabel" type="Label" parent="."]
+[node name="DamageDeltaLabel" type="Label" parent="." unique_id=1644556867]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 26.0
 offset_top = 40.0
-offset_right = 150.0
+offset_right = 80.0
 offset_bottom = 63.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
-[node name="FireRateLabel" type="Label" parent="."]
+[node name="FireRateLabel" type="Label" parent="." unique_id=1615266621]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 64.0
@@ -53,16 +53,16 @@ offset_right = 56.0
 offset_bottom = 87.0
 theme_override_font_sizes/font_size = 8
 
-[node name="FireRateDeltaLabel" type="Label" parent="."]
+[node name="FireRateDeltaLabel" type="Label" parent="." unique_id=763881528]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 26.0
 offset_top = 64.0
-offset_right = 150.0
+offset_right = 80.0
 offset_bottom = 87.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
-[node name="SpeedLabel" type="Label" parent="."]
+[node name="SpeedLabel" type="Label" parent="." unique_id=1335881805]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 88.0
@@ -70,16 +70,16 @@ offset_right = 56.0
 offset_bottom = 111.0
 theme_override_font_sizes/font_size = 8
 
-[node name="SpeedDeltaLabel" type="Label" parent="."]
+[node name="SpeedDeltaLabel" type="Label" parent="." unique_id=182710091]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 26.0
 offset_top = 88.0
-offset_right = 150.0
+offset_right = 80.0
 offset_bottom = 111.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
-[node name="RangeLabel" type="Label" parent="."]
+[node name="RangeLabel" type="Label" parent="." unique_id=1128177980]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 112.0
@@ -87,16 +87,16 @@ offset_right = 56.0
 offset_bottom = 135.0
 theme_override_font_sizes/font_size = 8
 
-[node name="RangeDeltaLabel" type="Label" parent="."]
+[node name="RangeDeltaLabel" type="Label" parent="." unique_id=1566347828]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 26.0
 offset_top = 112.0
-offset_right = 150.0
+offset_right = 80.0
 offset_bottom = 135.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
-[node name="LuckLabel" type="Label" parent="."]
+[node name="LuckLabel" type="Label" parent="." unique_id=2009470379]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 136.0
@@ -104,23 +104,23 @@ offset_right = 56.0
 offset_bottom = 159.0
 theme_override_font_sizes/font_size = 8
 
-[node name="LuckDeltaLabel" type="Label" parent="."]
+[node name="LuckDeltaLabel" type="Label" parent="." unique_id=823496396]
 layout_mode = 0
-offset_left = 96.0
+offset_left = 26.0
 offset_top = 136.0
-offset_right = 150.0
+offset_right = 80.0
 offset_bottom = 159.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
-[node name="DropsLabel" type="Label" parent="."]
+[node name="DropsLabel" type="Label" parent="." unique_id=1655853740]
 layout_mode = 0
 offset_left = 272.0
 offset_right = 312.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 8
 
-[node name="ItemAcquisitionPanel" type="PanelContainer" parent="."]
+[node name="ItemAcquisitionPanel" type="PanelContainer" parent="." unique_id=615786825]
 visible = false
 layout_mode = 0
 offset_left = 136.0
@@ -128,24 +128,24 @@ offset_top = 24.0
 offset_right = 304.0
 offset_bottom = 124.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemAcquisitionPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemAcquisitionPanel" unique_id=261785847]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="ItemNameLabel" type="Label" parent="ItemAcquisitionPanel/VBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="ItemAcquisitionPanel/VBoxContainer" unique_id=1376405482]
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 
-[node name="ItemDescriptionLabel" type="Label" parent="ItemAcquisitionPanel/VBoxContainer"]
+[node name="ItemDescriptionLabel" type="Label" parent="ItemAcquisitionPanel/VBoxContainer" unique_id=1641677728]
 layout_mode = 2
-autowrap_mode = 3
 theme_override_font_sizes/font_size = 8
+autowrap_mode = 3
 
-[node name="ItemEffectsLabel" type="Label" parent="ItemAcquisitionPanel/VBoxContainer"]
+[node name="ItemEffectsLabel" type="Label" parent="ItemAcquisitionPanel/VBoxContainer" unique_id=1149235420]
 layout_mode = 2
-autowrap_mode = 3
 theme_override_font_sizes/font_size = 8
+autowrap_mode = 3
 
-[node name="ItemAcquisitionHideTimer" type="Timer" parent="."]
+[node name="ItemAcquisitionHideTimer" type="Timer" parent="." unique_id=1269821333]
 wait_time = 2.2
 one_shot = true
