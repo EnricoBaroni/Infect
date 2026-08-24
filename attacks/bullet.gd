@@ -1,13 +1,16 @@
 extends Area2D
 
 const BULLET_SCENE = preload("res://attacks/bullet.tscn")
+const TEAR_BREAK_EFFECT = preload("res://effects/tear_break_effect.tscn")
 
 @export var SPEED: float = 150.0
 @export var DAMAGE: float = 1.0
 @export var FIRE_RATE: float = 0.6
 @export var MAX_DISTANCE: float = 150
 @export var MOVEMENT_INHERITANCE: float = 0.4
+@export var MAX_VISUAL_DROP := 4
 @onready var hitbox: Hitbox = $Hitbox
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var direction: Vector2 = Vector2.ZERO
 var inherited_velocity: Vector2 = Vector2.ZERO
@@ -140,6 +143,8 @@ func _physics_process(delta: float) -> void:
 	hitbox.knockback_direction = direction.normalized()
 	
 	distance_travelled += movement.length()
+	var progress: float = clamp(distance_travelled / MAX_DISTANCE, 0.0, 1.0)
+	sprite.position.y = pow(progress, 4.0) * MAX_VISUAL_DROP
 	if distance_travelled >= MAX_DISTANCE:
 		_dispose()
 
@@ -364,5 +369,11 @@ func _dispose() -> void:
 			"position": global_position,
 			"distance_travelled": distance_travelled
 		})
+	_spawn_break_effect()
 
 	queue_free()
+
+func _spawn_break_effect() -> void:
+	var effect = TEAR_BREAK_EFFECT.instantiate()
+	effect.global_position = global_position
+	get_tree().current_scene.add_child(effect)
