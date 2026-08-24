@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/gain_drops_on_room_clear_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/luck_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_room_clear"]
+resource_name = "GainDropsOnRoomClearEffect"
+script = ExtResource("2")
+flat_drops = 1
+bonus_if_combat_room = 0
+proc_chance = 0.75
+luck_to_full = 8.0
+max_proc_chance = 1.0
+
+[sub_resource type="Resource" id="Resource_luck"]
+resource_name = "LuckUpEffect"
+script = ExtResource("3")
+amount = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "lucky_toe"
+name = "Lucky Toe"
+description = "Luck and extra room-clear rewards."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_room_clear"), SubResource("Resource_luck")])

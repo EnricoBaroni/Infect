@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/split_shots_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="4"]
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "SplitShotsEffect"
+script = ExtResource("2")
+extra_shots = 2
+spread_degrees = 14.0
+
+[sub_resource type="Resource" id="Resource_fire_rate_down"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = -0.2
+min_fire_rate = 0.05
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("4")
+amount = 0.25
+
+[resource]
+script = ExtResource("1")
+id = "the_inner_eye"
+name = "The Inner Eye"
+description = "Triple shot with reduced fire rate."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_split"), SubResource("Resource_fire_rate_down"), SubResource("Resource_damage")])

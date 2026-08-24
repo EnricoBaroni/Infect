@@ -6,11 +6,17 @@ var custom_color := Color.CYAN
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
+# Spawn tier metadata — no direct Isaac equivalent; original design
+# Cross + diagonal (when infected) pattern + highest HP in roster → design decision: Tier 3
+@export var spawn_tier_min: int = 3
+@export var spawn_tier_max: int = 0
+@export var spawn_weight: int = 4
+
 @export var BULLET: PackedScene
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 @onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:

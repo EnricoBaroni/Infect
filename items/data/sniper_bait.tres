@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/bait_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/critical_hits_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_bait"]
+resource_name = "BaitStatusEffect"
+script = ExtResource("2")
+duration = 5.0
+intensity = 1.0
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.28
+proc_luck_to_full = 12.0
+proc_max_chance = 0.72
+
+[sub_resource type="Resource" id="Resource_crit"]
+resource_name = "CriticalHitsEffect"
+script = ExtResource("3")
+extra_crit_chance = 0.2
+extra_crit_multiplier = 1.9
+luck_to_full = 10.0
+max_crit_chance = 0.6
+
+[resource]
+script = ExtResource("1")
+id = "sniper_bait"
+name = "Sniper Bait"
+description = "Tears may mark enemies. Crit tears always seek the marked."
+quality = 3
+pool_tags = PackedStringArray("treasure", "secret", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_bait"), SubResource("Resource_crit")])

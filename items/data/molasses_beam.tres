@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/slow_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/beam_length_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_slow"]
+resource_name = "SlowStatusEffect"
+script = ExtResource("2")
+duration = 2.3
+speed_multiplier = 0.6
+max_stacks = 2
+stack_rule = "refresh"
+
+[sub_resource type="Resource" id="Resource_beam"]
+resource_name = "BeamLengthUpEffect"
+script = ExtResource("3")
+extra_segments = 2
+extra_duration = 0.03
+
+[resource]
+script = ExtResource("1")
+id = "molasses_beam"
+name = "Molasses Beam"
+description = "Extended beams that heavily slow enemies."
+quality = 4
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_slow"), SubResource("Resource_beam")])

@@ -24,14 +24,14 @@ func use_machine() -> void:
 	press_e.text = "ENEMIES RESPAWNED"
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name != "Player":
+	if not body.is_in_group("player"):
 		return
 	player_inside = true
 	press_e.visible = true
 	press_e.text = "Press E to\n" + "RESPAWN\nDIFFICULTY "  + str(Global.difficulty_level)
 
 func _on_body_exited(body: Node2D) -> void:
-	if body.name != "Player":
+	if not body.is_in_group("player"):
 		return
 	player_inside = false
 	press_e.visible = false

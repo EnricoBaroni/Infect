@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/room_entry_hazard_pulse_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_pulse"]
+resource_name = "RoomEntryHazardPulseEffect"
+script = ExtResource("2")
+radius = 480.0
+damage = 0.8
+apply_fear = true
+fear_duration = 2.4
+apply_slow = true
+slow_duration = 2.0
+slow_intensity = 0.65
+proc_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "terror_cloth"
+name = "Terror Cloth"
+description = "Entering rooms emits a wave of fear."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_pulse")])

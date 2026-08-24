@@ -95,9 +95,15 @@ NOT:
 
 # Current Prototype Goals
 
-Current prototype only exists to answer:
+The original prototype question was:
 
 "Is infection fun?"
+
+The project has grown beyond a bare prototype. It now has a full item architecture (290 passive items, 73 effect types, 10 enemy types, multi-room dungeon). However, the core validation question — **whether the Infection mechanic produces interesting, sustainable combat decisions** — has not been definitively answered through systematic human playtesting.
+
+Every system in the project exists to support that question. Do not add systems for their own sake until this loop is clearly validated.
+
+For current implementation state and the next milestone, see [docs/implementation/AGENT_CONTEXT.md](docs/implementation/AGENT_CONTEXT.md).
 
 Nothing else should be overengineered before this is validated.
 

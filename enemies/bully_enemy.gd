@@ -6,12 +6,17 @@ var custom_color := Color.RED
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
-@export var min_range: = 4
-@export var max_range: = 400
+# Spawn tier metadata — based on Isaac Gaper (Basement/Cellar only)
+@export var spawn_tier_min: int = 1
+@export var spawn_tier_max: int = 3   # Gapers are an early-game enemy; retire at higher tiers
+@export var spawn_weight: int = 8
+
+@export var min_range: float = 4.0
+@export var max_range: float = 400.0
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var navigation_agent_2d: NavigationAgent2D = $Marker2D/NavigationAgent2D
 @onready var marker_2d: Marker2D = $Marker2D

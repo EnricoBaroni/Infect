@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/confusion_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/fire_rate_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_confusion"]
+resource_name = "ConfusionStatusEffect"
+script = ExtResource("2")
+duration = 2.1
+intensity = 0.5
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.18
+proc_luck_to_full = 10.0
+proc_max_chance = 0.6
+
+[sub_resource type="Resource" id="Resource_fire_rate"]
+resource_name = "FireRateUpEffect"
+script = ExtResource("3")
+amount = 0.06
+min_fire_rate = 0.05
+
+[resource]
+script = ExtResource("1")
+id = "wavy_cap"
+name = "Wavy Cap"
+description = "Confusing tears with unstable rate of fire."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_confusion"), SubResource("Resource_fire_rate")])

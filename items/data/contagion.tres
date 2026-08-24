@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/room_entry_hazard_pulse_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/poison_status_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_pulse"]
+resource_name = "RoomEntryHazardPulseEffect"
+script = ExtResource("2")
+radius = 500.0
+damage = 0.95
+apply_poison = true
+poison_duration = 2.8
+poison_dps = 0.8
+proc_chance = 1.0
+
+[sub_resource type="Resource" id="Resource_poison"]
+resource_name = "PoisonStatusEffect"
+script = ExtResource("3")
+duration = 2.6
+damage_per_second = 0.75
+tick_interval = 0.5
+max_stacks = 3
+stack_rule = "refresh"
+proc_chance = 0.2
+proc_luck_to_full = 10.0
+proc_max_chance = 0.65
+
+[resource]
+script = ExtResource("1")
+id = "contagion"
+name = "Contagion"
+description = "Room entry spreads infectious poison."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_pulse"), SubResource("Resource_poison")])

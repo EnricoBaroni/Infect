@@ -452,13 +452,15 @@ Explicit synergy code should only exist when mathematically unavoidable.
 
 # IMPLEMENTATION ROADMAP
 
+> **Historical record.** Phases 1 through 8 are complete. This section documents the design sequence followed during development and explains why the systems were built in this order. It is **not** a list of pending work. For the current milestone and next steps, see `docs/implementation/AGENT_CONTEXT.md`.
+
 The roadmap is considered frozen.
 
 Do not skip phases.
 
 ---
 
-## PHASE 1 - Foundation
+## PHASE 1 - Foundation *(Complete)*
 
 Create:
 
@@ -470,7 +472,7 @@ Gameplay remains unchanged.
 
 ---
 
-## PHASE 2 - Stats Refactor
+## PHASE 2 - Stats Refactor *(Complete)*
 
 Create:
 
@@ -482,7 +484,7 @@ Current Upgrade Pickups must now grant Items instead of modifying stats directly
 
 ---
 
-## PHASE 3 - First Real Items
+## PHASE 3 - First Real Items *(Complete)*
 
 Implement:
 
@@ -494,7 +496,7 @@ Validate simple stat items.
 
 ---
 
-## PHASE 4 - EventBus
+## PHASE 4 - EventBus *(Complete)*
 
 Implement global signals.
 
@@ -502,7 +504,7 @@ Infrastructure only.
 
 ---
 
-## PHASE 5 - Reactive Items
+## PHASE 5 - Reactive Items *(Complete)*
 
 Validate:
 
@@ -512,7 +514,7 @@ Validate:
 
 ---
 
-## PHASE 6 - Weapon Refactor
+## PHASE 6 - Weapon Refactor *(Complete)*
 
 Implement:
 
@@ -525,7 +527,7 @@ No Brimstone yet.
 
 ---
 
-## PHASE 7 - Projectile System
+## PHASE 7 - Projectile System *(Complete)*
 
 Implement capabilities.
 
@@ -538,7 +540,7 @@ Validate:
 
 ---
 
-## PHASE 8 - Weapon Replacement
+## PHASE 8 - Weapon Replacement *(Complete)*
 
 Implement:
 

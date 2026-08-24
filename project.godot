@@ -21,6 +21,7 @@ buses/default_bus_layout="uid://ds2wmpkfbhpfc"
 [autoload]
 
 Global="*uid://dt22oyalvgix"
+EventBus="*res://system/event_bus.gd"
 
 [display]
 

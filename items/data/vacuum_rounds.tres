@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/knockback_modifier_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_knockback"]
+resource_name = "KnockbackModifierEffect"
+script = ExtResource("2")
+knockback_multiplier = 0.3
+knockback_flat_bonus = -50.0
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("3")
+amount = 0.45
+
+[resource]
+script = ExtResource("1")
+id = "vacuum_rounds"
+name = "Vacuum Rounds"
+description = "Less knockback, more raw damage."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_knockback"), SubResource("Resource_damage")])

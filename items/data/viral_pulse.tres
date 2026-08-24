@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/cadence_shot_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_cadence"]
+resource_name = "CadenceShotEffect"
+script = ExtResource("2")
+every_n_shots = 3
+bonus_split = 0
+bonus_damage_multiplier = 2.0
+bonus_explosion_radius = 32.0
+
+[resource]
+script = ExtResource("1")
+id = "viral_pulse"
+name = "Viral Pulse"
+description = "Every 3rd shot fires an explosive burst."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_cadence")])

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/homing_projectiles_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/range_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_homing"]
+resource_name = "HomingProjectilesEffect"
+script = ExtResource("2")
+strength = 3.0
+radius = 210.0
+
+[sub_resource type="Resource" id="Resource_range"]
+resource_name = "RangeUpEffect"
+script = ExtResource("3")
+amount = 35.0
+
+[resource]
+script = ExtResource("1")
+id = "tractor_beam"
+name = "Tractor Beam"
+description = "Tears stay guided in a focused lane."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_homing"), SubResource("Resource_range")])

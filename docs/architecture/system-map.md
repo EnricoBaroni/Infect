@@ -37,15 +37,44 @@ Responsabilidad:
 
 Debe ser una estructura ligera, no una entidad del árbol de escena.
 
+## Sistema de arma: `WeaponSystem`
+
+Responsabilidad:
+- construir `AttackData` a partir del input de disparo y del estado actual del jugador;
+- delegar la materialización física al flujo de proyectiles.
+
+No debe conocer ítems ni reglas específicas por contenido.
+
+## Sistema de evaluación de ataque: `AttackEvaluationSystem`
+
+Responsabilidad:
+- aplicar efectos de ataque activos al `AttackData` antes de materializar el proyectil;
+- mantener fuera de `WeaponSystem` el recorrido de efectos de inventario.
+
+Debe operar de forma aditiva y data-driven.
+
 ## Sistema de proyectiles
 
 Responsabilidad:
 - materializar `AttackData` en un proyectil o entidad física;
 - moverla;
 - aplicar duración útil;
-- responder a colisiones.
+- responder a colisiones;
+- interpretar capacidades (por ejemplo: pierce, bounce).
 
 El proyectil no debe ser el lugar donde vive la lógica completa del juego.
+
+Estado actual:
+- incluye proyectil de lágrima (`Bullet`) y haz segmentado (`BeamSegment`) bajo el mismo flujo de materialización.
+
+## Reemplazo de arma por datos
+
+Responsabilidad:
+- permitir que un efecto de ataque cambie el tipo de arma escribiendo en `AttackData.weapon_type`;
+- mantener la materialización dentro de `ProjectileSystem` sin condicionales por ítem.
+
+Validación actual:
+- Brimstone implementado como reemplazo a haz segmentado.
 
 ## Sistema de colisión: `Hitbox` y `Hurtbox`
 
@@ -78,6 +107,18 @@ Responsabilidad:
 
 Debe existir para evitar mezclar contenido y comportamiento.
 
+Estado actual:
+- implementado como capa mínima de runtime reactivo (`ReactiveEffectInstance` + `EffectRuntimeSystem`);
+- activo para efectos que consumen señales de `EventBus`.
+
+## Sistema de eventos: `EventBus`
+
+Responsabilidad:
+- exponer señales globales de gameplay para efectos reactivos y telemetría interna mínima;
+- evitar acoplar sistemas entre sí mediante referencias directas.
+
+Debe mantenerse como infraestructura ligera de señales, sin lógica de negocio.
+
 ## Sistema de inventario: `Inventory`
 
 Responsabilidad:
@@ -98,10 +139,26 @@ Responsabilidad:
 
 La regla es clara: no mutar stats desde pickups o efectos de forma aislada.
 
+## Sistema de companions: `CompanionSystem`
+
+Responsabilidad:
+- gestionar el ciclo de vida de companions (orbitals y seguidores pasivos) por fuente de runtime;
+- hacer spawn y limpieza de entidades companion vinculadas a ítems sin condicionales por ítem.
+
+Entidades reutilizables: `OrbitalCompanion` (daño de contacto en órbita) y `PassiveFollower` (seguidor con daño de contacto).
+Configuración por datos vía `CompanionFormationEffect` + `CompanionFormationRuntime`.
+
+## Sistema de estado de enemigos: `StatusPayload`
+
+Responsabilidad:
+- transportar configuraciones de estado (veneno, quemadura, freeze, slow, miedo, encanto, confusión, sangrado, cebo, encadenado) desde `AttackData` al `Hurtbox`/`EnemyBase`;
+- permitir que `EnemyBase` aplique múltiples estados simultáneos con stacking, duración y ticks de daño sin condicionales por estado en sistemas de ataque.
+
+`StatusPayload` vive en `system/status_payload.gd`. El runtime de estados está integrado en `EnemyBase`.
+
 ## Límites de la arquitectura actual
 
 No crear todavía:
-- un `EventBus` global grande;
 - un `WeaponController` separado como abstracción de alto nivel;
 - un `CombatResolver` independiente;
 - un `EnemyStatusModel` paralelo al enemigo;

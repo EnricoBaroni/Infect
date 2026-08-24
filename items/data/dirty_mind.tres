@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/charm_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/spawn_companions_on_kill_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_charm"]
+resource_name = "CharmStatusEffect"
+script = ExtResource("2")
+duration = 2.5
+intensity = 1.0
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.2
+proc_luck_to_full = 10.0
+proc_max_chance = 0.65
+
+[sub_resource type="Resource" id="Resource_spawn"]
+resource_name = "SpawnCompanionsOnKillEffect"
+script = ExtResource("3")
+companion_type = "follower"
+spawn_per_kill = 1
+max_companions = 6
+reset_on_room_enter = true
+follower_distance = 78.0
+follower_follow_speed = 7.0
+follower_contact_damage = 0.68
+follower_contact_cooldown = 0.3
+follower_shot_interval = 0.0
+
+[resource]
+script = ExtResource("1")
+id = "dirty_mind"
+name = "Dirty Mind"
+description = "Conflicted enemies feed a filthy spider swarm."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_charm"), SubResource("Resource_spawn")])

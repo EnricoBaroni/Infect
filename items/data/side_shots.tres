@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/directional_shot_appender_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_appender"]
+resource_name = "DirectionalShotAppenderEffect"
+script = ExtResource("2")
+angle_offsets_degrees = [90.0, -90.0]
+
+[resource]
+script = ExtResource("1")
+id = "side_shots"
+name = "Side Shots"
+description = "Every shot also fires bullets to both sides."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_appender")])

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/chained_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/piercing_projectiles_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_chain"]
+resource_name = "ChainedStatusEffect"
+script = ExtResource("2")
+duration = 1.8
+root_multiplier = 0.06
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.5
+proc_luck_to_full = 10.0
+proc_max_chance = 0.9
+
+[sub_resource type="Resource" id="Resource_pierce"]
+resource_name = "PiercingProjectilesEffect"
+script = ExtResource("3")
+extra_pierces = 1
+
+[resource]
+script = ExtResource("1")
+id = "binding_wire"
+name = "Binding Wire"
+description = "Piercing tears leave enemies chained on each pass."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_chain"), SubResource("Resource_pierce")])

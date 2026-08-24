@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "returning_blade"
+damage_multiplier = 1.4
+blade_outbound_distance = 88.0
+blade_return_speed = 320.0
+blade_spin_speed = 19.0
+blade_contact_cooldown = 0.12
+charge_enabled = true
+charge_min_time = 0.1
+charge_max_time = 0.85
+charge_damage_scale_min = 0.75
+charge_damage_scale_max = 1.85
+charge_range_scale_min = 0.75
+charge_range_scale_max = 1.35
+charge_size_scale_min = 0.7
+charge_size_scale_max = 1.6
+
+[resource]
+script = ExtResource("1")
+id = "moms_knife"
+name = "Mom's Knife"
+description = "Charge and throw a returning blade."
+quality = 4
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])

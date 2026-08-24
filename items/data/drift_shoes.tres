@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/move_speed_up_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/range_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_speed_up"]
+resource_name = "MoveSpeedUpEffect"
+script = ExtResource("2")
+amount = 18.0
+
+[sub_resource type="Resource" id="Resource_range_up"]
+resource_name = "RangeUpEffect"
+script = ExtResource("3")
+amount = 18.0
+
+[resource]
+script = ExtResource("1")
+id = "drift_shoes"
+name = "Drift Shoes"
+description = "Speed and range up."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_speed_up"), SubResource("Resource_range_up")])

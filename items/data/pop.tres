@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/bouncy_projectiles_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/split_shots_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_bounce"]
+resource_name = "BouncyProjectilesEffect"
+script = ExtResource("2")
+extra_bounces = 3
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "SplitShotsEffect"
+script = ExtResource("3")
+extra_shots = 1
+spread_degrees = 18.0
+
+[resource]
+script = ExtResource("1")
+id = "pop"
+name = "Pop!"
+description = "Erratic bouncing tear clusters."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_bounce"), SubResource("Resource_split")])

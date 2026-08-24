@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/spawn_companions_on_kill_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_spawn"]
+resource_name = "SpawnCompanionsOnKillEffect"
+script = ExtResource("2")
+companion_type = "follower"
+spawn_per_kill = 1
+max_companions = 6
+reset_on_room_enter = true
+follower_distance = 70.0
+follower_follow_speed = 7.2
+follower_contact_damage = 0.7
+follower_contact_cooldown = 0.32
+follower_shot_interval = 0.0
+
+[resource]
+script = ExtResource("1")
+id = "infestation"
+name = "Infestation"
+description = "Killed enemies spawn aggressive spiders."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_spawn")])

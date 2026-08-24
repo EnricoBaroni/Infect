@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/gain_drops_on_drop_pickup_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_pickup_drop"]
+resource_name = "GainDropsOnDropPickupEffect"
+script = ExtResource("2")
+bonus_drops = 1
+proc_chance = 0.5
+luck_to_full = 10.0
+max_proc_chance = 0.95
+
+[resource]
+script = ExtResource("1")
+id = "counterfeit_penny"
+name = "Counterfeit Penny"
+description = "Picked drops can duplicate."
+quality = 2
+pool_tags = PackedStringArray("shop", "treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_pickup_drop")])

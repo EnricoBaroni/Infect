@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/fracture_on_hit_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/spawn_companions_on_enemy_hit_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_fracture"]
+resource_name = "FractureOnHitEffect"
+script = ExtResource("2")
+fragment_count = 2
+spread_degrees = 22.0
+damage_multiplier = 0.4
+speed_multiplier = 1.0
+range_multiplier = 0.6
+generations = 2
+
+[sub_resource type="Resource" id="Resource_spawn"]
+resource_name = "SpawnCompanionsOnEnemyHitEffect"
+script = ExtResource("3")
+companion_type = "follower"
+spawn_count = 1
+max_companions = 6
+proc_chance = 0.1
+luck_to_full = 10.0
+max_proc_chance = 0.5
+reset_on_room_enter = true
+follower_distance = 76.0
+follower_follow_speed = 7.2
+follower_contact_damage = 0.6
+follower_contact_cooldown = 0.32
+follower_shot_interval = 0.0
+
+[resource]
+script = ExtResource("1")
+id = "lachryphagy"
+name = "Lachryphagy"
+description = "Bursting tears can spawn extra larvae on hit."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_fracture"), SubResource("Resource_spawn")])

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/explosive_projectiles_effect.gd" id="3"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="4"]
+[ext_resource type="Script" path="res://items/effects/poison_status_effect.gd" id="5"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "lob_burst"
+damage_multiplier = 1.0
+lob_gravity = 450.0
+lob_burst_count = 7
+lob_burst_spread_degrees = 330.0
+lob_burst_speed_multiplier = 0.58
+lob_burst_damage_multiplier = 0.52
+lob_burst_inherit_status = true
+
+[sub_resource type="Resource" id="Resource_explosion"]
+resource_name = "ExplosiveProjectilesEffect"
+script = ExtResource("3")
+explosion_radius = 44.0
+extra_explosion_damage_multiplier = 0.85
+inherit_infection = false
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("4")
+amount = 2.0
+
+[sub_resource type="Resource" id="Resource_poison"]
+resource_name = "PoisonStatusEffect"
+script = ExtResource("5")
+duration = 2.8
+damage_per_second = 0.8
+tick_interval = 0.5
+max_stacks = 2
+stack_rule = "refresh"
+proc_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "ipecac"
+name = "Ipecac"
+description = "Arcing explosive poison shots with heavy damage."
+quality = 4
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon"), SubResource("Resource_explosion"), SubResource("Resource_damage"), SubResource("Resource_poison")])

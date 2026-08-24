@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/burn_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/explosive_projectiles_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_burn"]
+resource_name = "BurnStatusEffect"
+script = ExtResource("2")
+duration = 2.0
+damage_per_second = 1.0
+tick_interval = 0.35
+max_stacks = 3
+stack_rule = "refresh"
+
+[sub_resource type="Resource" id="Resource_explosion"]
+resource_name = "ExplosiveProjectilesEffect"
+script = ExtResource("3")
+explosion_radius = 24.0
+extra_explosion_damage_multiplier = 0.35
+inherit_infection = false
+
+[resource]
+script = ExtResource("1")
+id = "blast_furnace"
+name = "Blast Furnace"
+description = "Burning shots with small explosions."
+quality = 4
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_burn"), SubResource("Resource_explosion")])

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d5w6vdg4lthwk"]
+
+[ext_resource type="Script" path="res://world/world_dungeon_random.gd" id="1_j3r7m"]
+[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_2r3p7"]
+[ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_yq1sv"]
+[ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_1k5n8"]
+[ext_resource type="PackedScene" path="res://world/templates/gacha_room_template.tscn" id="5_w95mq"]
+[ext_resource type="PackedScene" path="res://world/templates/combat_room_template_01.tscn" id="6_4a0tt"]
+[ext_resource type="PackedScene" path="res://world/templates/boss_room_template.tscn" id="7_kr0fp"]
+[ext_resource type="PackedScene" path="res://ui/death_screen.tscn" id="8_dscr1"]
+[ext_resource type="PackedScene" path="res://ui/debug_menu.tscn" id="9_dbgm1"]
+
+[node name="WorldDungeonRandom" type="Node2D"]
+script = ExtResource("1_j3r7m")
+gacha_room_template = ExtResource("5_w95mq")
+combat_room_templates = Array[PackedScene]([ExtResource("6_4a0tt")])
+boss_room_template = ExtResource("7_kr0fp")
+
+[node name="Pauser" parent="." instance=ExtResource("3_yq1sv")]
+
+[node name="Player" parent="." instance=ExtResource("4_1k5n8")]
+position = Vector2(160, 91)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StatsUI" parent="CanvasLayer" instance=ExtResource("2_2r3p7")]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 91)
+zoom = Vector2(1, 0.95)
+position_smoothing_speed = 50.0
+
+[node name="DeathScreen" parent="." instance=ExtResource("8_dscr1")]
+
+[node name="DebugMenu" parent="." instance=ExtResource("9_dbgm1")]

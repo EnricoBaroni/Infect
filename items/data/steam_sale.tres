@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/shop_price_multiplier_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_price"]
+resource_name = "ShopPriceMultiplierEffect"
+script = ExtResource("2")
+price_multiplier = 0.5
+flat_discount = 0
+
+[resource]
+script = ExtResource("1")
+id = "steam_sale"
+name = "Steam Sale"
+description = "Shop prices are halved."
+quality = 2
+pool_tags = PackedStringArray("shop", "treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_price")])

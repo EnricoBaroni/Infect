@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/explosive_projectiles_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/split_shots_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_explosive"]
+resource_name = "ExplosiveProjectilesEffect"
+script = ExtResource("2")
+explosion_radius = 28.0
+extra_explosion_damage_multiplier = 0.35
+inherit_infection = false
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "SplitShotsEffect"
+script = ExtResource("3")
+extra_shots = 1
+spread_degrees = 11.0
+
+[resource]
+script = ExtResource("1")
+id = "cluster_weld"
+name = "Cluster Weld"
+description = "Split shots that pop on contact."
+quality = 4
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_explosive"), SubResource("Resource_split")])

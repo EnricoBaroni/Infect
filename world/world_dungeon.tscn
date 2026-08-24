@@ -13,11 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://bf7b40xa60a6f" path="res://world/difficulty_machine.tscn" id="9_begq3"]
 [ext_resource type="PackedScene" uid="uid://c02ovucw1uf58" path="res://world/grass.tscn" id="10_jv6pf"]
 [ext_resource type="PackedScene" uid="uid://cnvh167nqxbsb" path="res://world/bush.tscn" id="11_6hcyg"]
+[ext_resource type="PackedScene" uid="uid://bx3k7m2eap1qn" path="res://ui/death_screen.tscn" id="12_dscr1"]
+[ext_resource type="PackedScene" uid="uid://cdebugmenu001" path="res://ui/debug_menu.tscn" id="13_dbgm1"]
 
 [node name="WorldDungeon" type="Node2D" unique_id=158855967]
 script = ExtResource("1_42e15")
 
 [node name="Room1" parent="." unique_id=1208624606 instance=ExtResource("1_52cv3")]
+enemy_spawn_count = 2
 
 [node name="Door" parent="Room1" index="4" unique_id=2133244952]
 tp_position = "Room2"
@@ -39,6 +42,7 @@ position = Vector2(248, 88)
 
 [node name="Room2" parent="." unique_id=539529083 instance=ExtResource("1_52cv3")]
 position = Vector2(0, -216)
+enemy_spawn_count = 2
 
 [node name="Door2" parent="Room2" index="5" unique_id=281333314]
 tp_position = "Room3"
@@ -50,6 +54,7 @@ enabled = true
 
 [node name="Room3" parent="." unique_id=320607790 instance=ExtResource("1_52cv3")]
 position = Vector2(352, -216)
+room_type = 2
 
 [node name="Door3" parent="Room3" index="6" unique_id=1313167308]
 tp_position = "Room4"
@@ -64,6 +69,7 @@ position = Vector2(264, 136)
 
 [node name="Room4" parent="." unique_id=1925319994 instance=ExtResource("1_52cv3")]
 position = Vector2(352, 0)
+enemy_spawn_count = 2
 
 [node name="Door" parent="Room4" index="4" unique_id=2133244952]
 tp_position = "Room3"
@@ -79,6 +85,7 @@ position = Vector2(88, 40)
 [node name="Room5" parent="." unique_id=830723811 instance=ExtResource("1_52cv3")]
 position = Vector2(0, 216)
 combat_room = false
+room_type = 0
 
 [node name="Door" parent="Room5" index="4" unique_id=2133244952]
 tp_position = "Room1"
@@ -87,11 +94,15 @@ enabled = true
 [node name="GachaponMachine" parent="Room5" unique_id=255747899 instance=ExtResource("3_6hcyg")]
 position = Vector2(64, 72)
 
-[node name="RespawnMachine" parent="Room5" unique_id=369210811 instance=ExtResource("8_s4wlq")]
+[node name="InfectionGachaponMachine" parent="Room5" unique_id=330148426 instance=ExtResource("3_6hcyg")]
 position = Vector2(256, 72)
+pool_tag = "infection_gacha"
+
+[node name="RespawnMachine" parent="Room5" unique_id=369210811 instance=ExtResource("8_s4wlq")]
+position = Vector2(256, 128)
 
 [node name="DifficultyMachine" parent="Room5" unique_id=1809678683 instance=ExtResource("9_begq3")]
-position = Vector2(160, 112)
+position = Vector2(160, 128)
 
 [node name="Pauser" parent="." unique_id=583955222 instance=ExtResource("3_52cv3")]
 
@@ -131,6 +142,10 @@ position = Vector2(80, -96)
 
 [node name="Bush6" parent="Obstacles" unique_id=1077180949 instance=ExtResource("11_6hcyg")]
 position = Vector2(216, 120)
+
+[node name="DeathScreen" parent="." unique_id=987654321 instance=ExtResource("12_dscr1")]
+
+[node name="DebugMenu" parent="." unique_id=876543210 instance=ExtResource("13_dbgm1")]
 
 [editable path="Room1"]
 [editable path="Room2"]

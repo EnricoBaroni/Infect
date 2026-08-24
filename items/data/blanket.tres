@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/damage_prevention_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_prevention"]
+resource_name = "DamagePreventionEffect"
+script = ExtResource("2")
+charges_per_room = 1
+reset_on_room_enter = true
+full_block = true
+proc_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "blanket"
+name = "Blanket"
+description = "Grants a protective hit shield each room."
+quality = 2
+pool_tags = PackedStringArray("shop", "treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_prevention")])

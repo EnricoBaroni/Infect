@@ -12,11 +12,32 @@ La prioridad actual no es construir una infraestructura enorme. La prioridad es 
 
 ## Regla principal
 
-Antes de implementar cualquier cambio, leer:
-1. [README.md](README.md)
-2. [ITEM_ARCHITECTURE.md](ITEM_ARCHITECTURE.md)
-3. [docs/architecture/system-map.md](docs/architecture/system-map.md)
-4. [docs/implementation/backlog.md](docs/implementation/backlog.md)
+Antes de implementar cualquier cambio, leer en este orden:
+1. [docs/implementation/AGENT_CONTEXT.md](docs/implementation/AGENT_CONTEXT.md) — estado actual del proyecto, milestone activo y prioridades inmediatas
+2. [README.md](README.md)
+3. [ITEM_ARCHITECTURE.md](ITEM_ARCHITECTURE.md)
+4. [docs/architecture/system-map.md](docs/architecture/system-map.md)
+5. [docs/implementation/backlog.md](docs/implementation/backlog.md)
+
+Si se busca únicamente el siguiente paso a implementar, ir directamente a la Sección 8 de AGENT_CONTEXT.md.
+
+## Resolución de conflictos entre documentos
+
+Si dos documentos se contradicen:
+
+1. Inspeccionar el código real para determinar el estado verdadero.
+2. `AGENT_CONTEXT.md` es el documento de estado actual autoritativo. Si entra en conflicto con otro documento, actualizar el otro documento.
+3. Los conflictos deben clasificarse: documentación desactualizada, inconsistencia de implementación, o decisión arquitectónica cambiada.
+4. Nunca reescribir silenciosamente la arquitectura. Registrar toda decisión de cambio en el Decision Log de AGENT_CONTEXT.md.
+5. Si el conflicto es ambiguo, documentarlo explícitamente como no resuelto y solicitar revisión humana.
+
+## Interpretación del backlog
+
+Los slices del backlog son históricos en su mayoría. El backlog describe el trabajo completado y el trabajo pendiente, pero:
+
+- **No tratar slices completados como tareas pendientes.** Revisar el estado de cada slice antes de asumir que requiere trabajo.
+- **El milestone activo está definido en la Sección 8 de AGENT_CONTEXT.md**, no en el orden del backlog.
+- Solo el slice marcado explícitamente como NEXT o CURRENT en AGENT_CONTEXT.md es el objetivo autónomo activo.
 
 ## Principios de implementación
 

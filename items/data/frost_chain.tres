@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/chained_status_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/freeze_status_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_chain"]
+resource_name = "ChainedStatusEffect"
+script = ExtResource("2")
+duration = 3.0
+root_multiplier = 0.03
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.35
+proc_luck_to_full = 8.0
+proc_max_chance = 0.75
+
+[sub_resource type="Resource" id="Resource_freeze"]
+resource_name = "FreezeStatusEffect"
+script = ExtResource("3")
+duration = 1.2
+speed_multiplier = 0.3
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.25
+proc_luck_to_full = 8.0
+proc_max_chance = 0.65
+
+[resource]
+script = ExtResource("1")
+id = "frost_chain"
+name = "Frost Chain"
+description = "Tears may chain enemies. Frozen enemies may also be chained."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha", "infection_gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_chain"), SubResource("Resource_freeze")])

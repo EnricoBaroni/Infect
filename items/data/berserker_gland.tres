@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/temp_stat_buff_on_kill_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_buff"]
+resource_name = "TempStatBuffOnKillEffect"
+script = ExtResource("2")
+damage_bonus = 0.5
+speed_bonus = 0.0
+fire_rate_reduction = 0.0
+buff_duration = 3.5
+only_infected_kills = false
+
+[resource]
+script = ExtResource("1")
+id = "berserker_gland"
+name = "Berserker Gland"
+description = "Each kill grants a brief damage surge."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_buff")])

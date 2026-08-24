@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/chance_split_shots_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "ChanceSplitShotsEffect"
+script = ExtResource("2")
+extra_shots = 3
+spread_degrees = 90.0
+proc_chance = 0.25
+luck_to_full = 10.0
+max_proc_chance = 0.7
+
+[resource]
+script = ExtResource("1")
+id = "lokis_horns"
+name = "Loki's Horns"
+description = "Chance to fire a four-way tear burst."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_split")])

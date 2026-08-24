@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/split_shots_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/bullet_speed_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_split"]
+resource_name = "SplitShotsEffect"
+script = ExtResource("2")
+extra_shots = 1
+spread_degrees = 7.0
+
+[sub_resource type="Resource" id="Resource_bullet_speed"]
+resource_name = "BulletSpeedUpEffect"
+script = ExtResource("3")
+amount = 20.0
+
+[resource]
+script = ExtResource("1")
+id = "twin_fang"
+name = "Twin Fang"
+description = "Tighter split and shot speed up."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_split"), SubResource("Resource_bullet_speed")])

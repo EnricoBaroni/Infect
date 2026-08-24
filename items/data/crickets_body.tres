@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/fracture_on_hit_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/damage_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_fracture"]
+resource_name = "FractureOnHitEffect"
+script = ExtResource("2")
+fragment_count = 4
+spread_degrees = 40.0
+damage_multiplier = 0.45
+speed_multiplier = 1.0
+range_multiplier = 0.58
+generations = 1
+
+[sub_resource type="Resource" id="Resource_damage"]
+resource_name = "DamageUpEffect"
+script = ExtResource("3")
+amount = 0.45
+
+[resource]
+script = ExtResource("1")
+id = "crickets_body"
+name = "Cricket's Body"
+description = "Tears burst into extra shards."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_fracture"), SubResource("Resource_damage")])

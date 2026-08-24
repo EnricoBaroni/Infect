@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/projectile_hazard_pulse_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_hazard"]
+resource_name = "ProjectileHazardPulseEffect"
+script = ExtResource("2")
+radius = 52.0
+damage = 0.38
+apply_slow = true
+slow_duration = 1.8
+slow_intensity = 0.58
+trigger_chance = 1.0
+
+[resource]
+script = ExtResource("1")
+id = "aquarius"
+name = "Aquarius"
+description = "Shots leave slowing water hazard pulses."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_hazard")])

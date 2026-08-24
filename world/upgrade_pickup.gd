@@ -49,14 +49,19 @@ func update_sprite() -> void:
 			$Sprite2D.frame = 0
 
 func _on_body_entered(body: Node2D) -> void:
-	print("UPGRADE TYPE:", _get_item_id())
-
-	if not body is Player:
+	if not body.is_in_group("player"):
 		return
 
 	if not item_data:
 		queue_free()
 		return
+
+	EventBus.emit_item_collected({
+		"item": item_data,
+		"item_id": item_data.id,
+		"item_name": item_data.name,
+		"position": global_position
+	})
 
 	body.inventory.add_passive_item(item_data)
 	queue_free()

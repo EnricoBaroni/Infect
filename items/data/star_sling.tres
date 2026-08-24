@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/set_weapon_type_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_weapon"]
+resource_name = "SetWeaponTypeEffect"
+script = ExtResource("2")
+weapon_type = "orbit_shot"
+damage_multiplier = 0.68
+orbit_contact_cooldown = 0.16
+orbit_radius = 58
+orbit_angular_speed = 4.3
+orbit_duration = 1.8
+orbit_radial_drift = 12
+
+[resource]
+script = ExtResource("1")
+id = "star_sling"
+name = "Star Sling"
+description = "Shots orbit around you before fading."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_weapon")])
+

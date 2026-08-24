@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/critical_hits_effect.gd" id="2"]
+[ext_resource type="Script" path="res://items/effects/bullet_speed_up_effect.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_crit"]
+resource_name = "CriticalHitsEffect"
+script = ExtResource("2")
+extra_crit_chance = 0.18
+extra_crit_multiplier = 0.25
+
+[sub_resource type="Resource" id="Resource_bullet_speed"]
+resource_name = "BulletSpeedUpEffect"
+script = ExtResource("3")
+amount = 25.0
+
+[resource]
+script = ExtResource("1")
+id = "shatterpoint"
+name = "Shatterpoint"
+description = "Faster shots with frequent crits."
+quality = 3
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_crit"), SubResource("Resource_bullet_speed")])

@@ -1,28 +1,45 @@
 extends Node2D
+class_name Door
 
-@onready var area_2d: Area2D = $Area2D
+enum ConnectionRole {
+	NONE,
+	FORWARD,
+	BACKWARD
+}
+
+@onready var transition_area: Area2D = $TransitionArea
 @onready var marker_2d: Marker2D = $Marker2D
+@onready var blocker_shape: CollisionPolygon2D = $BlockerBody/CollisionPolygon2D
 @export var tp_position: String
 @export var enabled: bool = false
+@export var connection_role: ConnectionRole = ConnectionRole.NONE
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _ready() -> void:
+	if blocker_shape:
+		blocker_shape.disabled = enabled
+
+func _on_transition_area_body_entered(body: Node2D) -> void:
 	if enabled == false: return
 	if Global.recently_moved:
 		await get_tree().create_timer(0.3).timeout
 
-		if body not in area_2d.get_overlapping_bodies():
+		if body not in transition_area.get_overlapping_bodies():
 			return
 	if not tp_position:
 		return
+	var destination_room := get_tree().current_scene.get_node_or_null(tp_position) as Room
+	if destination_room == null:
+		return
 	move_body_to(body, marker_2d.global_position)
-	move_camera_to(get_tree().current_scene.get_node(tp_position).get_node("Marker2D").global_position)
-	
-	var current_room = get_parent()
-	current_room.deactivate()
+	var dest_marker := destination_room.get_node_or_null("Marker2D") as Marker2D
+	if dest_marker != null:
+		move_camera_to(dest_marker.global_position)
 
-	var destination_room = get_tree().current_scene.get_node(tp_position)
+	var current_room := get_parent() as Room
+	if current_room == null:
+		return
+	current_room.deactivate()
 	destination_room.activate()
-	
 	_start_move_cooldown()
 
 func has_destination() -> bool:
@@ -37,8 +54,7 @@ func move_camera_to(pos: Vector2):
 		var tween := get_tree().create_tween()
 		tween.tween_property(camera, "position", pos, 0.3).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	else:
-		print("❌ Cámara no encontrada.")
-
+		push_warning("Door: Camera2D not found in current scene.")
 func _start_move_cooldown():
 	Global.recently_moved = true
 	await get_tree().create_timer(0.3).timeout
@@ -47,7 +63,11 @@ func _start_move_cooldown():
 func open():
 	enabled = true
 	modulate = Color.WHITE
+	if blocker_shape:
+		blocker_shape.disabled = true
 
 func close():
 	enabled = false
 	modulate = Color.BLACK
+	if blocker_shape:
+		blocker_shape.disabled = false

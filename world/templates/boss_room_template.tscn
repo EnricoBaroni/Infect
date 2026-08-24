@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c6o2k41m5e3ya"]
+
+[ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_3k7fv"]
+[ext_resource type="PackedScene" uid="uid://4wm0rnnygrql" path="res://enemies/rapper_enemy.tscn" id="2_58wql"]
+
+[node name="BossRoomTemplate" instance=ExtResource("1_3k7fv")]
+combat_room = true
+room_type = 2
+
+[node name="RapperBoss" parent="Enemies" index="0" instance=ExtResource("2_58wql")]
+position = Vector2(160, 92)
+
+[editable path="."]

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cbv4xwy8yg2lv"]
+
+[ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_4n3pr"]
+
+[node name="CombatRoomTemplate01" instance=ExtResource("1_4n3pr")]
+combat_room = true
+room_type = 1
+enemy_spawn_min_count = 3
+enemy_spawn_max_count = 5
+
+[node name="Spawn01" type="Marker2D" parent="SpawnPoints" index="0"]
+position = Vector2(80, 56)
+
+[node name="Spawn02" type="Marker2D" parent="SpawnPoints" index="1"]
+position = Vector2(240, 56)
+
+[node name="Spawn03" type="Marker2D" parent="SpawnPoints" index="2"]
+position = Vector2(160, 92)
+
+[node name="Spawn04" type="Marker2D" parent="SpawnPoints" index="3"]
+position = Vector2(80, 132)
+
+[node name="Spawn05" type="Marker2D" parent="SpawnPoints" index="4"]
+position = Vector2(240, 132)
+
+[editable path="."]

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/piercing_projectiles_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_pierce"]
+resource_name = "PiercingProjectilesEffect"
+script = ExtResource("2")
+extra_pierces = 1
+
+[resource]
+script = ExtResource("1")
+id = "cupid_arrow"
+name = "Cupid's Arrow"
+description = "Piercing tears."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_pierce")])

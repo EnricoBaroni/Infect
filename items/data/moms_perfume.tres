@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://items/data/item_data.gd" id="1"]
+[ext_resource type="Script" path="res://items/effects/effect_data.gd" id="1_effect"]
+[ext_resource type="Script" path="res://items/effects/fear_status_effect.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_fear"]
+resource_name = "FearStatusEffect"
+script = ExtResource("2")
+duration = 2.7
+intensity = 1.0
+max_stacks = 1
+stack_rule = "refresh"
+proc_chance = 0.15
+proc_luck_to_full = 10.0
+proc_max_chance = 0.55
+
+[resource]
+script = ExtResource("1")
+id = "moms_perfume"
+name = "Mom's Perfume"
+description = "Tears can frighten enemies."
+quality = 2
+pool_tags = PackedStringArray("treasure", "gacha")
+effects = Array[ExtResource("1_effect")]([SubResource("Resource_fear")])
