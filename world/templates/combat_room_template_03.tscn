@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dsstig0n3bdqm"]
+
+[ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_jtf22"]
+[ext_resource type="PackedScene" uid="uid://cnvh167nqxbsb" path="res://world/bush.tscn" id="2_ufkp7"]
+
+[node name="CombatRoomTemplate01" unique_id=697654513 instance=ExtResource("1_jtf22")]
+enemy_spawn_min_count = 3
+enemy_spawn_max_count = 5
+
+[node name="Spawn01" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="0" unique_id=1138127321]
+position = Vector2(42, 40)
+
+[node name="Spawn02" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="1" unique_id=801282987]
+position = Vector2(279, 40)
+
+[node name="Spawn03" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="2" unique_id=1301981929]
+position = Vector2(38, 146)
+
+[node name="Spawn04" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="3" unique_id=1498814835]
+position = Vector2(283, 148)
+
+[node name="Spawn05" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="4" unique_id=334364655]
+position = Vector2(278, 89)
+
+[node name="Bush" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="5" unique_id=1033768930 instance=ExtResource("2_ufkp7")]
+position = Vector2(96, 122)
+
+[node name="Bush2" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="6" unique_id=1887773198 instance=ExtResource("2_ufkp7")]
+position = Vector2(220, 121)
+
+[node name="Bush3" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="7" unique_id=850956358 instance=ExtResource("2_ufkp7")]
+position = Vector2(98, 64)
+
+[node name="Bush4" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="8" unique_id=578958227 instance=ExtResource("2_ufkp7")]
+position = Vector2(216, 65)

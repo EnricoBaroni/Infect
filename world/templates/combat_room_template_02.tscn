@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://djbe2xx3wq02b"]
+
+[ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_e5vuk"]
+[ext_resource type="PackedScene" uid="uid://cnvh167nqxbsb" path="res://world/bush.tscn" id="2_t8e70"]
+[ext_resource type="PackedScene" uid="uid://c02ovucw1uf58" path="res://world/grass.tscn" id="3_8y4ev"]
+
+[node name="CombatRoomTemplate01" unique_id=1821113729 instance=ExtResource("1_e5vuk")]
+enemy_spawn_min_count = 3
+enemy_spawn_max_count = 5
+
+[node name="Spawn01" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="0" unique_id=926778645]
+position = Vector2(46, 41)
+
+[node name="Spawn02" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="1" unique_id=983731680]
+position = Vector2(90, 68)
+
+[node name="Spawn03" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="2" unique_id=734326989]
+position = Vector2(49, 91)
+
+[node name="Spawn04" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="3" unique_id=974858332]
+position = Vector2(48, 135)
+
+[node name="Spawn05" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="4" unique_id=1111948153]
+position = Vector2(92, 115)
+
+[node name="Bush" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="5" unique_id=1033768930 instance=ExtResource("2_t8e70")]
+position = Vector2(125, 81)
+
+[node name="Bush2" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="6" unique_id=330338625 instance=ExtResource("2_t8e70")]
+position = Vector2(125, 102)
+
+[node name="Bush3" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="7" unique_id=1075954657 instance=ExtResource("2_t8e70")]
+position = Vector2(124, 124)
+
+[node name="Grass" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="8" unique_id=579628287 instance=ExtResource("3_8y4ev")]
+position = Vector2(107, 136)
+
+[node name="Grass2" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="9" unique_id=1608553836 instance=ExtResource("3_8y4ev")]
+position = Vector2(107, 149)
+
+[node name="Grass3" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="10" unique_id=1261949328 instance=ExtResource("3_8y4ev")]
+position = Vector2(103, 53)
+
+[node name="Grass4" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="11" unique_id=1080909045 instance=ExtResource("3_8y4ev")]
+position = Vector2(103, 37)

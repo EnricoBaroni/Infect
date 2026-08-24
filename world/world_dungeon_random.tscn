@@ -2,13 +2,19 @@
 
 [ext_resource type="Script" uid="uid://hutts8eu46y8" path="res://world/world_dungeon_random.gd" id="1_j3r7m"]
 [ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_2r3p7"]
+[ext_resource type="PackedScene" uid="uid://cbv4xwy8yg2lv" path="res://world/templates/combat_room_template_01.tscn" id="2_5smi6"]
+[ext_resource type="PackedScene" uid="uid://djbe2xx3wq02b" path="res://world/templates/combat_room_template_02.tscn" id="3_htu4n"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_yq1sv"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_1k5n8"]
+[ext_resource type="PackedScene" uid="uid://dsstig0n3bdqm" path="res://world/templates/combat_room_template_03.tscn" id="4_r2d7y"]
+[ext_resource type="PackedScene" uid="uid://cddfeo550m7d7" path="res://world/templates/combat_room_template_04.tscn" id="5_gb0m8"]
+[ext_resource type="PackedScene" uid="uid://xdns63w0wmn" path="res://world/templates/combat_room_template_05.tscn" id="6_mledl"]
 [ext_resource type="PackedScene" uid="uid://bx3k7m2eap1qn" path="res://ui/death_screen.tscn" id="8_dscr1"]
 [ext_resource type="PackedScene" uid="uid://cdebugmenu001" path="res://ui/debug_menu.tscn" id="9_dbgm1"]
 
 [node name="WorldDungeonRandom" type="Node2D" unique_id=1040047387]
 script = ExtResource("1_j3r7m")
+combat_room_templates = Array[PackedScene]([ExtResource("2_5smi6"), ExtResource("3_htu4n"), ExtResource("4_r2d7y"), ExtResource("5_gb0m8"), ExtResource("6_mledl")])
 
 [node name="Pauser" parent="." unique_id=19794476 instance=ExtResource("3_yq1sv")]
 

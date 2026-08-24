@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://xdns63w0wmn"]
+
+[ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_lqeoh"]
+[ext_resource type="PackedScene" uid="uid://cnvh167nqxbsb" path="res://world/bush.tscn" id="2_kranf"]
+[ext_resource type="PackedScene" uid="uid://c02ovucw1uf58" path="res://world/grass.tscn" id="3_e4pah"]
+
+[node name="CombatRoomTemplate01" unique_id=2111551986 instance=ExtResource("1_lqeoh")]
+enemy_spawn_min_count = 3
+enemy_spawn_max_count = 5
+
+[node name="Spawn01" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="0" unique_id=285570976]
+position = Vector2(49, 133)
+
+[node name="Spawn02" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="1" unique_id=1373638885]
+position = Vector2(95, 133)
+
+[node name="Spawn03" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="2" unique_id=1492372617]
+position = Vector2(208, 133)
+
+[node name="Spawn04" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="3" unique_id=904256785]
+position = Vector2(253, 133)
+
+[node name="Spawn05" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="4" unique_id=756717845]
+position = Vector2(155, 68)
+
+[node name="Bush" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="5" unique_id=1033768930 instance=ExtResource("2_kranf")]
+position = Vector2(40, 115)
+
+[node name="Bush2" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="6" unique_id=907750754 instance=ExtResource("2_kranf")]
+position = Vector2(63, 115)
+
+[node name="Bush3" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="7" unique_id=1340984767 instance=ExtResource("2_kranf")]
+position = Vector2(88, 114)
+
+[node name="Bush4" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="8" unique_id=89043284 instance=ExtResource("2_kranf")]
+position = Vector2(111, 114)
+
+[node name="Bush5" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="9" unique_id=2079777880 instance=ExtResource("2_kranf")]
+position = Vector2(192, 115)
+
+[node name="Bush6" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="10" unique_id=73866620 instance=ExtResource("2_kranf")]
+position = Vector2(215, 116)
+
+[node name="Bush7" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="11" unique_id=2143711431 instance=ExtResource("2_kranf")]
+position = Vector2(236, 115)
+
+[node name="Bush8" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="12" unique_id=1032846155 instance=ExtResource("2_kranf")]
+position = Vector2(259, 115)
+
+[node name="Bush9" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="13" unique_id=225763604 instance=ExtResource("2_kranf")]
+position = Vector2(282, 115)
+
+[node name="Grass" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="14" unique_id=579628287 instance=ExtResource("3_e4pah")]
+position = Vector2(121, 147)
+
+[node name="Grass2" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="15" unique_id=2051025070 instance=ExtResource("3_e4pah")]
+position = Vector2(122, 133)
+
+[node name="Grass3" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="16" unique_id=1977545043 instance=ExtResource("3_e4pah")]
+position = Vector2(122, 119)
+
+[node name="Grass4" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="17" unique_id=1071232316 instance=ExtResource("3_e4pah")]
+position = Vector2(186, 149)
+
+[node name="Grass5" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="18" unique_id=394389004 instance=ExtResource("3_e4pah")]
+position = Vector2(186, 135)
+
+[node name="Grass6" parent="SpawnPoints" parent_id_path=PackedInt32Array(-933778082) index="19" unique_id=1721541843 instance=ExtResource("3_e4pah")]
+position = Vector2(187, 120)
