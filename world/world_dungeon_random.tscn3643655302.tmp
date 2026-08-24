@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bjcbbju1ml5s"]
+
+[ext_resource type="Script" uid="uid://hutts8eu46y8" path="res://world/world_dungeon_random.gd" id="1_j3r7m"]
+[ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_2r3p7"]
+[ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_yq1sv"]
+[ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_1k5n8"]
+[ext_resource type="PackedScene" uid="uid://bx3k7m2eap1qn" path="res://ui/death_screen.tscn" id="8_dscr1"]
+[ext_resource type="PackedScene" uid="uid://cdebugmenu001" path="res://ui/debug_menu.tscn" id="9_dbgm1"]
+
+[node name="WorldDungeonRandom" type="Node2D" unique_id=1040047387]
+script = ExtResource("1_j3r7m")
+
+[node name="Pauser" parent="." unique_id=19794476 instance=ExtResource("3_yq1sv")]
+
+[node name="Player" parent="." unique_id=1167533857 instance=ExtResource("4_1k5n8")]
+position = Vector2(160, 91)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1338916623]
+
+[node name="StatsUI" parent="CanvasLayer" unique_id=568791627 instance=ExtResource("2_2r3p7")]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=369709891]
+position = Vector2(160, 91)
+zoom = Vector2(1, 0.95)
+position_smoothing_speed = 50.0
+
+[node name="DeathScreen" parent="." unique_id=10660148 instance=ExtResource("8_dscr1")]
+
+[node name="DebugMenu" parent="." unique_id=1684574460 instance=ExtResource("9_dbgm1")]

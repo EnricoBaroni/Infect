@@ -5,11 +5,14 @@ const ITEMS_PATH := "res://items/data"
 var _panel: Panel
 var _items_container: VBoxContainer
 var _status_label: Label
+var _tooltip_panel: PanelContainer
+var _tooltip_label: Label
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 100
 	_build_ui()
+	_build_tooltip()
 	_panel.visible = false
 	_load_items()
 
@@ -22,8 +25,11 @@ func _input(event: InputEvent) -> void:
 
 func _build_ui() -> void:
 	_panel = Panel.new()
-	_panel.custom_minimum_size = Vector2(360, 0)
-	_panel.size = Vector2(360, 620)
+	var panel_style := StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.05, 0.05, 0.05, 0.85)
+	_panel.add_theme_stylebox_override("panel", panel_style)
+	_panel.custom_minimum_size = Vector2(304, 164)
+	_panel.size = Vector2(304, 164)
 	_panel.position = Vector2(8, 8)
 	add_child(_panel)
 
@@ -40,6 +46,7 @@ func _build_ui() -> void:
 
 	var title := Label.new()
 	title.text = "DEBUG MENU  [F1 toggle]"
+	title.add_theme_font_size_override("font_size", 12)
 	vbox.add_child(title)
 
 	vbox.add_child(HSeparator.new())
@@ -49,11 +56,13 @@ func _build_ui() -> void:
 
 	var drops_label := Label.new()
 	drops_label.text = "Economy:"
+	drops_label.add_theme_font_size_override("font_size", 9)
 	drops_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	drops_row.add_child(drops_label)
 
 	var give_drops_btn := Button.new()
 	give_drops_btn.text = "+ 10 Drops"
+	give_drops_btn.add_theme_font_size_override("font_size", 9)
 	give_drops_btn.pressed.connect(_on_give_drops_pressed)
 	drops_row.add_child(give_drops_btn)
 
@@ -61,16 +70,34 @@ func _build_ui() -> void:
 
 	_status_label = Label.new()
 	_status_label.text = "Items: (loading...)"
+	_status_label.add_theme_font_size_override("font_size", 9)
 	vbox.add_child(_status_label)
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.custom_minimum_size = Vector2(0, 450)
 	vbox.add_child(scroll)
 
 	_items_container = VBoxContainer.new()
 	_items_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(_items_container)
+
+func _build_tooltip() -> void:
+	_tooltip_panel = PanelContainer.new()
+	var tooltip_style := StyleBoxFlat.new()
+	tooltip_style.bg_color = Color(0.03, 0.03, 0.03, 0.92)
+	_tooltip_panel.add_theme_stylebox_override("panel", tooltip_style)
+	_tooltip_panel.visible = false
+	_tooltip_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_tooltip_panel.z_index = 1000
+	add_child(_tooltip_panel)
+
+	_tooltip_label = Label.new()
+	_tooltip_label.add_theme_font_size_override("font_size", 8)
+	_tooltip_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_tooltip_label.custom_minimum_size = Vector2(90, 0)
+	_tooltip_label.size = Vector2(120, 0)
+
+	_tooltip_panel.add_child(_tooltip_label)
 
 func _load_items() -> void:
 	var dir := DirAccess.open(ITEMS_PATH)
@@ -101,9 +128,11 @@ func _load_items() -> void:
 		var item_data := resource as ItemData
 		var btn := Button.new()
 		btn.text = item_data.name if item_data.name != "" else file_name
+		btn.add_theme_font_size_override("font_size", 8)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		btn.tooltip_text = item_data.description
+		btn.mouse_entered.connect(_on_item_mouse_entered.bind(item_data))
+		btn.mouse_exited.connect(_on_item_mouse_exited)
 		btn.pressed.connect(_on_give_item_pressed.bind(item_data))
 		_items_container.add_child(btn)
 		count += 1
@@ -128,3 +157,31 @@ func _get_player() -> Player:
 	if players.is_empty():
 		return null
 	return players[0] as Player
+
+func _on_item_mouse_entered(item_data: ItemData) -> void:
+	_tooltip_label.text = item_data.description if item_data.description != "" else "No description."
+	_tooltip_panel.visible = true
+	_update_tooltip_position()
+
+func _on_item_mouse_exited() -> void:
+	_tooltip_panel.visible = false
+
+func _update_tooltip_position() -> void:
+	var viewport_size := get_viewport().get_visible_rect().size
+	var mouse_position := get_viewport().get_mouse_position()
+
+	_tooltip_panel.reset_size()
+
+	var tooltip_size := _tooltip_panel.size
+	var position := mouse_position + Vector2(6, 6)
+
+	if position.x + tooltip_size.x > viewport_size.x:
+		position.x = mouse_position.x - tooltip_size.x - 6
+
+	if position.y + tooltip_size.y > viewport_size.y:
+		position.y = mouse_position.y - tooltip_size.y - 6
+
+	position.x = clampf(position.x, 0.0, viewport_size.x - tooltip_size.x)
+	position.y = clampf(position.y, 0.0, viewport_size.y - tooltip_size.y)
+
+	_tooltip_panel.position = position
