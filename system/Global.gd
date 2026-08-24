@@ -16,6 +16,7 @@ var reveal_boss_rooms_level := 0
 var shop_price_multiplier := 1.0
 var shop_flat_discount := 0
 var shop_infinite_restock_sources := 0
+var start_with_mutant_spider := false
 
 # Reset all transient per-run state. Called by DeathScreen before scene reload.
 # Inventory/items are destroyed by the scene reload itself.
@@ -34,6 +35,7 @@ func reset_run_state() -> void:
 	shop_price_multiplier = 1.0
 	shop_flat_discount = 0
 	shop_infinite_restock_sources = 0
+	start_with_mutant_spider = false
 
 func get_effective_shop_cost(base_cost: int) -> int:
 	var adjusted := int(ceil(float(max(0, base_cost)) * maxf(0.05, shop_price_multiplier)))

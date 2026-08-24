@@ -6,6 +6,7 @@ const ATTACK_EVALUATION_SYSTEM_SCRIPT = preload("res://player/systems/attack_eva
 const PROJECTILE_SYSTEM_SCRIPT = preload("res://player/systems/projectile_system.gd")
 const WEAPON_SYSTEM_SCRIPT = preload("res://player/systems/weapon_system.gd")
 const COMPANION_SYSTEM_SCRIPT = preload("res://player/systems/companion_system.gd")
+const MUTANT_SPIDER_ITEM = preload("res://items/data/mutant_spider.tres")
 @export var BULLET: PackedScene
 @export var stats: Stats
 
@@ -44,6 +45,10 @@ func _ready() -> void:
 
 	if stats == null:
 		return
+
+	if Global.start_with_mutant_spider and not inventory.has_passive_item(MUTANT_SPIDER_ITEM):
+		inventory.add_passive_item(MUTANT_SPIDER_ITEM.duplicate())
+		Global.start_with_mutant_spider = false
 
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_health.connect(die)

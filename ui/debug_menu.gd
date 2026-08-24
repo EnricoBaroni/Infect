@@ -66,6 +66,12 @@ func _build_ui() -> void:
 	give_drops_btn.pressed.connect(_on_give_drops_pressed)
 	drops_row.add_child(give_drops_btn)
 
+	var tk_btn := Button.new()
+	tk_btn.text = "T.Keeper"
+	tk_btn.add_theme_font_size_override("font_size", 9)
+	tk_btn.pressed.connect(_on_t_keeper_pressed)
+	drops_row.add_child(tk_btn)
+
 	vbox.add_child(HSeparator.new())
 
 	_status_label = Label.new()
@@ -141,6 +147,11 @@ func _load_items() -> void:
 
 func _on_give_drops_pressed() -> void:
 	Global.drops += 10
+
+func _on_t_keeper_pressed() -> void:
+	Global.reset_run_state()
+	Global.start_with_mutant_spider = true
+	get_tree().reload_current_scene()
 
 func _on_give_item_pressed(item_data: ItemData) -> void:
 	var player := _get_player()
