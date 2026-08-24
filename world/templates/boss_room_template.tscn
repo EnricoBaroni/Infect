@@ -10,4 +10,3 @@ room_type = 2
 [node name="RapperBoss" parent="Enemies" index="0" instance=ExtResource("2_58wql")]
 position = Vector2(160, 92)
 
-[editable path="."]

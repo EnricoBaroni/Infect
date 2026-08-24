@@ -32,20 +32,20 @@ scale = Vector2(0.8, 0.8)
 
 [node name="Door" parent="." unique_id=2133244952 instance=ExtResource("2_ucf2g")]
 position = Vector2(152, 14)
+connection_role = 1
 
 [node name="Door2" parent="." unique_id=281333314 instance=ExtResource("2_ucf2g")]
 position = Vector2(306, 80)
 rotation = 1.5707964
-connection_role = 1
 
 [node name="Door3" parent="." unique_id=1313167308 instance=ExtResource("2_ucf2g")]
 position = Vector2(152, 170)
 rotation = 3.1415927
+connection_role = 2
 
 [node name="Door4" parent="." unique_id=933195664 instance=ExtResource("2_ucf2g")]
 position = Vector2(14, 80)
 rotation = -1.5707964
-connection_role = 2
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1697690180]
 position = Vector2(160, 91)
@@ -55,4 +55,4 @@ navigation_polygon = SubResource("NavigationPolygon_ucf2g")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1420077364]
 
-[node name="SpawnPoints" type="Node2D" parent="." unique_id=3361189214]
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=-933778082]

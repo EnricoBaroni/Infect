@@ -23,4 +23,3 @@ position = Vector2(80, 132)
 [node name="Spawn05" type="Marker2D" parent="SpawnPoints" index="4"]
 position = Vector2(240, 132)
 
-[editable path="."]

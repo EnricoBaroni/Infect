@@ -2,24 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://dn38e2lj6t1iv" path="res://world/room.tscn" id="1_xq7a8"]
 [ext_resource type="PackedScene" uid="uid://d3gh83ohwg4bt" path="res://world/gachapon_machine.tscn" id="2_b1v9c"]
-[ext_resource type="PackedScene" uid="uid://dm420nd0iunuo" path="res://world/respawn_machine.tscn" id="3_7gk2u"]
 [ext_resource type="PackedScene" uid="uid://bf7b40xa60a6f" path="res://world/difficulty_machine.tscn" id="4_r2v6w"]
 
-[node name="GachaRoomTemplate" instance=ExtResource("1_xq7a8")]
+[node name="GachaRoomTemplate" unique_id=1706768973 instance=ExtResource("1_xq7a8")]
 combat_room = false
 room_type = 0
 
-[node name="GachaponMachine" parent="." index="9" instance=ExtResource("2_b1v9c")]
+[node name="GachaponMachine" parent="." index="9" unique_id=1123990719 instance=ExtResource("2_b1v9c")]
 position = Vector2(64, 72)
 
-[node name="InfectionGachaponMachine" parent="." index="10" instance=ExtResource("2_b1v9c")]
-position = Vector2(256, 72)
+[node name="InfectionGachaponMachine" parent="." index="10" unique_id=806697487 instance=ExtResource("2_b1v9c")]
+position = Vector2(220, 56)
 pool_tag = "infection_gacha"
 
-[node name="RespawnMachine" parent="." index="11" instance=ExtResource("3_7gk2u")]
-position = Vector2(256, 128)
-
-[node name="DifficultyMachine" parent="." index="12" instance=ExtResource("4_r2v6w")]
+[node name="DifficultyMachine" parent="." index="11" unique_id=827175690 instance=ExtResource("4_r2v6w")]
 position = Vector2(160, 128)
-
-[editable path="."]

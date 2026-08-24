@@ -10,7 +10,7 @@ const STANDARD_ROOM_WIDTH := 352.0
 const STANDARD_ROOM_HEIGHT := 216.0
 
 @export var combat_rooms_per_floor := 4
-@export var room_spacing := Vector2(STANDARD_ROOM_WIDTH, 0)
+@export var room_spacing := Vector2(0, -STANDARD_ROOM_HEIGHT)
 @export var start_position := Vector2.ZERO
 @export var max_spawn_tier := 5
 @export var base_floor_difficulty := 1
@@ -60,7 +60,7 @@ func notify_boss_room_cleared(room: Room) -> void:
 func advance_to_next_floor() -> void:
 	Global.floor_number += 1
 	Global.difficulty_level = max(base_floor_difficulty, Global.floor_number)
-	_generate_floor()
+	call_deferred("_generate_floor")
 
 func _sync_progression_state_on_load() -> void:
 	Global.floor_number = max(1, Global.floor_number)
@@ -102,7 +102,7 @@ func _build_room_sequence() -> Array[PackedScene]:
 	var sequence: Array[PackedScene] = []
 	sequence.append(gacha_room_template if gacha_room_template != null else DEFAULT_GACHA_TEMPLATE)
 
-	var combat_count := max(1, combat_rooms_per_floor)
+	var combat_count: int = maxi(1, combat_rooms_per_floor)
 	for i in combat_count:
 		sequence.append(_pick_random_combat_template())
 
@@ -207,13 +207,14 @@ func _spawn_floor_transition_in_room(room: Room) -> void:
 func _clear_generated_rooms() -> void:
 	for room in _generated_rooms:
 		if room != null and is_instance_valid(room):
-			remove_child(room)
-			room.queue_free()
+			if room.get_parent() == self:
+				call_deferred("remove_child", room)
+			room.call_deferred("queue_free")
 	_generated_rooms.clear()
 
 func _clear_floor_transition() -> void:
 	if _active_floor_transition != null and is_instance_valid(_active_floor_transition):
-		_active_floor_transition.queue_free()
+		_active_floor_transition.call_deferred("queue_free")
 	_active_floor_transition = null
 
 func _get_gacha_room() -> Room:
