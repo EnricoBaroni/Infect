@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	match state:
 		"IdleState": pass
 		"ChaseState":
-			chase_player()
+			chase_player_with_navigation(navigation_agent_2d)
 		"HitState":
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			move_and_slide()

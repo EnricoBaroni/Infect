@@ -136,7 +136,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tm0s6"]
 advance_mode = 2
-advance_expression = "can_see_player()"
+advance_expression = "can_see_player(ray_cast_2d, min_range, max_range)"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6jij"]
 

@@ -4,6 +4,8 @@ const FRICTION = 500
 
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
+@export var min_range: float = 4.0
+@export var max_range: float = 400.0
 # Spawn tier metadata — based on Isaac Hopper (Basement/Cellar through all floors)
 @export var spawn_tier_min: int = 1   # Floor must be >= this to include this enemy in spawn pool
 @export var spawn_tier_max: int = 0   # 0 = no upper limit
