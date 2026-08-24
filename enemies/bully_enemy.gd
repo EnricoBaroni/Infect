@@ -2,7 +2,6 @@ extends EnemyBase
 
 const FRICTION = 500
 
-var custom_color := Color.RED
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
@@ -23,7 +22,6 @@ var speed_multiplier := 1.0
 
 func _ready() -> void:
 	super()
-	modulate = custom_color
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 

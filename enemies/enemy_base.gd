@@ -163,7 +163,7 @@ func face_direction(direction: Vector2) -> void:
 	var sprite = get_node("Sprite2D")
 
 	if direction.x != 0:
-		sprite.scale.x = sign(direction.x)
+		sprite.flip_h = direction.x < 0
 
 func get_direction_to_player() -> Vector2:
 	var player = get_player()
@@ -528,7 +528,7 @@ func get_bullet_scene() -> PackedScene:
 	return DEFAULT_ENEMY_BULLET
 
 func get_bullet_color() -> Color:
-	return Color.WHITE
+	return Color.RED
 
 # ATTACKS
 

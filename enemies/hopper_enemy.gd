@@ -2,7 +2,6 @@ extends EnemyBase
 
 const FRICTION = 500
 
-var custom_color := Color.PINK
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 

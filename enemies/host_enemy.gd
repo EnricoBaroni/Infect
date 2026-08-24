@@ -4,7 +4,6 @@ const FRICTION = 500
 const CLOSED_COLOR = Color.SADDLE_BROWN
 const OPEN_COLOR = Color.RED
 
-var custom_color := Color.SADDLE_BROWN
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 var opened := false
@@ -32,7 +31,6 @@ func _ready() -> void:
 	state_timer.start(2.0)
 	attack_timer.timeout.connect(start_attack)
 	attack_timer.start()
-	modulate = custom_color
 	
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
@@ -73,9 +71,6 @@ func start_attack() -> void:
 func on_infected() -> void:
 	super()
 	attack_timer.wait_time *= 0.5
-
-func get_bullet_color() -> Color:
-	return custom_color
 
 func toggle_state() -> void:
 	opened = !opened

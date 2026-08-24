@@ -2,7 +2,6 @@ extends EnemyBase
 
 const FRICTION = 500
 
-var custom_color := Color.CYAN
 var health_multiplier := 1.0
 var speed_multiplier := 1.0
 
@@ -23,7 +22,6 @@ func _ready() -> void:
 	super()
 	attack_timer.timeout.connect(start_attack)
 	attack_timer.start(randf_range(0.3, 1.0))
-	modulate = custom_color
 	stats.health *= health_multiplier
 	stats.max_health *= health_multiplier
 
@@ -53,5 +51,3 @@ func start_attack() -> void:
 
 func get_bullet_scene() -> PackedScene:
 	return BULLET
-func get_bullet_color() -> Color:
-	return custom_color

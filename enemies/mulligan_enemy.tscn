@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://22bgwq7gxryy" path="res://enemies/mulligan_enemy.gd" id="1_cerr4"]
 [ext_resource type="Script" uid="uid://b468jftlj52qv" path="res://system/stats.gd" id="2_e8td7"]
-[ext_resource type="Texture2D" uid="uid://cqxkuslu7o0n0" path="res://assets/bat.png" id="3_alptj"]
+[ext_resource type="Texture2D" uid="uid://l6n2fgrohwqh" path="res://assets/Enemies/MULLIGAN.png" id="3_vpflk"]
 [ext_resource type="Texture2D" uid="uid://birymg7a6vh3j" path="res://assets/small_shadow.png" id="4_4ce4h"]
 [ext_resource type="Script" uid="uid://btafa1o3b3lta" path="res://system/hurtbox.gd" id="5_rnlg5"]
 [ext_resource type="Script" uid="uid://ck4dpilw310u0" path="res://system/hitbox.gd" id="6_v2p08"]
@@ -56,7 +56,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_v6jij"]
 resource_name = "fly"
-length = 0.5
+length = 0.4
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -66,10 +66,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_8d0ax"]
@@ -173,12 +173,16 @@ script = ExtResource("1_cerr4")
 stats = SubResource("Resource_vpflk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1822061733]
-texture = ExtResource("3_alptj")
+position = Vector2(0, -3)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_vpflk")
 offset = Vector2(-1, -4)
-hframes = 5
+hframes = 8
+vframes = 4
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="." unique_id=1347354646]
 show_behind_parent = true
+position = Vector2(0, 4)
 texture = ExtResource("4_4ce4h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=738081806]
