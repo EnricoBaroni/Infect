@@ -87,9 +87,9 @@ func spawn_enemy_on_death(
 	if enemy == null:
 		return
 
-	enemy.global_position = global_position
-
+	var spawn_position := global_position
 	get_parent().add_child(enemy)
+	enemy.global_position = spawn_position
 
 func take_hit(other_hitbox: Hitbox) -> void:
 	var hit_effect = HIT_EFFECT.instantiate()

@@ -4,17 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://n7e37lobked7" path="res://ui/stats_ui.tscn" id="2_2r3p7"]
 [ext_resource type="PackedScene" uid="uid://ccjdlcptiqb5b" path="res://ui/pauser.tscn" id="3_yq1sv"]
 [ext_resource type="PackedScene" uid="uid://d1nbspfpdchax" path="res://player/player.tscn" id="4_1k5n8"]
-[ext_resource type="PackedScene" uid="uid://d1xj3p0q5h8mx" path="res://world/templates/gacha_room_template.tscn" id="5_w95mq"]
-[ext_resource type="PackedScene" uid="uid://cbv4xwy8yg2lv" path="res://world/templates/combat_room_template_01.tscn" id="6_4a0tt"]
-[ext_resource type="PackedScene" uid="uid://c6o2k41m5e3ya" path="res://world/templates/boss_room_template.tscn" id="7_kr0fp"]
 [ext_resource type="PackedScene" uid="uid://bx3k7m2eap1qn" path="res://ui/death_screen.tscn" id="8_dscr1"]
 [ext_resource type="PackedScene" uid="uid://cdebugmenu001" path="res://ui/debug_menu.tscn" id="9_dbgm1"]
 
 [node name="WorldDungeonRandom" type="Node2D" unique_id=1040047387]
 script = ExtResource("1_j3r7m")
-gacha_room_template = ExtResource("5_w95mq")
-combat_room_templates = Array[PackedScene]([ExtResource("6_4a0tt")])
-boss_room_template = ExtResource("7_kr0fp")
 
 [node name="Pauser" parent="." unique_id=19794476 instance=ExtResource("3_yq1sv")]
 
