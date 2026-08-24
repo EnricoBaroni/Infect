@@ -8,12 +8,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44d1o"]
 size = Vector2(16, 16)
 
-[node name="Grass" type="Node2D" unique_id=579628287]
+[node name="Grass" type="StaticBody2D" unique_id=579628287 groups=["navigation_polygon_source_geometry_group"]]
+collision_layer = 64
+collision_mask = 15
 script = ExtResource("1_6gvtj")
 GRASS_EFFECT = ExtResource("2_3kunl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1280921244]
 texture = ExtResource("1_44d1o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1680011552]
+shape = SubResource("RectangleShape2D_44d1o")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=270340922]
 collision_layer = 16
