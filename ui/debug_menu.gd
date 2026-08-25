@@ -3,10 +3,12 @@ extends CanvasLayer
 const ITEMS_PATH := "res://items/data"
 
 var _panel: Panel
+var _search_input: LineEdit
 var _items_container: VBoxContainer
 var _status_label: Label
 var _tooltip_panel: PanelContainer
 var _tooltip_label: Label
+var _item_buttons: Array[Button] = []
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -28,8 +30,8 @@ func _build_ui() -> void:
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color(0.05, 0.05, 0.05, 0.85)
 	_panel.add_theme_stylebox_override("panel", panel_style)
-	_panel.custom_minimum_size = Vector2(304, 164)
-	_panel.size = Vector2(304, 164)
+	_panel.custom_minimum_size = Vector2(304, 196)
+	_panel.size = Vector2(304, 196)
 	_panel.position = Vector2(8, 8)
 	add_child(_panel)
 
@@ -72,12 +74,23 @@ func _build_ui() -> void:
 	tk_btn.pressed.connect(_on_t_keeper_pressed)
 	drops_row.add_child(tk_btn)
 
+	var restart_btn := Button.new()
+	restart_btn.text = "Restart Run"
+	restart_btn.add_theme_font_size_override("font_size", 9)
+	restart_btn.pressed.connect(_on_restart_run_pressed)
+	drops_row.add_child(restart_btn)
+
 	vbox.add_child(HSeparator.new())
 
 	_status_label = Label.new()
 	_status_label.text = "Items: (loading...)"
 	_status_label.add_theme_font_size_override("font_size", 9)
 	vbox.add_child(_status_label)
+
+	_search_input = LineEdit.new()
+	_search_input.placeholder_text = "Search items..."
+	_search_input.text_changed.connect(_on_search_text_changed)
+	vbox.add_child(_search_input)
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -106,6 +119,10 @@ func _build_tooltip() -> void:
 	_tooltip_panel.add_child(_tooltip_label)
 
 func _load_items() -> void:
+	for button in _item_buttons:
+		button.queue_free()
+	_item_buttons.clear()
+
 	var dir := DirAccess.open(ITEMS_PATH)
 	if dir == null:
 		_status_label.text = "Items: (error — path not found)"
@@ -137,13 +154,16 @@ func _load_items() -> void:
 		btn.add_theme_font_size_override("font_size", 8)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		btn.set_meta("item_name", item_data.name.to_lower())
 		btn.mouse_entered.connect(_on_item_mouse_entered.bind(item_data))
 		btn.mouse_exited.connect(_on_item_mouse_exited)
 		btn.pressed.connect(_on_give_item_pressed.bind(item_data))
 		_items_container.add_child(btn)
+		_item_buttons.append(btn)
 		count += 1
 
 	_status_label.text = "Items (%d) — click to give:" % count
+	_apply_item_filter(_search_input.text if _search_input else "")
 
 func _on_give_drops_pressed() -> void:
 	Global.drops += 10
@@ -152,6 +172,25 @@ func _on_t_keeper_pressed() -> void:
 	Global.reset_run_state()
 	Global.start_with_mutant_spider = true
 	get_tree().reload_current_scene()
+
+func _on_restart_run_pressed() -> void:
+	get_tree().paused = false
+	Global.reset_run_state()
+	get_tree().reload_current_scene()
+
+func _on_search_text_changed(new_text: String) -> void:
+	_apply_item_filter(new_text)
+
+func _apply_item_filter(filter_text: String) -> void:
+	var needle := filter_text.strip_edges().to_lower()
+	for button in _item_buttons:
+		var visible := true
+		if needle != "":
+			var item_name := String(button.get_meta("item_name", button.text)).to_lower()
+			visible = item_name.find(needle) != -1
+		button.visible = visible
+		if not visible and button.has_focus():
+			button.release_focus()
 
 func _on_give_item_pressed(item_data: ItemData) -> void:
 	var player := _get_player()
